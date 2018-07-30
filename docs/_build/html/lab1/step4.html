@@ -87,7 +87,7 @@
 <li><a class="reference internal" href="#add-another-rule-list-to-the-policy">4.5.9. Add Another Rule List to the Policy</a></li>
 <li><a class="reference internal" href="#test-access-to-the-server">4.5.10. Test Access to the Server</a></li>
 <li><a class="reference internal" href="#test-access-to-the-server-1">4.5.11. Test Access to the Server</a></li>
-<li><a class="reference internal" href="#test-the-new-firewall-rules-1">4.5.12. Test the New Firewall Rules</a></li>
+<li><a class="reference internal" href="#id2">4.5.12. Test the New Firewall Rules</a></li>
 <li><a class="reference internal" href="#view-firewall-reports">4.5.13. View Firewall Reports</a></li>
 </ul>
 </li>
@@ -161,9 +161,10 @@ which is a <strong>default allow</strong> configuration, in which all traffic is
 allowed to virtual servers and self IPs on the system, and any traffic
 you want to block must be explicitly specified. This applies only to the
 Virtual Server &amp; Self IP level on the system.</p>
-<p><strong>Important: Even though the system is in a default allow configuration,
-if a packet matches no rule in any context on the firewall, a Global
-Drop rule drops the traffic.</strong></p>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">Even though the system is in a default allow configuration, if a packet matches no rule in any context on the firewall, a Global Drop rule drops the traffic.</p>
+</div>
 </div>
 <div class="section" id="rule-hierarchy">
 <h2>4.5.2. Rule Hierarchy<a class="headerlink" href="#rule-hierarchy" title="Permalink to this headline">¶</a></h2>
@@ -188,11 +189,10 @@ viewed in one list, and viewed and reorganized separately within each
 context. You can enforce a firewall policy on any context except the
 management port. You can also stage a firewall policy in any context
 except management.</p>
-<p><strong>Important: You cannot configure or change the Global Drop context. The
-Global Drop context is the final context for traffic. Note that even
-though it is a global context, it is not processed first, like the main
-global context, but last. If a packet matches no rule in any previous
-context, the Global Drop rule drops the traffic.</strong></p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">You cannot configure or change the Global Drop context. The Global Drop context is the final context for traffic. Note that even though it is a global context, it is not processed first, like the main global context, but last. If a packet matches no rule in any previous context, the Global Drop rule drops the traffic.</p>
+</div>
 <img alt="http://support.f5.com/kb/global/manual_images/MAN-0439-01/firewall_processing.png" src="http://support.f5.com/kb/global/manual_images/MAN-0439-01/firewall_processing.png" />
 </div>
 <div class="section" id="create-and-view-log-entries">
@@ -402,12 +402,10 @@ Rules</strong>, then selecting the context for route domain 0. Note the
 will also provide a <strong>Latest Matched</strong> field so you will know the last
 time each rule was matched:</p>
 <p><a class="reference internal" href="../_images/image23.png"><img alt="image22" src="../_images/image23.png" style="width: 6.49097in; height: 1.76875in;" /></a></p>
-<div class="line-block">
-<div class="line">Congratulations! Day one and you’ve already saved the day. Hang on,
+<p>Congratulations! Day one and you’ve already saved the day. Hang on,
 something isn’t right, the images Mr. Lumbergh talked about are not
-populating, they look like broken links.</div>
-<div class="line"><a class="reference internal" href="../_images/image24.png"><img alt="image23" src="../_images/image24.png" style="width: 2.67327in; height: 2.26704in;" /></a></div>
-</div>
+populating, they look like broken links.</p>
+<p><a class="reference internal" href="../_images/image24.png"><img alt="image23" src="../_images/image24.png" style="width: 2.67327in; height: 2.26704in;" /></a></p>
 <p>Let’s refresh the web page once more and see what the logs show….</p>
 <p><a class="reference internal" href="../_images/image25.png"><img alt="image24" src="../_images/image25.png" style="width: 6.5in; height: 1.25903in;" /></a></p>
 <p>If we follow the flow we can see the traffic to 10.30.0.50 is permitted
@@ -417,7 +415,7 @@ that reject rule and are logging all the traffic flows). Let’s look at
 how this web page is written. To view the page source details, simply
 <strong>right</strong> click anywhere on the <strong>10.30.0.50</strong> web page and select “view
 page source”</p>
-<p>re<a class="reference internal" href="../_images/image26.png"><img alt="image25" src="../_images/image26.png" style="width: 6.5in; height: 1.22222in;" /></a></p>
+<p><a class="reference internal" href="../_images/image26.png"><img alt="image25" src="../_images/image26.png" style="width: 6.5in; height: 1.22222in;" /></a></p>
 <p>Very interesting, it appears there are two images and they are links to
 another server which appear to be a server on the application network,
 which is also a link off of the firewall. You can verify this by looking
@@ -489,8 +487,9 @@ then click <strong>Done Editing</strong>.</p>
 <ul class="simple">
 <li>Open a new Web browser and access <a class="reference external" href="http://10.30.0.50">http://10.30.0.50</a></li>
 </ul>
-<p>Good to, wait, not go. What happened? I added a rule, why didn’t this
-work? Let’s look at the logs again (<strong>Security &gt; Event Logs &gt; Network &gt;
+<p>Good to, wait, <strong>not go</strong>. What happened? I added a rule, why didn’t this
+work?</p>
+<p>Let’s look at the logs again (<strong>Security &gt; Event Logs &gt; Network &gt;
 Firewall).</strong> They basically look the same as before, lets look at the
 ordering of the rule we just created (<strong>Security &gt; Network Firewall &gt;
 Active Rules change contex to route domain 0).</strong> Take note the newly
@@ -565,8 +564,8 @@ the change.</p>
 <p>The new Policy should look something like the screen shot below:</p>
 <p><a class="reference internal" href="../_images/image31.png"><img alt="image30" src="../_images/image31.png" style="width: 6.5in; height: 1.14792in;" /></a></p>
 </div>
-<div class="section" id="test-the-new-firewall-rules-1">
-<span id="id2"></span><h2>4.5.12. Test the New Firewall Rules<a class="headerlink" href="#test-the-new-firewall-rules-1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h2>4.5.12. Test the New Firewall Rules<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>Once again you will generate traffic through the BIG-IP AFM and then
 view the AFM (firewall) logs.</p>
 <ul class="simple">

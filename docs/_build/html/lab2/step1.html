@@ -51,7 +51,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="6. Conclusion" href="../conclusion.html" />
+    <link rel="next" title="5.2. Advanced Firewall Manager (AFM) Packet Tracer" href="step2.html" />
     <link rel="prev" title="5. Lab 2 - AFM Packet Tester, Flow Inspector, Stale Rule Lab" href="intro.html" />
   </head><body>
   <div id="clouddocs-header"></div>
@@ -76,15 +76,6 @@
         <span class="nav-sidebartoc">
             <ul>
 <li><a class="reference internal" href="#">5.1. Lab Overview</a></li>
-<li><a class="reference internal" href="#lab-1-advanced-firewall-manager-afm-packet-tracer">5.2. Lab 1 – Advanced Firewall Manager (AFM) Packet Tracer</a><ul>
-<li><a class="reference internal" href="#create-and-view-packet-tracer-entries">5.2.1. Create and View Packet Tracer Entries</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#lab-2-advanced-firewall-manager-afm-flow-inspector">5.3. Lab 2 – Advanced Firewall Manager (AFM) Flow Inspector</a><ul>
-<li><a class="reference internal" href="#create-and-view-flow-inspector-data">5.3.1. Create and View Flow Inspector Data</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#lab-3-stale-rule-report">5.4. Lab 3 – Stale Rule Report</a></li>
 </ul>
 
          </span>
@@ -93,18 +84,16 @@
         <span class="nav-sidebartoc">
             <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../intro1.html">1. Advanced Firewall Manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro1.html">1. Advanced Firewall Manager - The Data Center Firewall</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro2.html">2. Connecting to the Training Lab</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../intro3.html">3. Ravello Environment pre-check</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro3.html">3. Ravello Environment Pre-Check</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab1/intro.html">4. Lab 1 – Advanced Firewall Manager (AFM)</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="intro.html">5. Lab 2 - AFM Packet Tester, Flow Inspector, Stale Rule Lab</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">5.1. Lab Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#lab-1-advanced-firewall-manager-afm-packet-tracer">5.2. Lab 1 – Advanced Firewall Manager (AFM) Packet Tracer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#lab-2-advanced-firewall-manager-afm-flow-inspector">5.3. Lab 2 – Advanced Firewall Manager (AFM) Flow Inspector</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#lab-3-stale-rule-report">5.4. Lab 3 – Stale Rule Report</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../conclusion.html">6. Conclusion</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="intro.html">5. Lab 2 - AFM Packet Tester, Flow Inspector, Stale Rule Lab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab3/intro.html">6. Lab 3 - AFM DDoS Lab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab4/intro.html">7. Lab 4 - Device Management Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab5/intro.html">8. Lab 5 - Network Security (AFM) Management Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab6/intro.html">9. Lab 6 - iControl REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conclusion.html">10. Conclusion</a></li>
 </ul>
 
         </span><!-- Use this file to add extra links to the bottom of the ToC sidebar -->
@@ -133,146 +122,13 @@
 <p><a class="reference internal" href="../_images/image40.png"><img alt="image41" src="../_images/image40.png" style="width: 6.5in; height: 3.44792in;" /></a></p>
 <p>The packet tracing is inserted at L3 immediately prior to the Global IP
 intelligence. Because it is after the L2 section, this means that:</p>
-<ol class="loweralpha simple">
-<li>we cannot capture in tcpdump so we can’t see them in flight and</li>
+<ul class="simple">
+<li>we cannot capture in tcpdump so we can’t see them in flight, and</li>
 <li>no physical layer details will matter as it relates to testing.</li>
-</ol>
+</ul>
 <p>That said, it’s incredibly useful for what is and is not allowing your
 packets through. You can insert tcp, udp, sctp, and icmp packets, with a
 limited set of (appropriate to each protocol) attributes for each.</p>
-</div>
-<div class="section" id="lab-1-advanced-firewall-manager-afm-packet-tracer">
-<h1>5.2. Lab 1 – Advanced Firewall Manager (AFM) Packet Tracer<a class="headerlink" href="#lab-1-advanced-firewall-manager-afm-packet-tracer" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="create-and-view-packet-tracer-entries">
-<span id="section-2"></span><h2>5.2.1. Create and View Packet Tracer Entries<a class="headerlink" href="#create-and-view-packet-tracer-entries" title="Permalink to this headline">¶</a></h2>
-<p>In this section, you will generate various types of traffic as you did
-previously, but now you will view the flow using the network packet
-tracer. Login to bigip2.dnstest.lab</p>
-<p>(192.168.1.150), navigate to <strong>Security &gt; Debug &gt; Packet Tester</strong>.</p>
-<p><a class="reference internal" href="../_images/image41.png"><img alt="image42" src="../_images/image41.png" style="width: 6.48958in; height: 3.44792in;" /></a></p>
-<p>Create a packet test with the following parameters:</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="44%" />
-<col width="56%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head"><strong>Protocol</strong></th>
-<th class="head">TCP</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td><strong>TCP Flags</strong></td>
-<td>SYN</td>
-</tr>
-<tr class="row-odd"><td><strong>Source</strong></td>
-<td>IP - 1.2.3.4
-Port – 9999
-Vlan – Outside</td>
-</tr>
-<tr class="row-even"><td><strong>TTL</strong></td>
-<td>255</td>
-</tr>
-<tr class="row-odd"><td><strong>Destination</strong></td>
-<td>IP – 10.30.0.50
-Port - 80</td>
-</tr>
-<tr class="row-even"><td><strong>Trace Options</strong></td>
-<td>Use Staged Policy – no
-Trigger Log - no</td>
-</tr>
-</tbody>
-</table>
-<p>Click Run Trace to view the response. Your output should resmeble the
-allowed flow as shown below:</p>
-<p><a class="reference internal" href="../_images/image42.png"><img alt="image43" src="../_images/image42.png" style="width: 6.47361in; height: 2.94722in;" /></a></p>
-<p>You can also click on the “Route Domain Rules” trace result and see
-which rule is permitting the traffic.</p>
-<p><a class="reference internal" href="../_images/image43.png"><img alt="image44" src="../_images/image43.png" style="width: 6.5in; height: 2.66667in;" /></a></p>
-<p>Click <strong>New Packet Trace</strong> (optionally do not clear the existing data –
-aka leave checked).</p>
-<p>Create a packet test with the following parameters:</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="44%" />
-<col width="56%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head"><strong>Protocol</strong></th>
-<th class="head">TCP</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td><strong>TCP Flags</strong></td>
-<td>SYN</td>
-</tr>
-<tr class="row-odd"><td><strong>Source</strong></td>
-<td>IP - 1.2.3.4
-Port – 9999
-Vlan – Outside</td>
-</tr>
-<tr class="row-even"><td><strong>TTL</strong></td>
-<td>255</td>
-</tr>
-<tr class="row-odd"><td><strong>Destination</strong></td>
-<td>IP – 10.30.0.50
-Port - <strong>8081</strong></td>
-</tr>
-<tr class="row-even"><td><strong>Trace Options</strong></td>
-<td>Use Staged Policy – no
-Trigger Log - no</td>
-</tr>
-</tbody>
-</table>
-<p>Click Run Trace to view the response. Your output should resmeble the
-allowed flow as shown below:</p>
-<p><a class="reference internal" href="../_images/image44.png"><img alt="image45" src="../_images/image44.png" style="width: 6.49722in; height: 2.97708in;" /></a></p>
-<p>This shows there is no rule associated with the route domain or a
-virtual server which would permit the traffic. As such, the traffic
-would be dropped/rejected.</p>
-</div>
-</div>
-<div class="section" id="lab-2-advanced-firewall-manager-afm-flow-inspector">
-<h1>5.3. Lab 2 – Advanced Firewall Manager (AFM) Flow Inspector<a class="headerlink" href="#lab-2-advanced-firewall-manager-afm-flow-inspector" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="create-and-view-flow-inspector-data">
-<h2>5.3.1. Create and View Flow Inspector Data<a class="headerlink" href="#create-and-view-flow-inspector-data" title="Permalink to this headline">¶</a></h2>
-<p>A new tool introduced in version 13 is the flow inspector. This tool is
-useful to view statistical information about existing flows within the
-flow table. To test the flow inspector, navigate to <strong>Security &gt; Debug &gt;
-Flow Inspector.</strong> Refresh the web page we’ve been using for testing
-(<a class="reference external" href="http://10.30.0.50">http://10.30.0.50</a>) and click “Get Flows”.</p>
-<p><a class="reference internal" href="../_images/image45.png"><img alt="image46" src="../_images/image45.png" style="width: 6.48542in; height: 1.34653in;" /></a></p>
-<p>Select a flow and click on the pop-out arrow</p>
-<p>for additional data.</p>
-<p><a class="reference internal" href="../_images/image46.png"><img alt="image47" src="../_images/image46.png" style="width: 6.49167in; height: 0.68819in;" /></a></p>
-<p>This will show the TMM this is tied to as well as the last hop and the
-idle timeout. This data is extremely valuable when troubleshooting
-application flows.</p>
-<p>It is also worth noting you can click directly on the IP address of a
-flow to pre-populate the data in the packet tester for validating access
-and/or where the flow is permitted.</p>
-</div>
-</div>
-<div class="section" id="lab-3-stale-rule-report">
-<h1>5.4. Lab 3 – Stale Rule Report<a class="headerlink" href="#lab-3-stale-rule-report" title="Permalink to this headline">¶</a></h1>
-<p>AFM also can list out stale rules within the device its self. You must
-first enable the feature. To enable, navigate to <strong>Security &gt;Reporting &gt;
-Settings &gt; Reporting Settings.</strong> You will then need to check
-“<strong>Collect Stale Rules Statistics</strong>” found under the Network
-Firewall Rules Section. Please be sure to click “Save” before
-proceeding.</p>
-<p><a class="reference internal" href="../_images/image47.png"><img alt="image48" src="../_images/image47.png" style="width: 3.55556in; height: 3.70347in;" /></a></p>
-<p>Once enabled, navigate to <strong>Security &gt;Reporting &gt; Network &gt; Stale
-Rules.</strong> Feel free to refresh the web page we’ve been testing with
-(<a class="reference external" href="http://10.30.0.50">http://10.30.0.50</a>) to see data populate into the rules.</p>
-<p><strong>Note: this could take &gt;60 seconds to populate the data</strong></p>
-<p><a class="reference internal" href="../_images/image48.png"><img alt="image49" src="../_images/image48.png" style="width: 6.49722in; height: 1in;" /></a></p>
-<p>This information is quite useful for keeping a rule base tidy and
-optimized.</p>
-<p><strong>Anyone can create a firewall rule, but who is the person that removes
-the unneccesary ones?</strong></p>
-<blockquote>
-<div><a class="reference internal" href="../_images/image11.jpeg"><img alt="image50" src="../_images/image11.jpeg" style="width: 3.27778in; height: 1.14444in;" /></a></div></blockquote>
 </div>
 
 
@@ -284,7 +140,7 @@ the unneccesary ones?</strong></p>
         <a href="intro.html" title="5. Lab 2 - AFM Packet Tester, Flow Inspector, Stale Rule Lab" accesskey="p" class="btn btn-primary pull-left"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Previous</a>
        
        
-          <a href="../conclusion.html" title="6. Conclusion" accesskey="n" class="btn btn-primary pull-right">Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+          <a href="step2.html" title="5.2. Advanced Firewall Manager (AFM) Packet Tracer" accesskey="n" class="btn btn-primary pull-right">Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
        
      </div>
      </div>

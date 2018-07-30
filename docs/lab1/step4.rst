@@ -34,9 +34,7 @@ allowed to virtual servers and self IPs on the system, and any traffic
 you want to block must be explicitly specified. This applies only to the
 Virtual Server & Self IP level on the system.
 
-**Important: Even though the system is in a default allow configuration,
-if a packet matches no rule in any context on the firewall, a Global
-Drop rule drops the traffic.**
+.. IMPORTANT:: Even though the system is in a default allow configuration, if a packet matches no rule in any context on the firewall, a Global Drop rule drops the traffic.
 
 Rule Hierarchy
 --------------
@@ -68,11 +66,7 @@ context. You can enforce a firewall policy on any context except the
 management port. You can also stage a firewall policy in any context
 except management.
 
-**Important: You cannot configure or change the Global Drop context. The
-Global Drop context is the final context for traffic. Note that even
-though it is a global context, it is not processed first, like the main
-global context, but last. If a packet matches no rule in any previous
-context, the Global Drop rule drops the traffic.**
+.. TIP:: You cannot configure or change the Global Drop context. The Global Drop context is the final context for traffic. Note that even though it is a global context, it is not processed first, like the main global context, but last. If a packet matches no rule in any previous context, the Global Drop rule drops the traffic.
 
 .. image:: http://support.f5.com/kb/global/manual_images/MAN-0439-01/firewall_processing.png
 
@@ -311,10 +305,11 @@ time each rule was matched:
 
 |image22|
 
-| Congratulations! Day one and you’ve already saved the day. Hang on,
-  something isn’t right, the images Mr. Lumbergh talked about are not
-  populating, they look like broken links.
-| |image23|
+Congratulations! Day one and you’ve already saved the day. Hang on,
+something isn’t right, the images Mr. Lumbergh talked about are not
+populating, they look like broken links.
+
+|image23|
 
 Let’s refresh the web page once more and see what the logs show….
 
@@ -328,7 +323,7 @@ how this web page is written. To view the page source details, simply
 **right** click anywhere on the **10.30.0.50** web page and select “view
 page source”
 
-re\ |image25|
+|image25|
 
 Very interesting, it appears there are two images and they are links to
 another server which appear to be a server on the application network,
@@ -398,8 +393,10 @@ Test Access to the Server
 
 -  Open a new Web browser and access http://10.30.0.50
 
-Good to, wait, not go. What happened? I added a rule, why didn’t this
-work? Let’s look at the logs again (**Security > Event Logs > Network >
+Good to, wait, **not go**. What happened? I added a rule, why didn’t this
+work? 
+
+Let’s look at the logs again (**Security > Event Logs > Network >
 Firewall).** They basically look the same as before, lets look at the
 ordering of the rule we just created (**Security > Network Firewall >
 Active Rules change contex to route domain 0).** Take note the newly
@@ -468,8 +465,6 @@ the change.
 The new Policy should look something like the screen shot below:
 
 |image30|
-
-.. _test-the-new-firewall-rules-1:
 
 Test the New Firewall Rules
 ---------------------------
