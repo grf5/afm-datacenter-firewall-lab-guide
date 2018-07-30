@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<head>
+  
+  <!--STAGING:-->
+  <script src="https://assets.adobedtm.com/50164577268f481934e5d57dbfb78f929164cd0d/satelliteLib-ea775cfabef5fca8b04e9392f20c986c0724a7c3-staging.js"></script>
+  <!--Production:-->
+  <script src="https://assets.adobedtm.com/50164577268f481934e5d57dbfb78f929164cd0d/satelliteLib-ea775cfabef5fca8b04e9392f20c986c0724a7c3.js"></script>
+    <title>6.3. Lab 1 – Advanced Firewall Manager (AFM) DNS DoS</title>
+  
+
+  <meta charset="utf-8">
+  <!-- Twitter Bootstrap viewport setting -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- F5 metadata -->
+  <meta name="kb_doc_type" content="Manual"/>
+  <meta name="kb_doc_type" content="User Guide"/>
+  <meta name="title" content="6.3. Lab 1 – Advanced Firewall Manager (AFM) DNS DoS"/>
+  <meta name="product" content="F5 BIG-IP AFM - The Data Center Firewall Lab"/>
+  <meta name="version" content=""/>
+  <meta name="updated_date"  content="None"/>
+  <meta name="archived" content="Archived documents excluded"/>
+
+  
+  
+  
+  <link href="https://cdn.f5.com/favicon.ico" rel="icon">
+ 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script type="text"> jQuery.noConflict(true)</script>
+
+</head>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>6.3. Lab 1 – Advanced Firewall Manager (AFM) DNS DoS &#8212; F5 BIG-IP AFM - The Data Center Firewall Lab  documentation</title>
+    <link rel="stylesheet" href="../_static/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/f5_agility_theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/f5.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/f5-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/21fb8a09c3.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="7. Conclusion" href="../conclusion.html" />
+    <link rel="prev" title="6.1. Lab Overview" href="step1.html" />
+  </head><body>
+  <div id="clouddocs-header"></div>
+
+    <div id="dismiss">
+      <button type="button" class="btn btn-info navbar-btn site-hidden"><i class="fa fa-align-justify"></i></button>
+    </div>
+    <div id="sidebar" class="section-nav">
+      <nav class="nav-sidebartoc">
+        <h5>F5 BIG-IP AFM - The Data Center Firewall Lab  documentation </h5>
+<div id="searchbox" role="search">
+  <form class="search" action="../search.html" method="get">
+    <input type="text" class="search" name="q" placeholder=" Search..." />
+    <button type="submit" class="btn btn-info navbar-btn"><i class="fa fa-search"></i></button>
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        <hr>
+        <h5>Current Page</h5>
+        <span class="nav-sidebartoc">
+            <ul>
+<li><a class="reference internal" href="#">6.3. Lab 1 – Advanced Firewall Manager (AFM) DNS DoS</a><ul>
+<li><a class="reference internal" href="#detecting-and-preventing-dns-dos-attacks-on-a-virtual-server">6.3.1. Detecting and Preventing DNS DoS Attacks on a Virtual Server</a><ul>
+<li><a class="reference internal" href="#establishing-a-dns-server-baseline">6.3.1.1. Establishing a DNS server baseline</a></li>
+<li><a class="reference internal" href="#configuring-a-dos-logging-profile">6.3.1.2. Configuring a DoS Logging Profile</a></li>
+<li><a class="reference internal" href="#configuring-a-dos-profile">6.3.1.3. Configuring a DoS Profile</a></li>
+<li><a class="reference internal" href="#attaching-a-dos-profile">6.3.1.4. Attaching a DoS Profile</a></li>
+<li><a class="reference internal" href="#simulate-a-dns-ddos-attack">6.3.1.5. Simulate a DNS DDoS Attack</a></li>
+<li><a class="reference internal" href="#dns-ddos-mitigations-for-continued-service">6.3.1.6. DNS DDoS Mitigations for Continued Service</a></li>
+<li><a class="reference internal" href="#bad-actor-detection">6.3.1.7. Bad Actor Detection</a></li>
+<li><a class="reference internal" href="#remote-triggered-black-holing">6.3.1.8. Remote Triggered Black Holing</a></li>
+<li><a class="reference internal" href="#silverline-mitigation">6.3.1.9. Silverline Mitigation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#filtering-specific-dns-operations">6.3.2. Filtering specific DNS operations</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#advanced-firewall-manager-afm-detecting-and-preventing-system-dos-and-ddos-attacks">6.4. Advanced Firewall Manager (AFM) Detecting and Preventing System DoS and DDoS Attacks</a><ul>
+<li><a class="reference internal" href="#preventing-global-dos-sweep-and-flood-attacks">6.4.1. Preventing Global DoS Sweep and Flood Attacks</a><ul>
+<li><a class="reference internal" href="#single-endpoint-sweep">6.4.1.1. Single Endpoint Sweep</a></li>
+<li><a class="reference internal" href="#single-endpoint-flood">6.4.1.2. Single Endpoint Flood</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+         </span>
+        <hr>
+        <h5>Site Contents</h5>
+        <span class="nav-sidebartoc">
+            <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro1.html">1. Advanced Firewall Manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro2.html">2. Connecting to the Training Lab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro3.html">3. Ravello Environment pre-check</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab1/intro.html">4. Lab 1 – Advanced Firewall Manager (AFM)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab2/intro.html">5. Lab 2 - AFM Packet Tester, Flow Inspector, Stale Rule Lab</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="intro.html">6. Lab 3 - AFM DDoS Lab</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="step1.html">6.1. Lab Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="step1.html#base-big-ip-configuration">6.2. Base BIG-IP Configuration</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">6.3. Lab 1 – Advanced Firewall Manager (AFM) DNS DoS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#advanced-firewall-manager-afm-detecting-and-preventing-system-dos-and-ddos-attacks">6.4. Advanced Firewall Manager (AFM) Detecting and Preventing System DoS and DDoS Attacks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../conclusion.html">7. Conclusion</a></li>
+</ul>
+
+        </span><!-- Use this file to add extra links to the bottom of the ToC sidebar -->
+<hr>
+  <span class="nav-sidebartoc">
+ <!-- insert content here -->
+  </span>
+      </nav>
+    </div>
+
+  
+  <div class="main active" id="content">
+    <article class="docs-container site-article-inner">
+            <nav class="site-breadcrumb-nav site-nav">
+          <ul class="site-breadcrumb-list">
+            <li class="breadcrumb-item"><button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn site-hidden"><i class="fa fa-align-justify"></i></button>&#x20 <a href="/">Community Training Classes &amp; Labs</a> &gt; <a href="../index.html">F5 BIG-IP AFM - The Data Center Firewall Lab </a> &gt; 6.3. Lab 1 – Advanced Firewall Manager (AFM) DNS DoS</li>
+          </ul>
+      </nav>
+      
+      
+
+    
+  <div class="section" id="lab-1-advanced-firewall-manager-afm-dns-dos">
+<h1>6.3. Lab 1 – Advanced Firewall Manager (AFM) DNS DoS<a class="headerlink" href="#lab-1-advanced-firewall-manager-afm-dns-dos" title="Permalink to this headline">¶</a></h1>
+<p>It is day two of your career at Initech, and you are under attack!! You
+walk into the office on day two only to learn your DNS servers are being
+attacked by Joanna who took out her flair frustrations on your DNS
+servers. Before you can protect the servers however, you must first tune
+and configure them appropriately. (The most challenging part of DoS
+based protection is tuning correctly).</p>
+<ol class="arabic">
+<li><p class="first">Launch the Chrome shortcut titled “BIG-IP UI” on the desktop of your
+lab jump server. For this lab you will be working on
+bigip1.dnstest.lab (<a class="reference external" href="http://192.168.1.100">http://192.168.1.100</a>). The credentials for the
+BIG-IP are conveniently displayed in the login banner. Just in case:
+<strong>admin / 401elliottW!</strong></p>
+</li>
+<li><p class="first">Navigate to <strong>Local Traffic</strong> &gt; <strong>Nodes</strong> and create a new node with
+the following settings, leaving unspecified fields at their default
+value:</p>
+<ol class="arabic">
+<li><p class="first">Name: lab-server-10.10.0.50</p>
+</li>
+<li><div class="first line-block">
+<div class="line">Address: 10.10.0.50</div>
+<div class="line"><a class="reference internal" href="../_images/image491.png"><img alt="image51" src="../_images/image491.png" style="width: 3.94702in; height: 3.80739in;" /></a></div>
+</div>
+</li>
+</ol>
+</li>
+<li><p class="first">Click <strong>Finished</strong> to add the new node.</p>
+</li>
+<li><p class="first">Navigate to <strong>Local Traffic</strong> &gt; <strong>Pools</strong> and create a new pool with
+the following settings, leaving unspecified attributes at their
+default value:</p>
+<ol class="loweralpha" start="3">
+<li><p class="first">Name: lab-server-pool</p>
+</li>
+<li><p class="first">Health Monitors: gateway_icmp</p>
+</li>
+<li><p class="first">New Members: Node List</p>
+<ol class="lowerroman">
+<li><p class="first">Address: lab-server-10.10.0.50</p>
+</li>
+<li><p class="first">Service Port: * (All Services)</p>
+</li>
+<li><div class="first line-block">
+<div class="line">Click <strong>Add</strong> to add the new member to the member list.</div>
+<div class="line"><a class="reference internal" href="../_images/image501.png"><img alt="image52" src="../_images/image501.png" style="width: 4.75828in; height: 4.42937in;" /></a></div>
+</div>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p class="first">Click <strong>Finished</strong> to create the new pool.</p>
+</li>
+<li><p class="first">Because the attack server will be sending a huge amount of traffic,
+we’ll need a large SNAT pool. Navigate to <strong>Local Traffic</strong> &gt;
+<strong>Address Translation</strong> &gt; <strong>SNAT Pool List</strong> and create a new SNAT
+pool with the following attributes:</p>
+<ol class="loweralpha" start="6">
+<li><p class="first">Name: inside_snat_pool</p>
+</li>
+<li><div class="first line-block">
+<div class="line">Member List (click Add after each IP):</div>
+<div class="line">10.10.0.125, 10.10.0.126, 10.10.0.127, 10.10.0.128,
+10.10.0.129, 10.10.0.130</div>
+</div>
+</li>
+<li><div class="first line-block">
+<div class="line">Click Finished</div>
+<div class="line"><a class="reference internal" href="../_images/image511.png"><img alt="image53" src="../_images/image511.png" style="width: 4.72535in; height: 3.47384in;" /></a></div>
+</div>
+</li>
+</ol>
+</li>
+<li><p class="first">Navigate to <strong>Local Traffic</strong> &gt; <strong>Virtual Servers</strong> and create a new
+virtual server with the following settings, leaving unspecified
+fields at their default value:</p>
+<p>i. Name: udp_dns_VS
+j. Destination Address/Mask: 10.20.0.10
+k. Service Port: 53 (other)
+l. Protocol: UDP
+m. Source Address Translation: SNAT
+n. SNAT Pool: inside_snat_pool
+o. Default Pool: lab-server-pool</p>
+</li>
+<li><div class="first line-block">
+<div class="line">Click Finished</div>
+<div class="line"><a class="reference internal" href="../_images/image521.png"><img alt="image54" src="../_images/image521.png" style="width: 3.80731in; height: 8.22517in;" /></a></div>
+</div>
+</li>
+<li><p class="first">We’ll now test the new DNS virtual server. SSH into the attack host
+by clicking the “Attack Host (Ubuntu)” icon on the jump host
+desktop.</p>
+</li>
+<li><div class="first line-block">
+<div class="line">Issue the <code class="docutils literal notranslate"><span class="pre">dig</span> <span class="pre">&#64;10.20.0.10</span> <span class="pre">www.example.com</span> <span class="pre">+short</span></code> command on the BASH CLI of the attack host.  You should see output similar to:</div>
+<div class="line"><a class="reference internal" href="../_images/image531.png"><img alt="image55" src="../_images/image531.png" style="width: 6.16667in; height: 0.44444in;" /></a></div>
+<div class="line">This verifies that DNS traffic is passing through the BIG-IP.</div>
+</div>
+</li>
+<li><p class="first">Return to the BIG-IP and navigate to <strong>Local Traffic</strong> &gt; <strong>Virtual Servers</strong> and create a new virtual server with the following settings, leaving unspecified fields at their default value:</p>
+<ol class="loweralpha simple" start="16">
+<li>Name: other_protocols_VS</li>
+<li>Destination Address/Mask: 10.20.0.10</li>
+<li>Service Port: * (All Ports)</li>
+<li>Protocol: * All Protocols</li>
+<li>Any IP Profile: ipother</li>
+<li>Source Address Translation: SNAT</li>
+<li>SNAT Pool: inside_snat_pool</li>
+<li>Default Pool: lab-server-pool</li>
+</ol>
+</li>
+<li><div class="first line-block">
+<div class="line">Click Finished</div>
+<div class="line"><a class="reference internal" href="../_images/image541.png"><img alt="image56" src="../_images/image541.png" style="width: 4.73472in; height: 6.057in;" /></a></div>
+</div>
+</li>
+<li><p class="first">Return to the Attack Host SSH session and attempt to SSH to the
+server using SSH 10.20.0.10. Simply verify that you are prompted for
+credentials and press CTRL+C to cancel the session. This verifies
+that non-DNS traffic is now flowing through the BIG-IP.</p>
+</li>
+</ol>
+<div class="section" id="detecting-and-preventing-dns-dos-attacks-on-a-virtual-server">
+<h2>6.3.1. Detecting and Preventing DNS DoS Attacks on a Virtual Server<a class="headerlink" href="#detecting-and-preventing-dns-dos-attacks-on-a-virtual-server" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="establishing-a-dns-server-baseline">
+<h3>6.3.1.1. Establishing a DNS server baseline<a class="headerlink" href="#establishing-a-dns-server-baseline" title="Permalink to this headline">¶</a></h3>
+<p>Before we can prevent Joanna from attacking our DNS server, again, we
+should establish a baseline for how many QPS our DNS server can handle.
+For this lab, let’s find the magic number of QPS that causes 50% CPU
+utilization on the BIND process.</p>
+<ol class="arabic">
+<li><p class="first">Connect to the Victim Server SSH session by double-clicking the
+<strong>Victim Server (Ubuntu)</strong> shortcut on the jump host desktop.</p>
+</li>
+<li><p class="first">From the BASH prompt, enter <strong>top</strong> and press <strong>Enter</strong> to start the
+top utility.</p>
+</li>
+<li><p class="first">You will see a list of running processes sorted by CPU utilization,
+like the output below:</p>
+<p><a class="reference internal" href="../_images/image551.png"><img alt="image57" src="../_images/image551.png" style="width: 5.6in; height: 3.53333in;" /></a></p>
+</li>
+<li><p class="first">Connect to the Attack Host SSH session by double-clicking the
+<strong>Attack Host (Ubuntu)</strong> shortcut on the jump host desktop.</p>
+</li>
+<li><div class="first line-block">
+<div class="line">Start by sending 500 DNS QPS for 30 seconds to the host using the
+following syntax:</div>
+<div class="line">dnsperf -s 10.20.0.10 -d queryfile-example-current -c 20 -T 20 -l
+30 -q 10000 -Q 500</div>
+</div>
+</li>
+<li><p class="first">Observe CPU utilization over the 30 second window for the <strong>named</strong>
+process. If the CPU utilization is below 45%, increase the QPS by
+increasing the -Q value. If the CPU utilization is above 55%,
+decrease the QPS. This</p>
+</li>
+<li><p class="first">Record the QPS required to achieve a sustained CPU utilization of
+approximately 50%. Consider this the QPS that the server can safely
+sustain for demonstration purposes.</p>
+</li>
+<li><div class="first line-block">
+<div class="line">Now, attack the DNS server with 10,000 QPS using the following
+syntax:</div>
+<div class="line">dnsperf -s 10.20.0.10 -d queryfile-example-current -c 20 -T 20 -l
+30 -q 10000 -Q 10000</div>
+</div>
+</li>
+<li><p class="first">You’ll notice that the CPU utilization on the victim server
+skyrockets, as well as DNS query timeout errors appearing on the
+attack server’s SSH session. This shows your DNS server is
+overwhelmed.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="configuring-a-dos-logging-profile">
+<h3>6.3.1.2. Configuring a DoS Logging Profile<a class="headerlink" href="#configuring-a-dos-logging-profile" title="Permalink to this headline">¶</a></h3>
+<p>We’ll create a DoS logging profile so that we can see event logs in the
+BIG-IP UI during attack mitigation.</p>
+<ol class="arabic">
+<li><p class="first">On the BIG-IP web UI, navigate to <strong>Security</strong> &gt; <strong>Event Logs</strong> &gt;
+<strong>Logging Profiles</strong> and create a new profile with the following
+values, leaving unspecified attributes at their default value:</p>
+<ol class="loweralpha">
+<li><p class="first">Profile Name: dns-dos-profile-logging</p>
+</li>
+<li><p class="first">DoS Protection: Enabled</p>
+</li>
+<li><div class="first line-block">
+<div class="line">DNS DoS Protection Publisher: local-db-publisher and click
+finish</div>
+<div class="line"><a class="reference internal" href="../_images/image561.png"><img alt="image58" src="../_images/image561.png" style="width: 4.045in; height: 5.58775in;" /></a></div>
+</div>
+</li>
+</ol>
+</li>
+</ol>
+</div>
+<div class="section" id="configuring-a-dos-profile">
+<h3>6.3.1.3. Configuring a DoS Profile<a class="headerlink" href="#configuring-a-dos-profile" title="Permalink to this headline">¶</a></h3>
+<p>We will now create a DoS profile with manually configured thresholds to
+limit the attack’s effect on our server.</p>
+<ol class="arabic">
+<li><p class="first">Navigate to <strong>Security</strong> &gt; <strong>DoS Protection</strong> &gt; <strong>DoS Profiles</strong></p>
+</li>
+<li><p class="first">Create a new DoS profile with the name <strong>dns-dos-profile</strong>.</p>
+</li>
+<li><div class="first line-block">
+<div class="line">Click <strong>Finished</strong>.</div>
+<div class="line"><a class="reference internal" href="../_images/image571.png"><img alt="image59" src="../_images/image571.png" style="width: 4.94444in; height: 2.29167in;" /></a></div>
+</div>
+</li>
+<li><p class="first">The UI will return to the DoS Profiles list. Click the
+<strong>dns-dos-profile</strong> name.</p>
+</li>
+<li><p class="first">Click the <strong>Protocol Security</strong> tab and select <strong>DNS Security</strong> from
+the drop-down.</p>
+</li>
+<li><p class="first">Click the <strong>DNS A Query</strong> vector from the Attack Type list.</p>
+</li>
+<li><p class="first">Modify the <strong>DNS A Query</strong> vector configuration to match the
+following values, leaving unspecified attributes with their default
+value:</p>
+<ol class="loweralpha">
+<li><p class="first">State: Mitigate</p>
+</li>
+<li><p class="first">Threshold Mode: Fully Manual</p>
+</li>
+<li><p class="first">Detection Threshold EPS: (Set this at 80% of your safe QPS value)</p>
+</li>
+<li><div class="first line-block">
+<div class="line">Mitigation Threshold EPS: (Set this to your safe QPS value)</div>
+<div class="line"><a class="reference internal" href="../_images/image581.png"><img alt="image60" src="../_images/image581.png" style="width: 3.54305in; height: 4.68726in;" /></a></div>
+</div>
+</li>
+</ol>
+</li>
+<li><p class="first">Make sure that you click <strong>Update</strong> to save your changes.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="attaching-a-dos-profile">
+<h3>6.3.1.4. Attaching a DoS Profile<a class="headerlink" href="#attaching-a-dos-profile" title="Permalink to this headline">¶</a></h3>
+<p>We will attach the DoS profile to the virtual server that we configured
+to manage DNS traffic.</p>
+<ol class="arabic simple">
+<li>Navigate to <strong>Local Traffic</strong> &gt; <strong>Virtual Servers</strong> &gt; <strong>Virtual
+Server List</strong>.</li>
+<li>Click on the <strong>udp_dns_VS</strong> name.</li>
+<li>Click on the <strong>Security</strong> tab and select <strong>Policies</strong>.</li>
+<li>In the <strong>DoS Protection Profile</strong> field, select <strong>Enabled</strong> and
+choose the <strong>dns-dos-profile</strong>.</li>
+<li>In the <strong>Log Profile</strong>, select <strong>Enabled</strong> and move the
+<strong>dns-dos-profile-logging</strong> profile from <strong>Available</strong> to
+<strong>Selected</strong>.</li>
+<li>Click <strong>Update</strong>.</li>
+</ol>
+</div>
+<div class="section" id="simulate-a-dns-ddos-attack">
+<h3>6.3.1.5. Simulate a DNS DDoS Attack<a class="headerlink" href="#simulate-a-dns-ddos-attack" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Open the SSH session to the victim server and ensure the top utility
+is running.</p>
+</li>
+<li><div class="first line-block">
+<div class="line">Once again, attack your DNS server from the attack host using the
+following syntax:</div>
+<div class="line">dnsperf -s 10.20.0.10 -d queryfile-example-current -c 20 -T 20 -l
+30 -q 10000 -Q 10000</div>
+</div>
+</li>
+<li><p class="first">On the server SSH session running the top utility, notice the CPU
+utilization on your server remains in a range that ensures the DNS
+server is not overwhelmed.</p>
+</li>
+<li><p class="first">After the attack, navigate to <strong>Security</strong> &gt; <strong>Event Logs</strong> &gt; <strong>DoS</strong>
+&gt; <strong>DNS Protocol</strong>. Observe the logs to see the mitigation actions
+taken by the BIG-IP. Be sure to scroll right…</p>
+<p><a class="reference internal" href="../_images/image591.tiff"><img alt="image61" src="../_images/image591.tiff" style="width: 6.5in; height: 2.78542in;" /></a></p>
+</li>
+</ol>
+</div>
+<div class="section" id="dns-ddos-mitigations-for-continued-service">
+<h3>6.3.1.6. DNS DDoS Mitigations for Continued Service<a class="headerlink" href="#dns-ddos-mitigations-for-continued-service" title="Permalink to this headline">¶</a></h3>
+<p>At this point, you have successfully configured the BIG-IP to limit the
+amount of resource utilization on the BIG-IP, thus further frustrating
+Joanna on her flair rage. Unfortunately, even valid DNS requests can be
+caught in the mitigation we’ve configured. There are further steps that
+can be taken to mitigate Joanna’s attack that will allow non-malicious
+DNS queries.</p>
+</div>
+<div class="section" id="bad-actor-detection">
+<h3>6.3.1.7. Bad Actor Detection<a class="headerlink" href="#bad-actor-detection" title="Permalink to this headline">¶</a></h3>
+<p>Bad actor detection and blacklisting allows us to completely block
+communications from malicious hosts at the BIG-IP, completely preventing
+those hosts from reaching the back-end servers. To demonstrate:</p>
+<ol class="arabic">
+<li><p class="first">Navigate to <strong>Security</strong> &gt; <strong>DoS Protection</strong> &gt; <strong>DoS Profiles</strong>.</p>
+</li>
+<li><p class="first">Click on the <strong>dns-dos-profile</strong> profile name.</p>
+</li>
+<li><p class="first">Click on the <strong>Protocol Security</strong> tab then select <strong>DNS Security</strong>.</p>
+</li>
+<li><p class="first">Click on the <strong>DNS A Query</strong> attack type name.</p>
+</li>
+<li><p class="first">Modify the vector as follows:</p>
+<ol class="loweralpha">
+<li><p class="first">Bad Actor Detection: Checked</p>
+</li>
+<li><p class="first">Per Source IP Detection Threshold EPS: 80</p>
+</li>
+<li><p class="first">Per Source IP Mitigation Threshold EPS: 100</p>
+</li>
+<li><p class="first">Add Source Address to Category: Checked</p>
+</li>
+<li><p class="first">Category Name: denial_of_service</p>
+</li>
+<li><p class="first">Sustained Attack Detection Time: 15 seconds</p>
+</li>
+<li><div class="first line-block">
+<div class="line">Category Duration Time: 60 seconds</div>
+<div class="line"><a class="reference internal" href="../_images/image601.png"><img alt="image62" src="../_images/image601.png" style="width: 2.67129in; height: 5.81457in;" /></a></div>
+</div>
+</li>
+</ol>
+</li>
+<li><p class="first">Make sure you click <strong>Update</strong> to save your changes.</p>
+</li>
+<li><p class="first">Navigate to <strong>Security</strong> &gt; <strong>Network Firewall</strong> &gt; <strong>IP
+Intelligence</strong> &gt; <strong>Policies</strong> and create a new IP Intelligence
+policy with the following values, leaving unspecified attributes at
+their default values:</p>
+<ol class="loweralpha simple" start="8">
+<li>Name: dns-bad-actor-blocking</li>
+<li>Default Log Actions section:<ol class="lowerroman">
+<li>Log Blacklist Category Matches: Yes</li>
+</ol>
+</li>
+<li>Blacklist Matching Policy<ol class="lowerroman" start="2">
+<li>Create a new blacklist matching policy:<ol class="arabic">
+<li>Blacklist Category: denial_of_service</li>
+<li><a class="reference internal" href="../_images/image611.png"><img alt="image63" src="../_images/image611.png" style="width: 6.22083in; height: 3.675in;" /></a>Click <strong>Add</strong> to add the policy then click
+finished</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p class="first">Navigate to <strong>Local Traffic</strong> &gt; <strong>Virtual Servers</strong> &gt; <strong>Virtual
+Server List</strong>.</p>
+</li>
+<li><p class="first">Click on the <strong>udp_dns_VS</strong> virtual server name.</p>
+</li>
+<li><p class="first">Click on the <strong>Security</strong> tab and select <strong>Policies</strong>.</p>
+</li>
+<li><div class="first line-block">
+<div class="line">Enable <strong>IP Intelligence</strong> and choose the
+<strong>dns-bad-actor-blocking</strong> policy.</div>
+<div class="line"><a class="reference internal" href="../_images/image621.png"><img alt="image64" src="../_images/image621.png" style="width: 3.81074in; height: 5.31788in;" /></a></div>
+</div>
+</li>
+<li><p class="first">Make sure you click <strong>Update</strong> to save your changes.</p>
+</li>
+<li><p class="first">Navigate to <strong>Security</strong> &gt; <strong>Event Logs</strong> &gt; <strong>Logging Profiles</strong>.</p>
+</li>
+<li><p class="first">Click the <strong>global-network</strong> logging profile name.</p>
+</li>
+<li><div class="first line-block">
+<div class="line">Under the <strong>Network Firewall</strong> tab (next to Protocol Security),
+set the IP Intelligence Publisher to <strong>local-db-publisher</strong> and
+check <strong>Log Shun Events</strong>.</div>
+<div class="line"><a class="reference internal" href="../_images/image631.png"><img alt="image65" src="../_images/image631.png" style="width: 4.17881in; height: 2.18072in;" /></a></div>
+</div>
+</li>
+<li><p class="first">Click <strong>Update</strong> to save your changes.</p>
+</li>
+<li><p class="first">Click the <strong>dns-dos-profile-logging</strong> logging profile name.</p>
+</li>
+<li><div class="first line-block">
+<div class="line">Check <strong>Enabled</strong> next to <strong>Network Firewall</strong>.</div>
+<div class="line"><a class="reference internal" href="../_images/image641.png"><img alt="image66" src="../_images/image641.png" style="width: 3.40297in; height: 3.22001in;" /></a></div>
+</div>
+</li>
+<li><div class="first line-block">
+<div class="line">Under the <strong>Network Firewall</strong> tab, change the <strong>IP Intelligence
+Publisher</strong> to <strong>local-db-publisher</strong> and click <strong>Update</strong>.</div>
+<div class="line"><a class="reference internal" href="../_images/image651.png"><img alt="image67" src="../_images/image651.png" style="width: 2.96026in; height: 1.54149in;" /></a></div>
+</div>
+</li>
+<li><p class="first">Bring into view the Victim Server SSH session running the top
+utility to monitor CPU utilization.</p>
+</li>
+<li><div class="first line-block">
+<div class="line">On the Attack Server host, launch the DNS attack once again using
+the following syntax:</div>
+<div class="line">dnsperf -s 10.20.0.10 -d queryfile-example-current -c 20 -T 20 -l
+30 -q 10000 -Q 10000</div>
+</div>
+</li>
+<li><div class="first line-block">
+<div class="line">You’ll notice CPU utilization on the BIG-IP begin to climb, but
+slowly drop. The attack host will show that queries are timing out
+as shown below. This is due to the BIG-IP blacklisting the bad
+actor.</div>
+<div class="line"><a class="reference internal" href="../_images/image661.tiff"><img alt="image68" src="../_images/image661.tiff" style="width: 2.36111in; height: 0.68056in;" /></a></div>
+</div>
+</li>
+<li><p class="first">Navigate to <strong>Security</strong> &gt; <strong>Event Logs</strong> &gt; <strong>Network</strong> &gt; <strong>IP
+Intelligence</strong>. Observe the bad actor blocking mitigation logs.</p>
+</li>
+<li><div class="first line-block">
+<div class="line">Navigate to <strong>Security</strong> &gt; <strong>Event Logs</strong> &gt; <strong>Network</strong> &gt;
+<strong>Shun</strong>. This screen shows the bad actor being added to (and
+later deleted from) the shun category.</div>
+<div class="line"><a class="reference internal" href="../_images/image671.tiff"><img alt="image69" src="../_images/image671.tiff" style="width: 4.875in; height: 1.68056in;" /></a></div>
+</div>
+</li>
+<li><p class="first">While the attack is running, navigate to <strong>Security</strong> &gt; <strong>DoS
+Protection</strong>&gt; <strong>DoS Overview (you may need to refresh or set the
+auto refresh to 10 seconds).</strong> You will notice from here you can see
+all the details of the active attacks. You can also modify an attack
+vector right from this screen by clicking on the attack vector and
+modifying the fly out.</p>
+</li>
+</ol>
+<p><a class="reference internal" href="../_images/image681.png"><img alt="image70" src="../_images/image681.png" style="width: 6.69121in; height: 3.10185in;" /></a></p>
+<ol class="arabic" start="26">
+<li><div class="first line-block">
+<div class="line">Navigate to <strong>Security</strong> &gt; <strong>Reporting</strong> &gt; <strong>Protocol</strong> &gt; <strong>DNS</strong>.
+Change the <strong>View By</strong> drop-down to view various statistics around
+the DNS traffic and attacks.</div>
+<div class="line"><a class="reference internal" href="../_images/image691.tiff"><img alt="image71" src="../_images/image691.tiff" style="width: 4.3245in; height: 3.69594in;" /></a></div>
+</div>
+</li>
+<li><p class="first">Navigate to <strong>Security</strong> &gt; <strong>Reporting</strong> &gt; <strong>Network</strong> &gt; <strong>IP
+Intelligence</strong>. The default view may be blank. Change the <strong>View
+By</strong> drop-down to view various statistics around the IP Intelligence
+handling of the attack traffic.</p>
+</li>
+<li><div class="first line-block">
+<div class="line">Navigate to <strong>Security</strong> &gt; <strong>Reporting</strong> &gt; <strong>DoS</strong> &gt; <strong>Dashboard</strong>
+to view an overview of the DoS attacks and timeline. You can
+select filters in the filter pane to highlight specific attacks.</div>
+<div class="line"><a class="reference internal" href="../_images/image701.tiff"><img alt="image72" src="../_images/image701.tiff" style="width: 5in; height: 4.06944in;" /></a></div>
+</div>
+</li>
+<li><p class="first">Finally, navigate to <strong>Security</strong> &gt; <strong>Reporting</strong> &gt; <strong>DoS</strong> &gt;
+<strong>Analysis</strong>. View detailed statistics around each attack.</p>
+</li>
+</ol>
+<p><a class="reference internal" href="../_images/image711.png"><img alt="image73" src="../_images/image711.png" style="width: 6.49097in; height: 2.17569in;" /></a></p>
+</div>
+<div class="section" id="remote-triggered-black-holing">
+<h3>6.3.1.8. Remote Triggered Black Holing<a class="headerlink" href="#remote-triggered-black-holing" title="Permalink to this headline">¶</a></h3>
+<p>The BIG-IP supports the advertisement of bad actor(s) to upstream
+devices via BGP to block malicious traffic closer to the source. This is
+accomplished by publishing a blacklist to an external resource. This is
+not demonstrated in this lab.</p>
+</div>
+<div class="section" id="silverline-mitigation">
+<h3>6.3.1.9. Silverline Mitigation<a class="headerlink" href="#silverline-mitigation" title="Permalink to this headline">¶</a></h3>
+<p>F5’s Silverline service offers “always on” and “on demand” DDoS
+scrubbing that could assist in this scenario as well. This is not
+demonstrated in this lab.</p>
+</div>
+</div>
+<div class="section" id="filtering-specific-dns-operations">
+<h2>6.3.2. Filtering specific DNS operations<a class="headerlink" href="#filtering-specific-dns-operations" title="Permalink to this headline">¶</a></h2>
+<p>The BIG-IP offers the ability to filter DNS query types and header
+opcodes to act as a DNS firewall. To demonstrate, we will block MX
+queries from our DNS server.</p>
+<ol class="arabic">
+<li><p class="first">Open the SSH session to the Attack Host.</p>
+</li>
+<li><div class="first line-block">
+<div class="line">Perform an MX record lookup by issuing the following command:</div>
+<div class="line">dig &#64;10.20.0.10 MX example.com</div>
+</div>
+</li>
+<li><p class="first">The server doesn’t have a record for this domain. This server
+doesn’t have MX records, so those requests should be filtered</p>
+</li>
+<li><p class="first">Navigate to <strong>Security</strong> &gt; <strong>Protocol Security</strong> &gt; <strong>Security
+Profiles</strong> &gt; <strong>DNS</strong> and create a new DNS security profile with the
+following values, leaving unspecified attributes at their default
+value:</p>
+<ol class="loweralpha">
+<li><p class="first">Name: dns-block-mx-query</p>
+</li>
+<li><div class="first line-block">
+<div class="line">Query Type Filter: move mx from Available to Active and click
+finished</div>
+<div class="line"><a class="reference internal" href="../_images/image721.png"><img alt="image74" src="../_images/image721.png" style="width: 3.89968in; height: 3.43639in;" /></a></div>
+</div>
+</li>
+</ol>
+</li>
+<li><p class="first">Navigate to <strong>Local Traffic</strong> &gt; <strong>Profiles</strong> &gt; <strong>Services</strong> &gt;
+<strong>DNS</strong>. <strong>NOTE:</strong> if you are mousing over the services, DNS may not
+show up on the list. Select <strong>Services</strong> and then use the pulldown
+menu on services to select <strong>DNS</strong>.</p>
+</li>
+<li><p class="first">Create a new DNS services profile with the following values, leaving
+unspecified values at their default values:</p>
+<ol class="loweralpha" start="3">
+<li><p class="first">Name: dns-block-mx</p>
+</li>
+<li><p class="first">DNS Traffic</p>
+<ol class="lowerroman">
+<li><p class="first">DNS Security: Enabled</p>
+</li>
+<li><div class="first line-block">
+<div class="line">DNS Security Profile Name: dns-block-mx-query. Click
+finished</div>
+<div class="line"><a class="reference internal" href="../_images/image731.png"><img alt="image75" src="../_images/image731.png" style="width: 2.60017in; height: 6.93378in;" /></a></div>
+</div>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p class="first">Navigate to <strong>Local Traffic</strong> &gt; <strong>Virtual Servers</strong> &gt; <strong>Virtual
+Server List</strong>.</p>
+</li>
+<li><p class="first">Click on the <strong>udp_dns_VS</strong> virtual server name.</p>
+</li>
+<li><p class="first">In the <strong>Configuration</strong> section, change the view to <strong>Advanced</strong>.</p>
+</li>
+<li><div class="first line-block">
+<div class="line">Set the <strong>DNS Profile</strong> to <strong>dns-block-mx</strong>.</div>
+<div class="line"><a class="reference internal" href="../_images/image741.png"><img alt="image76" src="../_images/image741.png" style="width: 3.02244in; height: 2.63576in;" /></a></div>
+</div>
+</li>
+<li><p class="first">Click <strong>Update</strong> to save your settings.</p>
+</li>
+<li><p class="first">Navigate to <strong>Security</strong> &gt; <strong>Event Logs</strong> &gt; <strong>Logging Profiles</strong>.</p>
+</li>
+<li><p class="first">Click on the <strong>dns-dos-profile-logging</strong> logging profile name.</p>
+</li>
+<li><p class="first">Check <strong>Enabled</strong> next to <strong>Protocol Security</strong>.</p>
+</li>
+<li><div class="first line-block">
+<div class="line">In the <strong>Protocol Security</strong> tab, set the <strong>DNS Security
+Publisher</strong> to <strong>local-db-publisher</strong> and check all five of the
+request log types.</div>
+<div class="line"><a class="reference internal" href="../_images/image751.png"><img alt="image77" src="../_images/image751.png" style="width: 3.19205in; height: 5.75689in;" /></a></div>
+</div>
+</li>
+<li><p class="first">Make sure that you click <strong>Update</strong> to save your settings.</p>
+</li>
+<li><div class="first line-block">
+<div class="line">Return to the Attack Server SSH session and re-issue the MX query
+command:</div>
+<div class="line">dig &#64;10.20.0.10 MX example.com</div>
+</div>
+</li>
+<li><p class="first">The query hangs as the BIG-IP is blocking the MX lookup.</p>
+</li>
+<li><div class="first line-block">
+<div class="line">Navigate to <strong>Security</strong> &gt; <strong>Event Logs</strong> &gt; <strong>Protocol</strong> &gt;
+<strong>DNS</strong>. Observe the MX query drops.</div>
+<div class="line"><a class="reference internal" href="../_images/image761.tiff"><img alt="image78" src="../_images/image761.tiff" style="width: 3.80132in; height: 1.11928in;" /></a></div>
+</div>
+</li>
+</ol>
+<p>This concludes the DNS portion of the lab. On the Victim Server, stop
+the top utility by pressing <strong>CTRL + C</strong>. No mail for you Joanna!!</p>
+</div>
+</div>
+<div class="section" id="advanced-firewall-manager-afm-detecting-and-preventing-system-dos-and-ddos-attacks">
+<h1>6.4. Advanced Firewall Manager (AFM) Detecting and Preventing System DoS and DDoS Attacks<a class="headerlink" href="#advanced-firewall-manager-afm-detecting-and-preventing-system-dos-and-ddos-attacks" title="Permalink to this headline">¶</a></h1>
+<p>Configuring a logging destination will allow you to verify the BIG-IPs
+detection and mitigation of attacks, in addition to the built-in
+reporting.</p>
+<ol class="arabic">
+<li><p class="first">In the BIG-IP web UI, navigate to <strong>Security</strong> &gt; <strong>DoS Protection</strong> &gt;
+<strong>Device Configuration</strong> &gt; <strong>Properties</strong>.</p>
+</li>
+<li><p class="first">Under <strong>Log Pubisher</strong>, select <strong>local-db-publisher</strong>.</p>
+</li>
+<li><div class="first line-block">
+<div class="line">Click the <strong>Commit Changes to System</strong> button.</div>
+<div class="line"><a class="reference internal" href="../_images/image771.png"><img alt="image79" src="../_images/image771.png" style="width: 2.98013in; height: 1.62914in;" /></a></div>
+</div>
+</li>
+</ol>
+<p>Joanna was feeling festive this morning. In this example, we’ll set the
+BIG-IP to detect and mitigate Joanna’s attack where all flags on a TCP
+packet are set. This is commonly referred to as a Christmas Tree Packet
+and is intended to increase processing on in-path network devices and
+end hosts to the target.</p>
+<p>We’ll use the hping utility to send 25,000 packets to our server, with
+random source IPs to simulate a DDoS attack where multiple hosts are
+attacking our server. We’ll set the SYN, ACK, FIN, RST, URG, PUSH, Xmas
+and Ymas TCP flags.</p>
+<ol class="arabic">
+<li><p class="first">In the BIG-IP web UI, navigate to <strong>Security</strong> &gt; <strong>DoS Protection</strong>
+&gt; <strong>Device Configuration</strong> &gt; <strong>Network Security</strong>.</p>
+</li>
+<li><p class="first">Expand the <strong>Bad-Header-TCP</strong> category in the vectors list.</p>
+</li>
+<li><p class="first">Click on the <strong>Bad TCP Flags (All Flags Set)</strong> vector name.</p>
+</li>
+<li><p class="first">Configure the vector with the following parameters:</p>
+<ol class="loweralpha">
+<li><p class="first">State: Mitigate</p>
+</li>
+<li><p class="first">Threshold Mode: Fully Manual</p>
+</li>
+<li><p class="first">Detection Threshold EPS: Specify 50</p>
+</li>
+<li><p class="first">Detection Threshold Percent: Specify 200</p>
+</li>
+<li><div class="first line-block">
+<div class="line">Mitigation Threshold EPS: Specify 100</div>
+<div class="line"><a class="reference internal" href="../_images/image782.png"><img alt="image80" src="../_images/image782.png" style="width: 2.43392in; height: 2.49669in;" /></a></div>
+</div>
+</li>
+</ol>
+</li>
+<li><p class="first">Click <strong>Update</strong> to save your changes.</p>
+</li>
+<li><p class="first">Open the BIG-IP SSH session and scroll the ltm log in real time with
+the following command: tail -f /var/log/ltm</p>
+</li>
+<li><div class="first line-block">
+<div class="line">On the attack host, launch the attack by issuing the following
+command on the BASH prompt:</div>
+<div class="line">sudo hping3 10.20.0.10 –flood –rand-source –destport 80 -c
+25000 –syn –ack –fin –rst –push –urg –xmas –ymas</div>
+</div>
+</li>
+<li><div class="first line-block">
+<div class="line">You’ll see the BIG-IP ltm log show that the attack has been
+detected:</div>
+<div class="line"><a class="reference internal" href="../_images/image792.tiff"><img alt="image81" src="../_images/image792.tiff" style="width: 4.48611in; height: 0.38889in;" /></a></div>
+</div>
+</li>
+<li><div class="first line-block">
+<div class="line">After approximately 60 seconds, press <strong>CTRL+C</strong> to stop the
+attack.</div>
+<div class="line"><a class="reference internal" href="../_images/image802.tiff"><img alt="image82" src="../_images/image802.tiff" style="width: 4.43056in; height: 0.97222in;" /></a></div>
+</div>
+</li>
+<li><p class="first">Navigate to <strong>Security</strong> &gt; <strong>DoS Protection</strong>&gt; <strong>DoS Overview (you
+may need to refresh or set the auto refresh to 10 seconds).</strong> You’ll
+notice from here you can see all the details of the active attacks.
+You can also modify an attack vector right from this screen by
+clicking on the attack vector and modifying the details in the fly
+out panel.</p>
+<p><a class="reference internal" href="../_images/image812.png"><img alt="image83" src="../_images/image812.png" style="width: 6.49097in; height: 1.10208in;" /></a></p>
+</li>
+<li><div class="first line-block">
+<div class="line">Return to the BIG-IP web UI. Navigate to <strong>Security</strong> &gt; <strong>Event
+Logs</strong> &gt; <strong>DoS</strong> &gt; <strong>Network</strong> &gt; <strong>Events</strong>. Observe the log
+entries showing the details surrounding the attack detection and
+mitigation.</div>
+<div class="line"><a class="reference internal" href="../_images/image822.tiff"><img alt="image84" src="../_images/image822.tiff" style="width: 5in; height: 1.70833in;" /></a></div>
+</div>
+</li>
+<li><p class="first">Navigate to <strong>Security</strong> &gt; <strong>Reporting</strong> &gt; <strong>DoS</strong> &gt; <strong>Analysis</strong>.
+Single-click on the attack ID in the filter list to the right of the
+charts and observe the various statistics around the attack.</p>
+</li>
+</ol>
+<p>In the last example, Joanna crafted a packet that is easily identified
+as malicious, as its invalid. We’ll now simulate an attack with traffic
+that could be normal, acceptable traffic. The TCP SYN flood attack will
+attempt to DDoS a host by sending valid TCP traffic to a host from
+multiple source hosts.</p>
+<ol class="arabic">
+<li><p class="first">In the BIG-IP web UI, go to <strong>Security</strong> &gt; <strong>DoS Protection</strong> &gt;
+<strong>Device</strong> <strong>Configuration</strong> &gt; <strong>Network Security</strong>.</p>
+</li>
+<li><p class="first">Expand the <strong>Flood</strong> category in the vectors list.</p>
+</li>
+<li><p class="first">Click on <strong>TCP Syn Flood</strong> vector name.</p>
+</li>
+<li><p class="first">Configure the vector with the following parameters:</p>
+<ol class="loweralpha">
+<li><p class="first">State: Mitigate</p>
+</li>
+<li><p class="first">Threshold Mode: Fully Manual</p>
+</li>
+<li><p class="first">Detection Threshold EPS: 200</p>
+</li>
+<li><p class="first">Detection Threshold Percent: 500</p>
+</li>
+<li><div class="first line-block">
+<div class="line">Mitigation Threshold EPS: 400</div>
+<div class="line"><a class="reference internal" href="../_images/image831.png"><img alt="image85" src="../_images/image831.png" style="width: 2.45542in; height: 3.49669in;" /></a></div>
+</div>
+</li>
+</ol>
+</li>
+<li><p class="first">Click <strong>Update</strong> to save your changes.</p>
+</li>
+<li><p class="first">Open the BIG-IP SSH session and scroll the ltm log in real time with
+the following command: tail -f /var/log/ltm</p>
+</li>
+<li><div class="first line-block">
+<div class="line">On the attack host, launch the attack by issuing the following
+command on the BASH prompt:</div>
+<div class="line">sudo hping3 10.20.0.10 –flood –rand-source –destport 80 –syn
+-d 120 -w 64</div>
+</div>
+</li>
+<li><p class="first">After about 60 seconds, stop the flood attack by pressing <strong>CTRL +
+C</strong>.</p>
+</li>
+<li><p class="first">Return to the BIG-IP web UI and navigate to <strong>Security</strong> &gt; <strong>Event
+Logs</strong> &gt; <strong>DoS</strong> &gt; <strong>Network</strong> &gt; <strong>Events</strong>. Observe the log entries
+showing the details surrounding the attack detection and mitigation.</p>
+</li>
+<li><p class="first">Navigate to <strong>Security</strong> &gt; <strong>Reporting</strong> &gt; <strong>DoS</strong> &gt; <strong>Dashboard</strong>
+to view an overview of the DoS attacks and timeline. You can select
+filters in the filter pane to highlight the specific attack.</p>
+</li>
+<li><p class="first">Finally, navigate to <strong>Security</strong> &gt; <strong>Reporting</strong> &gt; <strong>DoS</strong> &gt;
+<strong>Analysis</strong>. View detailed statistics around the attack.</p>
+</li>
+</ol>
+<div class="section" id="preventing-global-dos-sweep-and-flood-attacks">
+<h2>6.4.1. Preventing Global DoS Sweep and Flood Attacks<a class="headerlink" href="#preventing-global-dos-sweep-and-flood-attacks" title="Permalink to this headline">¶</a></h2>
+<p>In the last section, the focus was on attacks originating from various
+hosts. In this section, we will focus on mitigating flood and sweep
+attacks from a single host.</p>
+<div class="section" id="single-endpoint-sweep">
+<h3>6.4.1.1. Single Endpoint Sweep<a class="headerlink" href="#single-endpoint-sweep" title="Permalink to this headline">¶</a></h3>
+<p>The single endpoint sweep is an attempt for an attacker to send traffic
+across a range of ports on the target server, typically to scan for open
+ports.</p>
+<ol class="arabic">
+<li><p class="first">In the BIG-IP web UI, navigate to <strong>Security</strong> &gt; <strong>DoS Protection</strong>
+&gt; <strong>Device Configuration</strong> &gt; <strong>Network Security</strong>.</p>
+</li>
+<li><p class="first">Expand the <strong>Single-Endpoint</strong> category in the vectors list.</p>
+</li>
+<li><p class="first">Click on <strong>Single Endpoint Sweep</strong> vector name.</p>
+</li>
+<li><p class="first">Configure the vector with the following parameters:</p>
+<ol class="loweralpha">
+<li><p class="first">State: Mitigate</p>
+</li>
+<li><p class="first">Threshold Mode: Fully Manual</p>
+</li>
+<li><p class="first">Detection Threshold EPS: 150</p>
+</li>
+<li><p class="first">Mitigation Threshold EPS: 200</p>
+</li>
+<li><p class="first">Add Source Address to Category: Checked</p>
+</li>
+<li><p class="first">Category Name: denial_of_service</p>
+</li>
+<li><p class="first">Sustained Attack Detection Time: 10 seconds</p>
+</li>
+<li><p class="first">Category Duration Time: 60 seconds</p>
+</li>
+<li><div class="first line-block">
+<div class="line">Packet Type: Move All IPv4 to Selected</div>
+<div class="line"><a class="reference internal" href="../_images/image841.png"><img alt="image86" src="../_images/image841.png" style="width: 2.7954in; height: 6.25166in;" /></a></div>
+</div>
+</li>
+</ol>
+</li>
+<li><p class="first">Click <strong>Update</strong> to save your changes.</p>
+</li>
+<li><p class="first">Navigate to <strong>Security</strong> &gt; <strong>Network Firewall</strong> &gt; <strong>IP
+Intelligence</strong> &gt; <strong>Policies</strong>.</p>
+</li>
+<li><div class="first line-block">
+<div class="line">In the <strong>Global Policy</strong> section, change the <strong>IP Intelligence
+Policy</strong> to <strong>ip-intelligence</strong>.</div>
+<div class="line"><a class="reference internal" href="../_images/image851.png"><img alt="image87" src="../_images/image851.png" style="width: 2.56954in; height: 0.91286in;" /></a></div>
+</div>
+</li>
+<li><p class="first">Click <strong>Update</strong>.</p>
+</li>
+<li><p class="first">Click on the <strong>ip-intelligence</strong> policy in the policy list below.</p>
+</li>
+<li><p class="first">Create a new Blacklist Matching Policy in the IP Intelligence Policy
+Properties section with the following attributes, leaving
+unspecified attributes with their default values:</p>
+<ol class="loweralpha simple" start="10">
+<li>Blacklist Category: denial-of-service</li>
+<li>Action: drop</li>
+<li>Log Blacklist Category Matches: Yes</li>
+</ol>
+</li>
+<li><div class="first line-block">
+<div class="line">Click <strong>Add</strong> to add the new Blacklist Matching Policy.</div>
+<div class="line"><a class="reference internal" href="../_images/image861.png"><img alt="image88" src="../_images/image861.png" style="width: 6.49097in; height: 3.32431in;" /></a></div>
+</div>
+</li>
+<li><p class="first">Click <strong>Update</strong> to save changes to the ip-intelligence policy.</p>
+</li>
+<li><p class="first">Open the BIG-IP SSH session and scroll the ltm log in real time with
+the following command: tail -f /var/log/ltm</p>
+</li>
+<li><p class="first">On the victim server, start a packet capture with an SSH filter by
+issuing sudo tcpdump -nn not port 22</p>
+</li>
+<li><div class="first line-block">
+<div class="line">On the attack host, launch the attack by issuing the following
+command on the BASH prompt:</div>
+<div class="line">sudo hping3 10.20.0.10 –flood –scan 1-65535 -d 128 -w 64 –syn</div>
+</div>
+</li>
+<li><p class="first">You will see the scan find a few open ports on the server, and the
+server will show the inbound sweep traffic. However, you will notice
+that the traffic to the server stops after a short time (10 seconds,
+the configured sustained attack detection time.) Leave the test
+running.</p>
+</li>
+<li><p class="first">After approximately 60 seconds, sweep traffic will return to the
+host. This is because the IP Intelligence categorization of the
+attack host has expired. After 10 seconds of traffic, the bad actor
+is again blacklisted for another 60 seconds.</p>
+</li>
+<li><p class="first">Stop the sweep attack on the attack host by pressing <strong>CTRL + C</strong>.</p>
+</li>
+<li><p class="first">Return to the BIG-IP web UI and navigate to <strong>Security</strong> &gt; <strong>Event
+Logs</strong> &gt; <strong>DoS</strong> &gt; <strong>Network</strong> &gt; <strong>Events</strong>. Observe the log entries
+showing the details surrounding the attack detection and mitigation.</p>
+</li>
+<li><p class="first">Navigate to <strong>Security</strong> &gt; <strong>Event Logs</strong> &gt; <strong>Network</strong> &gt; <strong>IP
+Intelligence</strong>. Observe the log entries showing the mitigation of
+the sweep attack via the ip-intelligence policy.</p>
+</li>
+<li><p class="first">Navigate to <strong>Security</strong> &gt; <strong>Event Logs</strong> &gt; <strong>Network</strong> &gt; <strong>Shun</strong>.
+Observe the log entries showing the blacklist adds and deletes.</p>
+</li>
+<li><p class="first">Navigate to <strong>Security</strong> &gt; <strong>Reporting</strong> &gt; <strong>Network</strong> &gt; <strong>IP
+Intelligence</strong>. Observe the statistics showing the sweep attack and
+mitigation. Change the <strong>View By</strong> drop-down to view the varying
+statistics.</p>
+</li>
+<li><p class="first">Navigate to <strong>Security</strong> &gt; <strong>Reporting</strong> &gt; <strong>DoS</strong> &gt; <strong>Dashboard</strong>
+to view an overview of the DoS attacks and timeline. You can select
+filters in the filter pane to highlight the specific attack.</p>
+</li>
+<li><p class="first">Finally, navigate to <strong>Security</strong> &gt; <strong>Reporting</strong> &gt; <strong>DoS</strong> &gt;
+<strong>Analysis</strong>. View detailed statistics around the attack.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="single-endpoint-flood">
+<h3>6.4.1.2. Single Endpoint Flood<a class="headerlink" href="#single-endpoint-flood" title="Permalink to this headline">¶</a></h3>
+<p>The single endpoint flood attack is an attempt for an attacker to send a
+flood of traffic to a host in hopes of overwhelming a service to a point
+of failure. In this example, we’ll flood the target server with ICMP
+packets.</p>
+<ol class="arabic">
+<li><p class="first">In the BIG-IP web UI, navigate to <strong>Security</strong> &gt; <strong>DoS Protection</strong>
+&gt; <strong>Device Configuration</strong> &gt; <strong>Network Security</strong>.</p>
+</li>
+<li><p class="first">Expand the <strong>Single-Endpoint</strong> category in the vectors list.</p>
+</li>
+<li><p class="first">Click on <strong>Single Endpoint Flood</strong> vector name.</p>
+</li>
+<li><p class="first">Configure the vector with the following parameters:</p>
+<ol class="loweralpha">
+<li><p class="first">State: Mitigate</p>
+</li>
+<li><p class="first">Threshold Mode: Fully Manual</p>
+</li>
+<li><p class="first">Detection Threshold EPS: 150</p>
+</li>
+<li><p class="first">Mitigation Threshold EPS: 200</p>
+</li>
+<li><p class="first">Add Destination Address to Category: Checked</p>
+</li>
+<li><p class="first">Category Name: denial_of_service</p>
+</li>
+<li><p class="first">Sustained Attack Detection Time: 10 seconds</p>
+</li>
+<li><p class="first">Category Duration Time: 60 seconds</p>
+</li>
+<li><div class="first line-block">
+<div class="line">Packet Type: Move Any ICMP (IPv4) to Selected</div>
+<div class="line"><a class="reference internal" href="../_images/image871.png"><img alt="image89" src="../_images/image871.png" style="width: 2.41144in; height: 5.43046in;" /></a></div>
+</div>
+</li>
+</ol>
+</li>
+<li><p class="first">Click <strong>Update</strong> to save your changes.</p>
+</li>
+<li><p class="first">Open the BIG-IP SSH session and scroll the ltm log in real time with
+the following command: tail -f /var/log/ltm</p>
+</li>
+<li><p class="first">We’ll run a packet capture on the victim server to gauge the
+incoming traffic. On the victim server, issue the following command:
+sudo tcpdump -nn not port 22</p>
+</li>
+<li><div class="first line-block">
+<div class="line">On the attack host, launch the attack by issuing the following
+command on the BASH prompt:</div>
+<div class="line">sudo hping3 10.20.0.10 –faster -c 25000 –icmp</div>
+</div>
+</li>
+<li><p class="first">The attack host will begin flooding the victim server with ICMP
+packets. However, you will notice that the traffic to the server
+stops after a short time (10 seconds, the configured sustained
+attack detection time.)</p>
+</li>
+<li><p class="first">After approximately 60 seconds, run the attack again. ICMP traffic
+will return to the host. This is because the IP Intelligence
+categorization of the attack host has expired.</p>
+</li>
+<li><p class="first">Return to the BIG-IP web UI.</p>
+</li>
+<li><p class="first">Navigate to <strong>Security</strong> &gt; <strong>Event Logs</strong> &gt; <strong>DoS</strong> &gt; <strong>Network</strong> &gt;
+<strong>Events</strong>. Observe the log entries showing the details surrounding
+the attack detection and mitigation.</p>
+</li>
+<li><p class="first">Navigate to <strong>Security</strong> &gt; <strong>Event Logs</strong> &gt; <strong>Network</strong> &gt; <strong>IP
+Intelligence</strong>. Observe the log entries showing the mitigation of
+the sweep attack via the ip-intelligence policy.</p>
+</li>
+<li><p class="first">Navigate to <strong>Security</strong> &gt; <strong>Reporting</strong> &gt; <strong>Network</strong> &gt; <strong>IP
+Intelligence</strong>. Observe the statistics showing the sweep attack and
+mitigation.</p>
+</li>
+<li><p class="first">Navigate to <strong>Security</strong> &gt; <strong>Reporting</strong> &gt; <strong>DoS</strong> &gt; <strong>Dashboard</strong>
+to view an overview of the DoS attacks and timeline. You can select
+filters in the filter pane to highlight the specific attack.</p>
+</li>
+<li><p class="first">Finally, navigate to <strong>Security</strong> &gt; <strong>Reporting</strong> &gt; <strong>DoS</strong> &gt;
+<strong>Analysis</strong>. View detailed statistics around the attack.</p>
+</li>
+</ol>
+<p>This concludes the DoS/DDoS portion of the lab. You have successfully
+defeated Joanna, she has decided a career at Chotchkie’s is more
+prosperous than nefarious internet activities, even with the new flair
+requirements. Well done!</p>
+</div>
+</div>
+</div>
+
+
+
+    
+     <div class="row next-prev-btn-row">
+       <div class="col-lg-12">
+       
+        <a href="step1.html" title="6.1. Lab Overview" accesskey="p" class="btn btn-primary pull-left"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Previous</a>
+       
+       
+          <a href="../conclusion.html" title="7. Conclusion" accesskey="n" class="btn btn-primary pull-right">Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+       
+     </div>
+     </div>
+    
+
+    </article>
+  </div>
+
+</div>
+
+
+  <div id="clouddocs-footer"></div>
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="../_static/js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+    jQuery.noConflict(true)
+  </script>
+  <script src="../_static/js/clouddocs.js"></script>
+  </body>
+</html>

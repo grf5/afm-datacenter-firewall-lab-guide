@@ -1,20 +1,22 @@
 F5 Agility Labs - Index
-=======================
+#######################
 
 Welcome
 -------
 
-Welcome to the |classbold| lab at F5 Agility |year|
+Welcome to the |classbold| lab at F5 Agility |year|. Below is a list of the modules in this lab. 
 
-|repoinfo|
+.. HINT:: Click Next at the bottom of this page to get started.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :numbered:
    :caption: Contents:
    :glob:
 
-   intro*
-   class*/class*
-   examples
-   markdown
+   intro1
+   intro2
+   intro3
+   lab*/intro*
+   conclusion
+   
