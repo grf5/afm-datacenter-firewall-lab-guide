@@ -14,104 +14,86 @@ source IPs to simulate a DDoS attack where multiple hosts are attacking
 our server. We’ll set the SYN, ACK, FIN, RST, URG, PUSH, Xmas and Ymas
 TCP flags.
 
-13. POSTMan is installed as an application and can be accessed from the
-    desktop of the Jumpbox
+#. POSTMan is installed as an application and can be accessed from the desktop of the Jumpbox
 
-14. Once you launch POSTMan You’ll then want to import the API calls for
-    the lab as well as the environment variables
+#. Once you launch POSTMan You’ll then want to import the API calls for the lab as well as the environment variables
+   
+   - There is a notepad on the desktop labeled “Postman Links”
+   - Within POSTman and click on the “Import” link near the top and then select “Import from Link”
+   - Copy and paste the **collection** link from within the notepad and select “Import”
+   - Copy and paste the **environment** link from within the notepad and select “Import”
+   
+   |image126|
 
-    f. There is a notepad on the desktop labeled “Postman Links”
+#. Before proceeding verify the Agility 2018 environment is selected
+   from the drop down in the top right of POSTman
 
-    g. Within POSTman and click on the “Import” link near the top and
-       then select “Import from Link”
+   |image127|
 
-    h. Copy and paste the **collection** link from within the notepad
-       and select “Import”
+#. In the bigip01.dnstest.lab (https://192.168.1.100) web UI, navigate
+   to Security > DoS Protection > Device Configuration > Network
+   Security.
 
-    i. Copy and paste the **environment** link from within the notepad
-       and select “Import”
+#. Expand the **Bad-Header-TCP** category in the vectors list.
 
-|image126|
+#. Click on the **Bad TCP Flags (All Flags Set)** vector name and take note of the current settings
 
-15. Before proceeding verify the Agility 2018 environment is selected
-    from the drop down in the top right of POSTman
+#. Within POSTman open the collection “Agility 2018 Lab 5”
 
-|image127|
+   |image128|
 
-16. In the bigip01.dnstest.lab (https://192.168.1.100) web UI, navigate
-    to Security > DoS Protection > Device Configuration > Network
-    Security.
+#. Run step 1 by clicking on the send button to the right
 
-17. Expand the **Bad-Header-TCP** category in the vectors list.
+   |image129|
 
-18. Click on the **Bad TCP Flags (All Flags Set)** vector name and take
-    note of the current settings
+#. The output from the GET request can be reviewed, this is showing you
+   all the device-dos configuration options and settings. Search for
+   "bad-tcp-flags-all-set” by clicking ‘ctrl +f’. Note the values as
+   they are currently configured. We are now going to modify the Bad
+   TCP Flags (All Flags Set) attack vector. To do so run step 2 of the
+   collection by highlighting the collection and click “Send”.
 
-19. Within POSTman open the collection “Agility 2018 Lab 5”
+#. You can now execute step 3 in the collection and verify the changes,
+   you can also verify the changes in the BIG-IP web UI.
 
-    |image128|
+   |image130|
 
-20. Run step 1 by clicking on the send button to the right
+#. Open the BIG-IP SSH session and scroll the ltm log in real time with
+   the following command: tail -f /var/log/ltm
 
-|image129|
+#. | On the attack host, launch the attack by issuing the following command on the BASH prompt:
+   | ``sudo hping3 10.20.0.10 --flood --rand-source --destport 80 -c 25000 --syn --ack --fin --rst --push --urg --xmas --ymas``
 
-21. The output from the GET request can be reviewed, this is showing you
-    all the device-dos configuration options and settings. Search for
-    "bad-tcp-flags-all-set” by clicking ‘ctrl +f’. Note the values as
-    they are currently configured. We are now going to modify the Bad
-    TCP Flags (All Flags Set) attack vector. To do so run step 2 of the
-    collection by highlighting the collection and click “Send”.
+#. | You’ll see the BIG-IP ltm log show that the attack has been detected:
+   | |image131|
 
-22. You can now execute step 3 in the collection and verify the changes,
-    you can also verify the changes in the BIG-IP web UI.
+#. | After approximately 60 seconds, press **CTRL+C** to stop the attack.
+   | |image132|
 
-|image130|
+#. Navigate to **Security** > **DoS Protection**> **DoS Overview (you
+   may need to refresh or set the auto refresh to 10 seconds).** You’ll
+   notice from here you can see all the details of the active attacks.
+   You can also modify an attack vector right from this screen by
+   clicking on the attack vector and modifying the fly out.
 
-23. Open the BIG-IP SSH session and scroll the ltm log in real time with
-    the following command: tail -f /var/log/ltm
+   |image133|
 
-24. | On the attack host, launch the attack by issuing the following
-      command on the BASH prompt:
-    | sudo hping3 10.20.0.10 --flood --rand-source --destport 80 -c
-      25000 --syn --ack --fin --rst --push --urg --xmas --ymas
+#. | Return to the BIG-IP web UI. Navigate to **Security** > **Event Logs** > **DoS** > **Network** > **Events**. Observe the log entries showing the details surrounding the attack detection and mitigation.
+   | |image134|
 
-25. | You’ll see the BIG-IP ltm log show that the attack has been
-      detected:
-    | |image131|
+#. Navigate to **Security** > **Reporting** > **DoS** > **Analysis**.
+   Single-click on the attack ID in the filter list to the right of the
+   charts and observe the various statistics around the attack.
 
-26. | After approximately 60 seconds, press **CTRL+C** to stop the
-      attack.
-    | |image132|
+#. The same attacks can also be seen in BIG-IQ as demonstrated in the previous lab.
 
-27. Navigate to **Security** > **DoS Protection**> **DoS Overview (you
-    may need to refresh or set the auto refresh to 10 seconds).** You’ll
-    notice from here you can see all the details of the active attacks.
-    You can also modify an attack vector right from this screen by
-    clicking on the attack vector and modifying the fly out. <- did you
-    mean to say “on the fly” JM
+**Congratulations, you have successfully defeated Joanna’s festive attack using only the REST API to configure the device!**
 
-    |image133|
-
-28. | Return to the BIG-IP web UI. Navigate to **Security** > **Event
-      Logs** > **DoS** > **Network** > **Events**. Observe the log
-      entries showing the details surrounding the attack detection and
-      mitigation.
-    | |image134|
-
-29. Navigate to **Security** > **Reporting** > **DoS** > **Analysis**.
-    Single-click on the attack ID in the filter list to the right of the
-    charts and observe the various statistics around the attack.
-
-30. The same attacks can also be seen in BIG-IQ as demonstrated in the
-    previous lab.
-
-Congratulations, you have successfully defeated Joanna’s festive attack
-using only the REST API to configure the device! Since it’s the end of
-the week and Joanna is using the same IP address continually, lets block
+Since it’s the end of the week and Joanna is using the same IP address continually, lets block
 her IP address and her subnet using BIG-IQ. We’ll use the REST API to
 accomplish this as well, as BIG-IQ also has an available REST API.
 
-1. Using POSTman run step 4, this will create an address-list within
+#. Using POSTman run step 4, this will create an address-list within
    BIG-IQ, the advantage to address-lists is they allow you to group
    similar objects into a group. In this instance we’re going to create
    an address-list named API_Naughty_Address_List with a host and a
@@ -119,34 +101,32 @@ accomplish this as well, as BIG-IQ also has an available REST API.
    will need to copy the value returned in the ‘ID” field as shown
    below:
 
-|image135|
+   |image135|
 
-2. Take the copied text and paste it into the environment variable for
+#. Take the copied text and paste it into the environment variable for
    AFM_Adddress_ID. The variables are accessed by clicking on the “eye”
    icon next to where you selected the Agility 2018 Environment:
 
-..
-
    |image136|
 
-3. Click edit and enter the value returned in step 1, when completed
+#. Click edit and enter the value returned in step 1, when completed
    click update
 
-|image137|
+   |image137|
 
-4. We will now create a rule list name first, to accomplish this send
+#. We will now create a rule list name first, to accomplish this send
    the call found in step 5. You will need to also capture the “ID” in
    this step as well. This value will be updated in the AFM_Rule_ID
    field
 
-|image138|
+   |image138|
 
-5. Take the copied text and paste it into the environment variable for
+#. Take the copied text and paste it into the environment variable for
    AFM_Rule_ID
 
-|image139|
+   |image139|
 
-6. At this stage we have created an address-list with objects and saved
+#. At this stage we have created an address-list with objects and saved
    the ID, we have also created a rule name and saved the ID. The next
    step is to add an actual rule to the newly created rule named
    “Naughty_Rule_List”. Before you send the call-in step 6, take a
@@ -155,60 +135,60 @@ accomplish this as well, as BIG-IQ also has an available REST API.
    JSON request we’re linking the AFM_Address_ID to the rule. Once sent
    you’ll receive confirmation similar to the below output.
 
-|image140|
+   |image140|
 
-7. Since this is an existing environment, we’re going to first need to
+#. Since this is an existing environment, we’re going to first need to
    obtain the policy ID before we can assign the value to this variable.
    To obtain the policy ID of the existing policy we created in lab 1
    and imported in the prior lab, run step 7.
 
-|image141|
+   |image141|
 
-8. You will notice there are two policies, Global and rd_0_policy, we’ll
+#. You will notice there are two policies, Global and rd_0_policy, we’ll
    need to copy the ID for the rd_0_policy which is located directly
    under its name and paste it into the variable for AFM_Policy_ID.
 
-|image142|
+   |image142|
 
-9. Finally run step 8 to add the new rule list to the existing policy,
+#. Finally run step 8 to add the new rule list to the existing policy,
    when completed you’ll receive output similar as seen below.
 
-|image143|
+   |image143|
 
-10. Before we deploy the policy. Log into the BIG-IQ web UI
-    (https://192.168.1.50) and navigate to Configuration Security
-    Network Security Firewall Policies. Click on the link for the
-    rd_0_policy, expand all the rules to verify your new API created
-    rule list is first in the list and all objects are created as
-    expected.
+#. Before we deploy the policy. Log into the BIG-IQ web UI
+   (https://192.168.1.50) and navigate to Configuration Security
+   Network Security Firewall Policies. Click on the link for the
+   rd_0_policy, expand all the rules to verify your new API created
+   rule list is first in the list and all objects are created as
+   expected.
 
-|image144|
+   |image144|
 
-11. The final step is to deploy the policy to the BIG-IP. Before we can
-    do this, we have one last variable we’ll need to acquire, the
-    machine ID of bigip02.dnslab.test. To obtain the machine ID run the
-    call in step 9, once the call is run, you will look for the
-    machineId key and copy the value to the environment variable
-    bigip02-machined as shown below and click update.
+#. The final step is to deploy the policy to the BIG-IP. Before we can
+   do this, we have one last variable we’ll need to acquire, the
+   machine ID of bigip02.dnslab.test. To obtain the machine ID run the
+   call in step 9, once the call is run, you will look for the
+   machineId key and copy the value to the environment variable
+   bigip02-machined as shown below and click update.
 
-|image145|
+   |image145|
 
-|image146|
+   |image146|
 
-12. Finally, you will run step 10, this will initiate a deployment on
-    BIG-IQ to deploy the changes to BIG-IP. Within BIG-IQ navigate to
-    Deployment Evaluate & Deploy Network Security. At the bottom in the
-    deployments section you’ll notice an API Policy Deploy task. Feel
-    free to click on the task to investigate the changes. Once the
-    policy has deployed, log into the web UI of bigip02.dnstest.lab and
-    navigate to Security network Firewall Active Rules. Change the
-    context to Route Domain and select 0. Expand all of the rules to
-    verify the rules have been deployed as expected. Your final screen
-    should look something like the screen capture below.
+#. Finally, you will run step 10, this will initiate a deployment on
+   BIG-IQ to deploy the changes to BIG-IP. Within BIG-IQ navigate to
+   Deployment Evaluate & Deploy Network Security. At the bottom in the
+   deployments section you’ll notice an API Policy Deploy task. Feel
+   free to click on the task to investigate the changes. Once the
+   policy has deployed, log into the web UI of bigip02.dnstest.lab and
+   navigate to Security network Firewall Active Rules. Change the
+   context to Route Domain and select 0. Expand all of the rules to
+   verify the rules have been deployed as expected. Your final screen
+   should look something like the screen capture below.
 
-|image147|
+   |image147|
 
-Lastly, in your web browser verify you can no longer access the web
+Lastly, in your web browser, verify you can no longer access the web
 pages http://10.30.0.50 and http://10.40.0.50 as well as no longer being
 able to SSH to any of the devices.
 

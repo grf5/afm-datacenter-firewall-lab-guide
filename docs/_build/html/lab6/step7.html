@@ -129,75 +129,62 @@ the hping utility to send 25,000 packets to our server, with random
 source IPs to simulate a DDoS attack where multiple hosts are attacking
 our server. We’ll set the SYN, ACK, FIN, RST, URG, PUSH, Xmas and Ymas
 TCP flags.</p>
-<ol class="arabic simple" start="13">
-<li>POSTMan is installed as an application and can be accessed from the
-desktop of the Jumpbox</li>
-<li>Once you launch POSTMan You’ll then want to import the API calls for
-the lab as well as the environment variables<ol class="loweralpha" start="6">
-<li>There is a notepad on the desktop labeled “Postman Links”</li>
-<li>Within POSTman and click on the “Import” link near the top and
-then select “Import from Link”</li>
-<li>Copy and paste the <strong>collection</strong> link from within the notepad
-and select “Import”</li>
-<li>Copy and paste the <strong>environment</strong> link from within the notepad
-and select “Import”</li>
-</ol>
+<ol class="arabic">
+<li><p class="first">POSTMan is installed as an application and can be accessed from the desktop of the Jumpbox</p>
 </li>
-</ol>
+<li><p class="first">Once you launch POSTMan You’ll then want to import the API calls for the lab as well as the environment variables</p>
+<ul class="simple">
+<li>There is a notepad on the desktop labeled “Postman Links”</li>
+<li>Within POSTman and click on the “Import” link near the top and then select “Import from Link”</li>
+<li>Copy and paste the <strong>collection</strong> link from within the notepad and select “Import”</li>
+<li>Copy and paste the <strong>environment</strong> link from within the notepad and select “Import”</li>
+</ul>
 <p><a class="reference internal" href="../_images/image121.png"><img alt="image126" src="../_images/image121.png" style="width: 6.5in; height: 4.08333in;" /></a></p>
-<ol class="arabic simple" start="15">
-<li>Before proceeding verify the Agility 2018 environment is selected
-from the drop down in the top right of POSTman</li>
-</ol>
+</li>
+<li><p class="first">Before proceeding verify the Agility 2018 environment is selected
+from the drop down in the top right of POSTman</p>
 <p><a class="reference internal" href="../_images/image122.png"><img alt="image127" src="../_images/image122.png" style="width: 3.86458in; height: 2.13542in;" /></a></p>
-<ol class="arabic" start="16">
+</li>
 <li><p class="first">In the bigip01.dnstest.lab (<a class="reference external" href="https://192.168.1.100">https://192.168.1.100</a>) web UI, navigate
 to Security &gt; DoS Protection &gt; Device Configuration &gt; Network
 Security.</p>
 </li>
 <li><p class="first">Expand the <strong>Bad-Header-TCP</strong> category in the vectors list.</p>
 </li>
-<li><p class="first">Click on the <strong>Bad TCP Flags (All Flags Set)</strong> vector name and take
-note of the current settings</p>
+<li><p class="first">Click on the <strong>Bad TCP Flags (All Flags Set)</strong> vector name and take note of the current settings</p>
 </li>
 <li><p class="first">Within POSTman open the collection “Agility 2018 Lab 5”</p>
 <p><a class="reference internal" href="../_images/image123.png"><img alt="image128" src="../_images/image123.png" style="width: 2.50278in; height: 4.31042in;" /></a></p>
 </li>
 <li><p class="first">Run step 1 by clicking on the send button to the right</p>
-</li>
-</ol>
 <p><a class="reference internal" href="../_images/image124.png"><img alt="image129" src="../_images/image124.png" style="width: 6.49722in; height: 0.83056in;" /></a></p>
-<ol class="arabic simple" start="21">
-<li>The output from the GET request can be reviewed, this is showing you
+</li>
+<li><p class="first">The output from the GET request can be reviewed, this is showing you
 all the device-dos configuration options and settings. Search for
 “bad-tcp-flags-all-set” by clicking ‘ctrl +f’. Note the values as
 they are currently configured. We are now going to modify the Bad
 TCP Flags (All Flags Set) attack vector. To do so run step 2 of the
-collection by highlighting the collection and click “Send”.</li>
-<li>You can now execute step 3 in the collection and verify the changes,
-you can also verify the changes in the BIG-IP web UI.</li>
-</ol>
+collection by highlighting the collection and click “Send”.</p>
+</li>
+<li><p class="first">You can now execute step 3 in the collection and verify the changes,
+you can also verify the changes in the BIG-IP web UI.</p>
 <p><a class="reference internal" href="../_images/image78.png"><img alt="image130" src="../_images/image78.png" style="width: 2.43392in; height: 2.49669in;" /></a></p>
-<ol class="arabic" start="23">
+</li>
 <li><p class="first">Open the BIG-IP SSH session and scroll the ltm log in real time with
 the following command: tail -f /var/log/ltm</p>
 </li>
 <li><div class="first line-block">
-<div class="line">On the attack host, launch the attack by issuing the following
-command on the BASH prompt:</div>
-<div class="line">sudo hping3 10.20.0.10 –flood –rand-source –destport 80 -c
-25000 –syn –ack –fin –rst –push –urg –xmas –ymas</div>
+<div class="line">On the attack host, launch the attack by issuing the following command on the BASH prompt:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">hping3</span> <span class="pre">10.20.0.10</span> <span class="pre">--flood</span> <span class="pre">--rand-source</span> <span class="pre">--destport</span> <span class="pre">80</span> <span class="pre">-c</span> <span class="pre">25000</span> <span class="pre">--syn</span> <span class="pre">--ack</span> <span class="pre">--fin</span> <span class="pre">--rst</span> <span class="pre">--push</span> <span class="pre">--urg</span> <span class="pre">--xmas</span> <span class="pre">--ymas</span></code></div>
 </div>
 </li>
 <li><div class="first line-block">
-<div class="line">You’ll see the BIG-IP ltm log show that the attack has been
-detected:</div>
+<div class="line">You’ll see the BIG-IP ltm log show that the attack has been detected:</div>
 <div class="line"><a class="reference internal" href="../_images/image791.png"><img alt="image131" src="../_images/image791.png" style="width: 4.48611in; height: 0.38889in;" /></a></div>
 </div>
 </li>
 <li><div class="first line-block">
-<div class="line">After approximately 60 seconds, press <strong>CTRL+C</strong> to stop the
-attack.</div>
+<div class="line">After approximately 60 seconds, press <strong>CTRL+C</strong> to stop the attack.</div>
 <div class="line"><a class="reference internal" href="../_images/image801.png"><img alt="image132" src="../_images/image801.png" style="width: 4.43056in; height: 0.97222in;" /></a></div>
 </div>
 </li>
@@ -205,15 +192,11 @@ attack.</div>
 may need to refresh or set the auto refresh to 10 seconds).</strong> You’ll
 notice from here you can see all the details of the active attacks.
 You can also modify an attack vector right from this screen by
-clicking on the attack vector and modifying the fly out. &lt;- did you
-mean to say “on the fly” JM</p>
+clicking on the attack vector and modifying the fly out.</p>
 <p><a class="reference internal" href="../_images/image81.png"><img alt="image133" src="../_images/image81.png" style="width: 6.49097in; height: 1.10208in;" /></a></p>
 </li>
 <li><div class="first line-block">
-<div class="line">Return to the BIG-IP web UI. Navigate to <strong>Security</strong> &gt; <strong>Event
-Logs</strong> &gt; <strong>DoS</strong> &gt; <strong>Network</strong> &gt; <strong>Events</strong>. Observe the log
-entries showing the details surrounding the attack detection and
-mitigation.</div>
+<div class="line">Return to the BIG-IP web UI. Navigate to <strong>Security</strong> &gt; <strong>Event Logs</strong> &gt; <strong>DoS</strong> &gt; <strong>Network</strong> &gt; <strong>Events</strong>. Observe the log entries showing the details surrounding the attack detection and mitigation.</div>
 <div class="line"><a class="reference internal" href="../_images/image821.png"><img alt="image134" src="../_images/image821.png" style="width: 5in; height: 1.70833in;" /></a></div>
 </div>
 </li>
@@ -221,99 +204,85 @@ mitigation.</div>
 Single-click on the attack ID in the filter list to the right of the
 charts and observe the various statistics around the attack.</p>
 </li>
-<li><p class="first">The same attacks can also be seen in BIG-IQ as demonstrated in the
-previous lab.</p>
+<li><p class="first">The same attacks can also be seen in BIG-IQ as demonstrated in the previous lab.</p>
 </li>
 </ol>
-<p>Congratulations, you have successfully defeated Joanna’s festive attack
-using only the REST API to configure the device! Since it’s the end of
-the week and Joanna is using the same IP address continually, lets block
+<p><strong>Congratulations, you have successfully defeated Joanna’s festive attack using only the REST API to configure the device!</strong></p>
+<p>Since it’s the end of the week and Joanna is using the same IP address continually, lets block
 her IP address and her subnet using BIG-IQ. We’ll use the REST API to
 accomplish this as well, as BIG-IQ also has an available REST API.</p>
-<ol class="arabic simple">
-<li>Using POSTman run step 4, this will create an address-list within
+<ol class="arabic">
+<li><p class="first">Using POSTman run step 4, this will create an address-list within
 BIG-IQ, the advantage to address-lists is they allow you to group
 similar objects into a group. In this instance we’re going to create
 an address-list named API_Naughty_Address_List with a host and a
 network. Once you run the command you’ll receive output below. You
 will need to copy the value returned in the ‘ID” field as shown
-below:</li>
-</ol>
+below:</p>
 <p><a class="reference internal" href="../_images/image125.png"><img alt="image135" src="../_images/image125.png" style="width: 6.49097in; height: 1.82708in;" /></a></p>
-<ol class="arabic simple" start="2">
-<li>Take the copied text and paste it into the environment variable for
+</li>
+<li><p class="first">Take the copied text and paste it into the environment variable for
 AFM_Adddress_ID. The variables are accessed by clicking on the “eye”
-icon next to where you selected the Agility 2018 Environment:</li>
-</ol>
-<blockquote>
-<div><a class="reference internal" href="../_images/image126.png"><img alt="image136" src="../_images/image126.png" style="width: 3.81806in; height: 3.66389in;" /></a></div></blockquote>
-<ol class="arabic simple" start="3">
-<li>Click edit and enter the value returned in step 1, when completed
-click update</li>
-</ol>
+icon next to where you selected the Agility 2018 Environment:</p>
+<p><a class="reference internal" href="../_images/image126.png"><img alt="image136" src="../_images/image126.png" style="width: 3.81806in; height: 3.66389in;" /></a></p>
+</li>
+<li><p class="first">Click edit and enter the value returned in step 1, when completed
+click update</p>
 <p><a class="reference internal" href="../_images/image127.png"><img alt="image137" src="../_images/image127.png" style="width: 5.99097in; height: 6.22708in;" /></a></p>
-<ol class="arabic simple" start="4">
-<li>We will now create a rule list name first, to accomplish this send
+</li>
+<li><p class="first">We will now create a rule list name first, to accomplish this send
 the call found in step 5. You will need to also capture the “ID” in
 this step as well. This value will be updated in the AFM_Rule_ID
-field</li>
-</ol>
+field</p>
 <p><a class="reference internal" href="../_images/image128.png"><img alt="image138" src="../_images/image128.png" style="width: 6.49097in; height: 1.31806in;" /></a></p>
-<ol class="arabic simple" start="5">
-<li>Take the copied text and paste it into the environment variable for
-AFM_Rule_ID</li>
-</ol>
+</li>
+<li><p class="first">Take the copied text and paste it into the environment variable for
+AFM_Rule_ID</p>
 <p><a class="reference internal" href="../_images/image129.png"><img alt="image139" src="../_images/image129.png" style="width: 5.98194in; height: 6.18194in;" /></a></p>
-<ol class="arabic simple" start="6">
-<li>At this stage we have created an address-list with objects and saved
+</li>
+<li><p class="first">At this stage we have created an address-list with objects and saved
 the ID, we have also created a rule name and saved the ID. The next
 step is to add an actual rule to the newly created rule named
 “Naughty_Rule_List”. Before you send the call-in step 6, take a
 moment to examine the body of the request. You’ll notice in the URI
 we’re referencing the variable of AFM_Rule_ID and in the body of the
 JSON request we’re linking the AFM_Address_ID to the rule. Once sent
-you’ll receive confirmation similar to the below output.</li>
-</ol>
+you’ll receive confirmation similar to the below output.</p>
 <p><a class="reference internal" href="../_images/image130.png"><img alt="image140" src="../_images/image130.png" style="width: 6.5in; height: 4.83333in;" /></a></p>
-<ol class="arabic simple" start="7">
-<li>Since this is an existing environment, we’re going to first need to
+</li>
+<li><p class="first">Since this is an existing environment, we’re going to first need to
 obtain the policy ID before we can assign the value to this variable.
 To obtain the policy ID of the existing policy we created in lab 1
-and imported in the prior lab, run step 7.</li>
-</ol>
+and imported in the prior lab, run step 7.</p>
 <p><a class="reference internal" href="../_images/image131.png"><img alt="image141" src="../_images/image131.png" style="width: 6.49097in; height: 3.15486in;" /></a></p>
-<ol class="arabic simple" start="8">
-<li>You will notice there are two policies, Global and rd_0_policy, we’ll
+</li>
+<li><p class="first">You will notice there are two policies, Global and rd_0_policy, we’ll
 need to copy the ID for the rd_0_policy which is located directly
-under its name and paste it into the variable for AFM_Policy_ID.</li>
-</ol>
+under its name and paste it into the variable for AFM_Policy_ID.</p>
 <p><a class="reference internal" href="../_images/image132.png"><img alt="image142" src="../_images/image132.png" style="width: 6in; height: 3.33333in;" /></a></p>
-<ol class="arabic simple" start="9">
-<li>Finally run step 8 to add the new rule list to the existing policy,
-when completed you’ll receive output similar as seen below.</li>
-</ol>
+</li>
+<li><p class="first">Finally run step 8 to add the new rule list to the existing policy,
+when completed you’ll receive output similar as seen below.</p>
 <p><a class="reference internal" href="../_images/image133.png"><img alt="image143" src="../_images/image133.png" style="width: 6.49097in; height: 1.87292in;" /></a></p>
-<ol class="arabic simple" start="10">
-<li>Before we deploy the policy. Log into the BIG-IQ web UI
+</li>
+<li><p class="first">Before we deploy the policy. Log into the BIG-IQ web UI
 (<a class="reference external" href="https://192.168.1.50">https://192.168.1.50</a>) and navigate to Configuration Security
 Network Security Firewall Policies. Click on the link for the
 rd_0_policy, expand all the rules to verify your new API created
 rule list is first in the list and all objects are created as
-expected.</li>
-</ol>
+expected.</p>
 <p><a class="reference internal" href="../_images/image134.png"><img alt="image144" src="../_images/image134.png" style="width: 6.5in; height: 1.69097in;" /></a></p>
-<ol class="arabic simple" start="11">
-<li>The final step is to deploy the policy to the BIG-IP. Before we can
+</li>
+<li><p class="first">The final step is to deploy the policy to the BIG-IP. Before we can
 do this, we have one last variable we’ll need to acquire, the
 machine ID of bigip02.dnslab.test. To obtain the machine ID run the
 call in step 9, once the call is run, you will look for the
 machineId key and copy the value to the environment variable
-bigip02-machined as shown below and click update.</li>
-</ol>
+bigip02-machined as shown below and click update.</p>
 <p><a class="reference internal" href="../_images/image135.png"><img alt="image145" src="../_images/image135.png" style="width: 6.5in; height: 1.27292in;" /></a></p>
 <p><a class="reference internal" href="../_images/image136.png"><img alt="image146" src="../_images/image136.png" style="width: 6in; height: 3.33333in;" /></a></p>
-<ol class="arabic simple" start="12">
-<li>Finally, you will run step 10, this will initiate a deployment on
+</li>
+<li><p class="first">Finally, you will run step 10, this will initiate a deployment on
 BIG-IQ to deploy the changes to BIG-IP. Within BIG-IQ navigate to
 Deployment Evaluate &amp; Deploy Network Security. At the bottom in the
 deployments section you’ll notice an API Policy Deploy task. Feel
@@ -322,10 +291,11 @@ policy has deployed, log into the web UI of bigip02.dnstest.lab and
 navigate to Security network Firewall Active Rules. Change the
 context to Route Domain and select 0. Expand all of the rules to
 verify the rules have been deployed as expected. Your final screen
-should look something like the screen capture below.</li>
-</ol>
+should look something like the screen capture below.</p>
 <p><a class="reference internal" href="../_images/image137.png"><img alt="image147" src="../_images/image137.png" style="width: 6.5in; height: 3.23611in;" /></a></p>
-<p>Lastly, in your web browser verify you can no longer access the web
+</li>
+</ol>
+<p>Lastly, in your web browser, verify you can no longer access the web
 pages <a class="reference external" href="http://10.30.0.50">http://10.30.0.50</a> and <a class="reference external" href="http://10.40.0.50">http://10.40.0.50</a> as well as no longer being
 able to SSH to any of the devices.</p>
 </div>

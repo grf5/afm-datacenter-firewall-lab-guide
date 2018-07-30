@@ -15,18 +15,19 @@ upgrade advisor.
 
    |image97|
 
-2. | Add Credentials to be used for the qkview upload and report retrieval.
-   | **If you do not have credentials, please raise your hand and speak
-     to an instructor**
-   | Click the Add button under Credentials.
-   | |image98|
+2. Add Credentials to be used for the qkview upload and report retrieval.
+   Click the Add button under Credentials.
+   
+   |image98|
 
-3. | Fill in the credentials that you used to access
-     https://ihealth.f5.com:
-   | Name: Give the credentials a name to be referenced in BIG-IQ
-   | Username: <Username you use to access iHealth.f5.com>
-   | Password: <Password you use to access iHealth.f5.com>
-   | |image99|
+.. WARNING:: **If you do not have credentials, please raise your hand and speak to an instructor**
+
+3. Fill in the credentials that you used to access https://ihealth.f5.com:
+
+   - Name: Give the credentials a name to be referenced in BIG-IQ
+   - Username: <Username you use to access iHealth.f5.com>
+   - Password: <Password you use to access iHealth.f5.com>
+   |image99|
 
 4. Click the Test button to validate that your credentials work.
 

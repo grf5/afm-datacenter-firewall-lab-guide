@@ -127,61 +127,87 @@
 <h2>8.2.1. Task 1 – Configure Network Security and DoS Event Logging<a class="headerlink" href="#task-1-configure-network-security-and-dos-event-logging" title="Permalink to this headline">¶</a></h2>
 <p>You enable Network Security event logging using the virtual servers
 displayed in the context list</p>
-<p>Navigate to the Configuration Security Network Security Contexts</p>
-<p>Check the box next to the IPV4_TCP VIP</p>
-<p>Select “Configure Logging” from the top buttons</p>
+<ol class="arabic">
+<li><p class="first">Navigate to the Configuration Security Network Security Contexts</p>
+</li>
+<li><p class="first">Check the box next to the IPV4_TCP VIP</p>
+</li>
+<li><p class="first">Select “Configure Logging” from the top buttons</p>
 <p><a class="reference internal" href="../_images/image115.png"><img alt="image119" src="../_images/image115.png" style="width: 6.49097in; height: 2.19097in;" /></a></p>
-<p>You will receive a configuration message alerting you to the changes
+</li>
+<li><p class="first">You will receive a configuration message alerting you to the changes
 about to be made to the device, click Continue</p>
 <p><a class="reference internal" href="../_images/image116.png"><img alt="image120" src="../_images/image116.png" style="width: 5.24514in; height: 2.43611in;" /></a></p>
+</li>
+</ol>
 <p>This will now configure a logging profile, associated pools, monitors
 and all necessary configuration to send logs to the Data Collection
 Device (DCD).</p>
 <p>In the spirit of central management, we’re also going to configure the
 DoS event logging, so we only must perform one deployment on both
 devices.</p>
-<p>Navigate to Configuration Security Shared Security DoS Protection Device
+<ol class="arabic">
+<li><p class="first">Navigate to Configuration Security Shared Security DoS Protection Device
 DoS Configurations</p>
-<p>Highlight bigip1.dnstest.lab and click the “Configure DoS Logging”
+</li>
+<li><p class="first">Highlight bigip1.dnstest.lab and click the “Configure DoS Logging”
 button from the top.</p>
 <p><a class="reference internal" href="../_images/image117.png"><img alt="image121" src="../_images/image117.png" style="width: 6.5in; height: 3.25486in;" /></a></p>
-<p>Once again you will receive a configuration message, click continue</p>
-<p>Once completed navigate to the Deployments tab</p>
+</li>
+<li><p class="first">Once again you will receive a configuration message, click continue</p>
+</li>
+<li><p class="first">Once completed navigate to the Deployments tab</p>
 <p>As most of the configuration is “LTM” related you will first need to
 deploy the LTM configuration.</p>
-<p>Navigate to Evaluate &amp; Deploy</p>
-<p>Select Local Traffic &amp; Network Traffic</p>
-<p>Create an evaluation named “logging_configuration”, leave all other
+</li>
+<li><p class="first">Navigate to Evaluate &amp; Deploy</p>
+</li>
+<li><p class="first">Select Local Traffic &amp; Network Traffic</p>
+</li>
+<li><p class="first">Create an evaluation named “logging_configuration”, leave all other
 defaults and select both devices, once finished, create the evaluation.</p>
 <p>Feel free to examine the changes in the evaluation, when satisfied
 deploy the changes.</p>
-<p>Once the LTM configuration is deployed, you’ll need to also deploy the
+</li>
+<li><p class="first">Once the LTM configuration is deployed, you’ll need to also deploy the
 Network Security portion of the changes.</p>
 <p>Navigate to Deployment Evaluate &amp; Deploy Network Security.</p>
+</li>
+</ol>
 <p>Again, create an evaluation and subsequent deployment for both devices.</p>
 </div>
 <div class="section" id="task-2-evaluate-network-firewall-events">
 <h2>8.2.2. Task 2 – Evaluate Network Firewall Events<a class="headerlink" href="#task-2-evaluate-network-firewall-events" title="Permalink to this headline">¶</a></h2>
-<p>Browse to <a class="reference external" href="http://10.30.0.50">http://10.30.0.50</a> once again (or refresh in your tabs).</p>
-<p>Within BIG-IQ, navigate to Monitoring Network Security Firewall</p>
-<p>Click on a line item for enriched information in the window below as
+<ol class="arabic">
+<li><p class="first">Browse to <a class="reference external" href="http://10.30.0.50">http://10.30.0.50</a> once again (or refresh in your tabs).</p>
+</li>
+<li><p class="first">Within BIG-IQ, navigate to Monitoring Network Security Firewall</p>
+</li>
+<li><p class="first">Click on a line item for enriched information in the window below as
 shown</p>
 <p><a class="reference internal" href="../_images/image118.png"><img alt="image122" src="../_images/image118.png" style="width: 6.5in; height: 2.59097in;" /></a></p>
 <p>Feel free to view other logs to see the data presented.</p>
+</li>
+</ol>
 </div>
 <div class="section" id="task-3-evaluate-dos-events">
 <h2>8.2.3. Task 3 – Evaluate DoS Events<a class="headerlink" href="#task-3-evaluate-dos-events" title="Permalink to this headline">¶</a></h2>
-<p>Open a few separate windows to the attack host. We will launch a few
+<ol class="arabic">
+<li><p class="first">Open a few separate windows to the attack host. We will launch a few
 attacks at once to see the value of consolidated reporting within BIG-IQ
 (there is a text document on the jumbox desktop which contains all of
 the attack commands).</p>
-<p>Launch a few attacks at once and navigate to Monitoring Events –DoS DoS
+</li>
+<li><p class="first">Launch a few attacks at once and navigate to Monitoring Events –DoS DoS
 Summary</p>
 <p><a class="reference internal" href="../_images/image119.png"><img alt="image123" src="../_images/image119.png" style="width: 6.49097in; height: 2.7in;" /></a></p>
-<p>From here you have a consolidated view of all your devices and attacks.</p>
+</li>
+<li><p class="first">From here you have a consolidated view of all your devices and attacks.</p>
 <p>Click on one of the attack ID’s for enriched information about the
 attack</p>
 <p><a class="reference internal" href="../_images/image120.png"><img alt="image124" src="../_images/image120.png" style="width: 6.5in; height: 3.6in;" /></a></p>
+</li>
+</ol>
 <p>This concludes the lab. You have had quite the eventful first week at
 Initech! You have successfully allowed communication to a new webserver,
 you tuned and defended against several DoS attacks, you then configured

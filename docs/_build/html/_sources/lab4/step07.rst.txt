@@ -22,8 +22,7 @@ follow the steps below
 6. Repeat this same procedure for both devices, once completed your
    screen will show the following.
 
-   a. For any conflicts you may encounter – leave BIG-IQ selected
-      resolution
+.. NOTE:: For any conflicts you may encounter – leave BIG-IQ selected resolution
 
 |image102|
 
