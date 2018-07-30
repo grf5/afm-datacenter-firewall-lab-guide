@@ -17,9 +17,9 @@ server.
     the following settings, leaving unspecified fields at their default
     value:
 
-    #. Name: lab-server-10.10.0.50
-    #. | Address: 10.10.0.50
-       | |image51|
+    - Name: lab-server-10.10.0.50
+    - | Address: 10.10.0.50
+      | |image51|
 
 3.  Click **Finished** to add the new node.
 
@@ -27,18 +27,13 @@ server.
     the following settings, leaving unspecified attributes at their
     default value:
 
-    c. Name: lab-server-pool
-
-    d. Health Monitors: gateway_icmp
-
-    e. New Members: Node List
-
-       i.   Address: lab-server-10.10.0.50
-
-       ii.  Service Port: \* (All Services)
-
-       iii. | Click **Add** to add the new member to the member list.
-            | |image52|
+    - Name: lab-server-pool
+    - Health Monitors: gateway_icmp
+    - New Members: Node List
+       - Address: lab-server-10.10.0.50
+       - Service Port: \* (All Services)
+       - | Click **Add** to add the new member to the member list.
+         | |image52|
 
 5.  Click **Finished** to create the new pool.
 
@@ -47,53 +42,44 @@ server.
     **Address Translation** > **SNAT Pool List** and create a new SNAT
     pool with the following attributes:
 
-    f. Name: inside_snat_pool
-
-    g. | Member List (click Add after each IP):
-       | 10.10.0.125, 10.10.0.126, 10.10.0.127, 10.10.0.128,
-         10.10.0.129, 10.10.0.130
-
-    h. | Click Finished
-       | |image53|
+    - Name: inside_snat_pool
+    - | Member List (click Add after each IP):
+      | 10.10.0.125, 10.10.0.126, 10.10.0.127, 10.10.0.128, 10.10.0.129, 10.10.0.130
+    - | Click Finished
+      | |image53|
 
 7.  Navigate to **Local Traffic** > **Virtual Servers** and create a new
     virtual server with the following settings, leaving unspecified
     fields at their default value:
 
-    i. Name: udp_dns_VS
-    j. Destination Address/Mask: 10.20.0.10
-    k. Service Port: 53 (other)
-    l. Protocol: UDP
-    m. Source Address Translation: SNAT
-    n. SNAT Pool: inside_snat_pool
-    o. Default Pool: lab-server-pool
+    - Name: udp_dns_VS
+    - Destination Address/Mask: 10.20.0.10
+    - Service Port: 53 (other)
+    - Protocol: UDP
+    - Source Address Translation: SNAT
+    - SNAT Pool: inside_snat_pool
+    - Default Pool: lab-server-pool
 
 8.  | Click Finished
     | |image54|
+    
 9.  We’ll now test the new DNS virtual server. SSH into the attack host
-    by clicking the “Attack Host (Ubuntu)” icon on the jump host
-    desktop.
+    by clicking the “Attack Host (Ubuntu)” icon on the jump host desktop.
+    
 10. | Issue the ``dig @10.20.0.10 www.example.com +short`` command on the BASH CLI of the attack host.  You should see output similar to:
     | |image55|
     | This verifies that DNS traffic is passing through the BIG-IP.
 
 11. Return to the BIG-IP and navigate to **Local Traffic** > **Virtual Servers** and create a new virtual server with the following settings, leaving unspecified fields at their default value:
 
-    p. Name: other_protocols_VS
-
-    q. Destination Address/Mask: 10.20.0.10
-
-    r. Service Port: \* (All Ports)
-
-    s. Protocol: \* All Protocols
-
-    t. Any IP Profile: ipother
-
-    u. Source Address Translation: SNAT
-
-    v. SNAT Pool: inside_snat_pool
-
-    w. Default Pool: lab-server-pool
+    - Name: other_protocols_VS
+    - Destination Address/Mask: 10.20.0.10
+    - Service Port: \* (All Ports)
+    - Protocol: \* All Protocols
+    - Any IP Profile: ipother
+    - Source Address Translation: SNAT
+    - SNAT Pool: inside_snat_pool
+    - Default Pool: lab-server-pool
 
 12. | Click Finished
     | |image56|

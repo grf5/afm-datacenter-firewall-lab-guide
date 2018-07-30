@@ -1,4 +1,4 @@
-WORKFLOW 1: Creating a Backup Schedule
+Workflow 1: Creating a Backup Schedule
 --------------------------------------
 
 BIG-IQ is capable of centrally backing up and restoring all the BIG-IP

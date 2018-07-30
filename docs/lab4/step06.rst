@@ -1,4 +1,4 @@
-WORKFLOW 2: Uploading QKviews to iHealth for a support case
+Workflow 2: Uploading QKviews to iHealth for a support case
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 BIG-IQ can now push qkviews from managed devices to ihealth.f5.com and
@@ -15,10 +15,11 @@ upgrade advisor.
 
    |image97|
 
-2. | |image98|\ Add Credentials to be used for the qkview upload and
-     report retrieval.
-   | \*If you do not have credentials, please raise your hand and speak
-     to an instructor\* Click the Add button under Credentials.
+2. | Add Credentials to be used for the qkview upload and report retrieval.
+   | **If you do not have credentials, please raise your hand and speak
+     to an instructor**
+   | Click the Add button under Credentials.
+   | |image98|
 
 3. | Fill in the credentials that you used to access
      https://ihealth.f5.com:
@@ -33,28 +34,21 @@ upgrade advisor.
 
 6. Click the QKview Upload Schedules button in the BIG-IP iHealth menu.
 
-   **Monitoring** **Reports** **Device** **iHealth** **QKView Upload
+   **Monitoring** > **Reports** > **Device** > **iHealth** > **QKView Upload
    Schedule**
 
 7. Click Create with the following values
-
-   a. Name – Weekly Upload
-
-   b. Description – Nightly QKView Upload
-
-   c. Credential – (use what was created in step 3)
-
-   d. Upload Frequecny – Weekly (Select Sunday)
-
-   e. Start Time – Select todays date at 00:00
-
-   f. End Date – No End date should be checked
-
-   g. Select both devices
-
-   h. Click the right arrow to move to the “Selected” Area
-
-8. Click Save & Close\ |image100|
+   
+   - Name – Weekly Upload
+   - Description – Nightly QKView Upload
+   - Credential – (use what was created in step 3)
+   - Upload Frequecny – Weekly (Select Sunday)
+   - Start Time – Select todays date at 00:00
+   - End Date – No End date should be checked
+   - Select both devices
+   - Click the right arrow to move to the “Selected” Area
+   - | Click Save & Close.
+     | |image100|
 
 You will now have a fresh set of QKView in iHealth every Sunday morning.
 This is extremely useful for when new cases are opened, one less step

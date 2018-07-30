@@ -14,24 +14,16 @@ ports.
 
 4.  Configure the vector with the following parameters:
 
-    a. State: Mitigate
-
-    b. Threshold Mode: Fully Manual
-
-    c. Detection Threshold EPS: 150
-
-    d. Mitigation Threshold EPS: 200
-
-    e. Add Source Address to Category: Checked
-
-    f. Category Name: denial_of_service
-
-    g. Sustained Attack Detection Time: 10 seconds
-
-    h. Category Duration Time: 60 seconds
-
-    i. | Packet Type: Move All IPv4 to Selected
-       | |image86|
+    - State: Mitigate
+    - Threshold Mode: Fully Manual
+    - Detection Threshold EPS: 150
+    - Mitigation Threshold EPS: 200
+    - Add Source Address to Category: Checked
+    - Category Name: denial_of_service
+    - Sustained Attack Detection Time: 10 seconds
+    - Category Duration Time: 60 seconds
+    - | Packet Type: Move All IPv4 to Selected
+      | |image86|
 
 5.  Click **Update** to save your changes.
 
@@ -50,11 +42,9 @@ ports.
     Properties section with the following attributes, leaving
     unspecified attributes with their default values:
 
-    j. Blacklist Category: denial-of-service
-
-    k. Action: drop
-
-    l. Log Blacklist Category Matches: Yes
+    - Blacklist Category: denial-of-service
+    - Action: drop
+    - Log Blacklist Category Matches: Yes
 
 11. | Click **Add** to add the new Blacklist Matching Policy.
     | |image88|
@@ -62,14 +52,14 @@ ports.
 12. Click **Update** to save changes to the ip-intelligence policy.
 
 13. Open the BIG-IP SSH session and scroll the ltm log in real time with
-    the following command: tail -f /var/log/ltm
+    the following command: ``tail -f /var/log/ltm``
 
 14. On the victim server, start a packet capture with an SSH filter by
     issuing sudo tcpdump -nn not port 22
 
 15. | On the attack host, launch the attack by issuing the following
       command on the BASH prompt:
-    | sudo hping3 10.20.0.10 --flood --scan 1-65535 -d 128 -w 64 --syn
+    | ``sudo hping3 10.20.0.10 --flood --scan 1-65535 -d 128 -w 64 --syn``
 
 16. You will see the scan find a few open ports on the server, and the
     server will show the inbound sweep traffic. However, you will notice

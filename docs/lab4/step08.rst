@@ -1,4 +1,7 @@
-WORKFLOW 1: Reviewing the data in the dashboards
+BIG-IQ Statistics Dashboards 
+=============================
+
+Workflow 1: Reviewing the data in the dashboards
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Navigate to **Monitoring Dashboards Device Health**

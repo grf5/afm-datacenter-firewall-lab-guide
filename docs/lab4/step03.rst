@@ -1,7 +1,7 @@
 New features
 ------------
 
-**STATISTICS DASHBOARDS –**
+**Statistics Dashboards**
 
 This is the real first step managing data statistics using a DCD (data
 collection device) evolving toward a true analytics platform. In this

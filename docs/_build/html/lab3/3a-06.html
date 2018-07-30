@@ -131,7 +131,7 @@ packets.</p>
 <li><p class="first">Click on <strong>Single Endpoint Flood</strong> vector name.</p>
 </li>
 <li><p class="first">Configure the vector with the following parameters:</p>
-<ol class="loweralpha">
+<ul>
 <li><p class="first">State: Mitigate</p>
 </li>
 <li><p class="first">Threshold Mode: Fully Manual</p>
@@ -153,21 +153,21 @@ packets.</p>
 <div class="line"><a class="reference internal" href="../_images/image87.png"><img alt="image89" src="../_images/image87.png" style="width: 2.41144in; height: 5.43046in;" /></a></div>
 </div>
 </li>
-</ol>
+</ul>
 </li>
 <li><p class="first">Click <strong>Update</strong> to save your changes.</p>
 </li>
 <li><p class="first">Open the BIG-IP SSH session and scroll the ltm log in real time with
-the following command: tail -f /var/log/ltm</p>
+the following command: <code class="docutils literal notranslate"><span class="pre">tail</span> <span class="pre">-f</span> <span class="pre">/var/log/ltm</span></code></p>
 </li>
 <li><p class="first">We’ll run a packet capture on the victim server to gauge the
 incoming traffic. On the victim server, issue the following command:
-sudo tcpdump -nn not port 22</p>
+<code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">tcpdump</span> <span class="pre">-nn</span> <span class="pre">not</span> <span class="pre">port</span> <span class="pre">22</span></code></p>
 </li>
 <li><div class="first line-block">
 <div class="line">On the attack host, launch the attack by issuing the following
 command on the BASH prompt:</div>
-<div class="line">sudo hping3 10.20.0.10 –faster -c 25000 –icmp</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">hping3</span> <span class="pre">10.20.0.10</span> <span class="pre">--faster</span> <span class="pre">-c</span> <span class="pre">25000</span> <span class="pre">--icmp</span></code></div>
 </div>
 </li>
 <li><p class="first">The attack host will begin flooding the victim server with ICMP

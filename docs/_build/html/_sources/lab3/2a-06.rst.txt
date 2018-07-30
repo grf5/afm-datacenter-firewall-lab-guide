@@ -6,8 +6,7 @@ Simulate a DNS DDoS Attack
 
 2. | Once again, attack your DNS server from the attack host using the
      following syntax:
-   | dnsperf -s 10.20.0.10 -d queryfile-example-current -c 20 -T 20 -l
-     30 -q 10000 -Q 10000
+   | ``dnsperf -s 10.20.0.10 -d queryfile-example-current -c 20 -T 20 -l 30 -q 10000 -Q 10000``
 
 3. On the server SSH session running the top utility, notice the CPU
    utilization on your server remains in a range that ensures the DNS

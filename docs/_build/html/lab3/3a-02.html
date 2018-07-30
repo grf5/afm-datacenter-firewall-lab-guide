@@ -136,7 +136,7 @@ and Ymas TCP flags.</p>
 <li><p class="first">Click on the <strong>Bad TCP Flags (All Flags Set)</strong> vector name.</p>
 </li>
 <li><p class="first">Configure the vector with the following parameters:</p>
-<ol class="loweralpha">
+<ul>
 <li><p class="first">State: Mitigate</p>
 </li>
 <li><p class="first">Threshold Mode: Fully Manual</p>
@@ -150,7 +150,7 @@ and Ymas TCP flags.</p>
 <div class="line"><a class="reference internal" href="../_images/image781.png"><img alt="image80" src="../_images/image781.png" style="width: 2.43392in; height: 2.49669in;" /></a></div>
 </div>
 </li>
-</ol>
+</ul>
 </li>
 <li><p class="first">Click <strong>Update</strong> to save your changes.</p>
 </li>
@@ -158,10 +158,8 @@ and Ymas TCP flags.</p>
 the following command: tail -f /var/log/ltm</p>
 </li>
 <li><div class="first line-block">
-<div class="line">On the attack host, launch the attack by issuing the following
-command on the BASH prompt:</div>
-<div class="line">sudo hping3 10.20.0.10 –flood –rand-source –destport 80 -c
-25000 –syn –ack –fin –rst –push –urg –xmas –ymas</div>
+<div class="line">On the attack host, launch the attack by issuing the following command on the BASH prompt:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">hping3</span> <span class="pre">10.20.0.10</span> <span class="pre">--flood</span> <span class="pre">--rand-source</span> <span class="pre">--destport</span> <span class="pre">80</span> <span class="pre">-c</span> <span class="pre">25000</span> <span class="pre">--syn</span> <span class="pre">--ack</span> <span class="pre">--fin</span> <span class="pre">--rst</span> <span class="pre">--push</span> <span class="pre">--urg</span> <span class="pre">--xmas</span> <span class="pre">--ymas</span></code></div>
 </div>
 </li>
 <li><div class="first line-block">

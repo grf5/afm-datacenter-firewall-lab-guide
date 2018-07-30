@@ -133,7 +133,7 @@ BIG-IP are conveniently displayed in the login banner. Just in case:
 <li><p class="first">Navigate to <strong>Local Traffic</strong> &gt; <strong>Nodes</strong> and create a new node with
 the following settings, leaving unspecified fields at their default
 value:</p>
-<ol class="arabic">
+<ul>
 <li><p class="first">Name: lab-server-10.10.0.50</p>
 </li>
 <li><div class="first line-block">
@@ -141,20 +141,21 @@ value:</p>
 <div class="line"><a class="reference internal" href="../_images/image49.png"><img alt="image51" src="../_images/image49.png" style="width: 3.94702in; height: 3.80739in;" /></a></div>
 </div>
 </li>
-</ol>
+</ul>
 </li>
 <li><p class="first">Click <strong>Finished</strong> to add the new node.</p>
 </li>
 <li><p class="first">Navigate to <strong>Local Traffic</strong> &gt; <strong>Pools</strong> and create a new pool with
 the following settings, leaving unspecified attributes at their
 default value:</p>
-<ol class="loweralpha" start="3">
+<ul>
 <li><p class="first">Name: lab-server-pool</p>
 </li>
 <li><p class="first">Health Monitors: gateway_icmp</p>
 </li>
-<li><p class="first">New Members: Node List</p>
-<ol class="lowerroman">
+<li><dl class="first docutils">
+<dt>New Members: Node List</dt>
+<dd><ul class="first last">
 <li><p class="first">Address: lab-server-10.10.0.50</p>
 </li>
 <li><p class="first">Service Port: * (All Services)</p>
@@ -164,9 +165,11 @@ default value:</p>
 <div class="line"><a class="reference internal" href="../_images/image50.png"><img alt="image52" src="../_images/image50.png" style="width: 4.75828in; height: 4.42937in;" /></a></div>
 </div>
 </li>
-</ol>
+</ul>
+</dd>
+</dl>
 </li>
-</ol>
+</ul>
 </li>
 <li><p class="first">Click <strong>Finished</strong> to create the new pool.</p>
 </li>
@@ -174,13 +177,12 @@ default value:</p>
 we’ll need a large SNAT pool. Navigate to <strong>Local Traffic</strong> &gt;
 <strong>Address Translation</strong> &gt; <strong>SNAT Pool List</strong> and create a new SNAT
 pool with the following attributes:</p>
-<ol class="loweralpha" start="6">
+<ul>
 <li><p class="first">Name: inside_snat_pool</p>
 </li>
 <li><div class="first line-block">
 <div class="line">Member List (click Add after each IP):</div>
-<div class="line">10.10.0.125, 10.10.0.126, 10.10.0.127, 10.10.0.128,
-10.10.0.129, 10.10.0.130</div>
+<div class="line">10.10.0.125, 10.10.0.126, 10.10.0.127, 10.10.0.128, 10.10.0.129, 10.10.0.130</div>
 </div>
 </li>
 <li><div class="first line-block">
@@ -188,18 +190,20 @@ pool with the following attributes:</p>
 <div class="line"><a class="reference internal" href="../_images/image51.png"><img alt="image53" src="../_images/image51.png" style="width: 4.72535in; height: 3.47384in;" /></a></div>
 </div>
 </li>
-</ol>
+</ul>
 </li>
 <li><p class="first">Navigate to <strong>Local Traffic</strong> &gt; <strong>Virtual Servers</strong> and create a new
 virtual server with the following settings, leaving unspecified
 fields at their default value:</p>
-<p>i. Name: udp_dns_VS
-j. Destination Address/Mask: 10.20.0.10
-k. Service Port: 53 (other)
-l. Protocol: UDP
-m. Source Address Translation: SNAT
-n. SNAT Pool: inside_snat_pool
-o. Default Pool: lab-server-pool</p>
+<ul class="simple">
+<li>Name: udp_dns_VS</li>
+<li>Destination Address/Mask: 10.20.0.10</li>
+<li>Service Port: 53 (other)</li>
+<li>Protocol: UDP</li>
+<li>Source Address Translation: SNAT</li>
+<li>SNAT Pool: inside_snat_pool</li>
+<li>Default Pool: lab-server-pool</li>
+</ul>
 </li>
 <li><div class="first line-block">
 <div class="line">Click Finished</div>
@@ -207,8 +211,7 @@ o. Default Pool: lab-server-pool</p>
 </div>
 </li>
 <li><p class="first">We’ll now test the new DNS virtual server. SSH into the attack host
-by clicking the “Attack Host (Ubuntu)” icon on the jump host
-desktop.</p>
+by clicking the “Attack Host (Ubuntu)” icon on the jump host desktop.</p>
 </li>
 <li><div class="first line-block">
 <div class="line">Issue the <code class="docutils literal notranslate"><span class="pre">dig</span> <span class="pre">&#64;10.20.0.10</span> <span class="pre">www.example.com</span> <span class="pre">+short</span></code> command on the BASH CLI of the attack host.  You should see output similar to:</div>
@@ -217,7 +220,7 @@ desktop.</p>
 </div>
 </li>
 <li><p class="first">Return to the BIG-IP and navigate to <strong>Local Traffic</strong> &gt; <strong>Virtual Servers</strong> and create a new virtual server with the following settings, leaving unspecified fields at their default value:</p>
-<ol class="loweralpha simple" start="16">
+<ul class="simple">
 <li>Name: other_protocols_VS</li>
 <li>Destination Address/Mask: 10.20.0.10</li>
 <li>Service Port: * (All Ports)</li>
@@ -226,7 +229,7 @@ desktop.</p>
 <li>Source Address Translation: SNAT</li>
 <li>SNAT Pool: inside_snat_pool</li>
 <li>Default Pool: lab-server-pool</li>
-</ol>
+</ul>
 </li>
 <li><div class="first line-block">
 <div class="line">Click Finished</div>

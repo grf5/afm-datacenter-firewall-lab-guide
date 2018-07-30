@@ -15,37 +15,29 @@ packets.
 
 4.  Configure the vector with the following parameters:
 
-    a. State: Mitigate
-
-    b. Threshold Mode: Fully Manual
-
-    c. Detection Threshold EPS: 150
-
-    d. Mitigation Threshold EPS: 200
-
-    e. Add Destination Address to Category: Checked
-
-    f. Category Name: denial_of_service
-
-    g. Sustained Attack Detection Time: 10 seconds
-
-    h. Category Duration Time: 60 seconds
-
-    i. | Packet Type: Move Any ICMP (IPv4) to Selected
-       | |image89|
+    - State: Mitigate
+    - Threshold Mode: Fully Manual
+    - Detection Threshold EPS: 150
+    - Mitigation Threshold EPS: 200
+    - Add Destination Address to Category: Checked
+    - Category Name: denial_of_service
+    - Sustained Attack Detection Time: 10 seconds
+    - Category Duration Time: 60 seconds
+    - | Packet Type: Move Any ICMP (IPv4) to Selected
+      | |image89|
 
 5.  Click **Update** to save your changes.
 
 6.  Open the BIG-IP SSH session and scroll the ltm log in real time with
-    the following command: tail -f /var/log/ltm
+    the following command: ``tail -f /var/log/ltm``
 
 7.  We’ll run a packet capture on the victim server to gauge the
     incoming traffic. On the victim server, issue the following command:
-    sudo tcpdump -nn not port 22
+    ``sudo tcpdump -nn not port 22``
 
 8.  | On the attack host, launch the attack by issuing the following
       command on the BASH prompt:
-    | sudo hping3 10.20.0.10 --faster -c 25000 --icmp
+    | ``sudo hping3 10.20.0.10 --faster -c 25000 --icmp``
 
 9.  The attack host will begin flooding the victim server with ICMP
     packets. However, you will notice that the traffic to the server

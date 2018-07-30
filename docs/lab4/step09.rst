@@ -1,4 +1,4 @@
-WORKFLOW 2: Interacting with the data in the dashboards
+Workflow 2: Interacting with the data in the dashboards
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 -  | You can narrow the scope of what is graphed by selecting a object

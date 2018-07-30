@@ -21,26 +21,20 @@ and Ymas TCP flags.
 
 4.  Configure the vector with the following parameters:
 
-    a. State: Mitigate
-
-    b. Threshold Mode: Fully Manual
-
-    c. Detection Threshold EPS: Specify 50
-
-    d. Detection Threshold Percent: Specify 200
-
-    e. | Mitigation Threshold EPS: Specify 100
-       | |image80|
+    - State: Mitigate
+    - Threshold Mode: Fully Manual
+    - Detection Threshold EPS: Specify 50
+    - Detection Threshold Percent: Specify 200
+    - | Mitigation Threshold EPS: Specify 100
+      | |image80|
 
 5.  Click **Update** to save your changes.
 
 6.  Open the BIG-IP SSH session and scroll the ltm log in real time with
     the following command: tail -f /var/log/ltm
 
-7.  | On the attack host, launch the attack by issuing the following
-      command on the BASH prompt:
-    | sudo hping3 10.20.0.10 --flood --rand-source --destport 80 -c
-      25000 --syn --ack --fin --rst --push --urg --xmas --ymas
+7.  | On the attack host, launch the attack by issuing the following command on the BASH prompt:
+    | ``sudo hping3 10.20.0.10 --flood --rand-source --destport 80 -c 25000 --syn --ack --fin --rst --push --urg --xmas --ymas``
 
 8.  | You’ll see the BIG-IP ltm log show that the attack has been
       detected:

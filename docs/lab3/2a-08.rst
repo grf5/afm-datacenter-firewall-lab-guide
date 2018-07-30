@@ -15,20 +15,14 @@ those hosts from reaching the back-end servers. To demonstrate:
 
 5.  Modify the vector as follows:
 
-    a. Bad Actor Detection: Checked
-
-    b. Per Source IP Detection Threshold EPS: 80
-
-    c. Per Source IP Mitigation Threshold EPS: 100
-
-    d. Add Source Address to Category: Checked
-
-    e. Category Name: denial_of_service
-
-    f. Sustained Attack Detection Time: 15 seconds
-
-    g. | Category Duration Time: 60 seconds
-       | |image62|
+    - Bad Actor Detection: Checked
+    - Per Source IP Detection Threshold EPS: 80
+    - Per Source IP Mitigation Threshold EPS: 100
+    - Add Source Address to Category: Checked
+    - Category Name: denial_of_service
+    - Sustained Attack Detection Time: 15 seconds
+    - | Category Duration Time: 60 seconds
+      | |image62|
 
 6.  Make sure you click **Update** to save your changes.
 
@@ -37,20 +31,16 @@ those hosts from reaching the back-end servers. To demonstrate:
     policy with the following values, leaving unspecified attributes at
     their default values:
 
-    h. Name: dns-bad-actor-blocking
+    - Name: dns-bad-actor-blocking
 
-    i. Default Log Actions section:
+    - Default Log Actions section:
+       - Log Blacklist Category Matches: Yes
 
-       i. Log Blacklist Category Matches: Yes
-
-    j. Blacklist Matching Policy
-
-       ii. Create a new blacklist matching policy:
-
-           1. Blacklist Category: denial_of_service
-
-           2. |image63|\ Click **Add** to add the policy then click
-              finished
+    - Blacklist Matching Policy
+       - Create a new blacklist matching policy:
+           - Blacklist Category: denial_of_service
+           - | Click **Add** to add the policy then click finished
+             | |image63|
 
 8.  Navigate to **Local Traffic** > **Virtual Servers** > **Virtual
     Server List**.
@@ -90,8 +80,7 @@ those hosts from reaching the back-end servers. To demonstrate:
 
 21. | On the Attack Server host, launch the DNS attack once again using
       the following syntax:
-    | dnsperf -s 10.20.0.10 -d queryfile-example-current -c 20 -T 20 -l
-      30 -q 10000 -Q 10000
+    | ``dnsperf -s 10.20.0.10 -d queryfile-example-current -c 20 -T 20 -l 30 -q 10000 -Q 10000``
 
 22. | You’ll notice CPU utilization on the BIG-IP begin to climb, but
       slowly drop. The attack host will show that queries are timing out

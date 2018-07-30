@@ -131,7 +131,7 @@ those hosts from reaching the back-end servers. To demonstrate:</p>
 <li><p class="first">Click on the <strong>DNS A Query</strong> attack type name.</p>
 </li>
 <li><p class="first">Modify the vector as follows:</p>
-<ol class="loweralpha">
+<ul>
 <li><p class="first">Bad Actor Detection: Checked</p>
 </li>
 <li><p class="first">Per Source IP Detection Threshold EPS: 80</p>
@@ -149,7 +149,7 @@ those hosts from reaching the back-end servers. To demonstrate:</p>
 <div class="line"><a class="reference internal" href="../_images/image60.png"><img alt="image62" src="../_images/image60.png" style="width: 2.67129in; height: 5.81457in;" /></a></div>
 </div>
 </li>
-</ol>
+</ul>
 </li>
 <li><p class="first">Make sure you click <strong>Update</strong> to save your changes.</p>
 </li>
@@ -157,22 +157,39 @@ those hosts from reaching the back-end servers. To demonstrate:</p>
 Intelligence</strong> &gt; <strong>Policies</strong> and create a new IP Intelligence
 policy with the following values, leaving unspecified attributes at
 their default values:</p>
-<ol class="loweralpha simple" start="8">
-<li>Name: dns-bad-actor-blocking</li>
-<li>Default Log Actions section:<ol class="lowerroman">
+<ul>
+<li><p class="first">Name: dns-bad-actor-blocking</p>
+</li>
+<li><dl class="first docutils">
+<dt>Default Log Actions section:</dt>
+<dd><ul class="first last simple">
 <li>Log Blacklist Category Matches: Yes</li>
-</ol>
+</ul>
+</dd>
+</dl>
 </li>
-<li>Blacklist Matching Policy<ol class="lowerroman" start="2">
-<li>Create a new blacklist matching policy:<ol class="arabic">
-<li>Blacklist Category: denial_of_service</li>
-<li><a class="reference internal" href="../_images/image61.png"><img alt="image63" src="../_images/image61.png" style="width: 6.22083in; height: 3.675in;" /></a>Click <strong>Add</strong> to add the policy then click
-finished</li>
-</ol>
+<li><dl class="first docutils">
+<dt>Blacklist Matching Policy</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>Create a new blacklist matching policy:</dt>
+<dd><ul class="first last">
+<li><p class="first">Blacklist Category: denial_of_service</p>
 </li>
-</ol>
+<li><div class="first line-block">
+<div class="line">Click <strong>Add</strong> to add the policy then click finished</div>
+<div class="line"><a class="reference internal" href="../_images/image61.png"><img alt="image63" src="../_images/image61.png" style="width: 6.22083in; height: 3.675in;" /></a></div>
+</div>
 </li>
-</ol>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
 </li>
 <li><p class="first">Navigate to <strong>Local Traffic</strong> &gt; <strong>Virtual Servers</strong> &gt; <strong>Virtual
 Server List</strong>.</p>
@@ -221,8 +238,7 @@ utility to monitor CPU utilization.</p>
 <li><div class="first line-block">
 <div class="line">On the Attack Server host, launch the DNS attack once again using
 the following syntax:</div>
-<div class="line">dnsperf -s 10.20.0.10 -d queryfile-example-current -c 20 -T 20 -l
-30 -q 10000 -Q 10000</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dnsperf</span> <span class="pre">-s</span> <span class="pre">10.20.0.10</span> <span class="pre">-d</span> <span class="pre">queryfile-example-current</span> <span class="pre">-c</span> <span class="pre">20</span> <span class="pre">-T</span> <span class="pre">20</span> <span class="pre">-l</span> <span class="pre">30</span> <span class="pre">-q</span> <span class="pre">10000</span> <span class="pre">-Q</span> <span class="pre">10000</span></code></div>
 </div>
 </li>
 <li><div class="first line-block">

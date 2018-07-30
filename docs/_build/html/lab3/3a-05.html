@@ -130,7 +130,7 @@ ports.</p>
 <li><p class="first">Click on <strong>Single Endpoint Sweep</strong> vector name.</p>
 </li>
 <li><p class="first">Configure the vector with the following parameters:</p>
-<ol class="loweralpha">
+<ul>
 <li><p class="first">State: Mitigate</p>
 </li>
 <li><p class="first">Threshold Mode: Fully Manual</p>
@@ -152,7 +152,7 @@ ports.</p>
 <div class="line"><a class="reference internal" href="../_images/image84.png"><img alt="image86" src="../_images/image84.png" style="width: 2.7954in; height: 6.25166in;" /></a></div>
 </div>
 </li>
-</ol>
+</ul>
 </li>
 <li><p class="first">Click <strong>Update</strong> to save your changes.</p>
 </li>
@@ -172,11 +172,11 @@ Policy</strong> to <strong>ip-intelligence</strong>.</div>
 <li><p class="first">Create a new Blacklist Matching Policy in the IP Intelligence Policy
 Properties section with the following attributes, leaving
 unspecified attributes with their default values:</p>
-<ol class="loweralpha simple" start="10">
+<ul class="simple">
 <li>Blacklist Category: denial-of-service</li>
 <li>Action: drop</li>
 <li>Log Blacklist Category Matches: Yes</li>
-</ol>
+</ul>
 </li>
 <li><div class="first line-block">
 <div class="line">Click <strong>Add</strong> to add the new Blacklist Matching Policy.</div>
@@ -186,7 +186,7 @@ unspecified attributes with their default values:</p>
 <li><p class="first">Click <strong>Update</strong> to save changes to the ip-intelligence policy.</p>
 </li>
 <li><p class="first">Open the BIG-IP SSH session and scroll the ltm log in real time with
-the following command: tail -f /var/log/ltm</p>
+the following command: <code class="docutils literal notranslate"><span class="pre">tail</span> <span class="pre">-f</span> <span class="pre">/var/log/ltm</span></code></p>
 </li>
 <li><p class="first">On the victim server, start a packet capture with an SSH filter by
 issuing sudo tcpdump -nn not port 22</p>
@@ -194,7 +194,7 @@ issuing sudo tcpdump -nn not port 22</p>
 <li><div class="first line-block">
 <div class="line">On the attack host, launch the attack by issuing the following
 command on the BASH prompt:</div>
-<div class="line">sudo hping3 10.20.0.10 –flood –scan 1-65535 -d 128 -w 64 –syn</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">hping3</span> <span class="pre">10.20.0.10</span> <span class="pre">--flood</span> <span class="pre">--scan</span> <span class="pre">1-65535</span> <span class="pre">-d</span> <span class="pre">128</span> <span class="pre">-w</span> <span class="pre">64</span> <span class="pre">--syn</span></code></div>
 </div>
 </li>
 <li><p class="first">You will see the scan find a few open ports on the server, and the

@@ -126,7 +126,7 @@ queries from our DNS server.</p>
 </li>
 <li><div class="first line-block">
 <div class="line">Perform an MX record lookup by issuing the following command:</div>
-<div class="line">dig &#64;10.20.0.10 MX example.com</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dig</span> <span class="pre">&#64;10.20.0.10</span> <span class="pre">MX</span> <span class="pre">example.com</span></code></div>
 </div>
 </li>
 <li><p class="first">The server doesn’t have a record for this domain. This server
@@ -136,16 +136,15 @@ doesn’t have MX records, so those requests should be filtered</p>
 Profiles</strong> &gt; <strong>DNS</strong> and create a new DNS security profile with the
 following values, leaving unspecified attributes at their default
 value:</p>
-<ol class="loweralpha">
+<ul>
 <li><p class="first">Name: dns-block-mx-query</p>
 </li>
 <li><div class="first line-block">
-<div class="line">Query Type Filter: move mx from Available to Active and click
-finished</div>
+<div class="line">Query Type Filter: move mx from Available to Active and click finished</div>
 <div class="line"><a class="reference internal" href="../_images/image72.png"><img alt="image74" src="../_images/image72.png" style="width: 3.89968in; height: 3.43639in;" /></a></div>
 </div>
 </li>
-</ol>
+</ul>
 </li>
 <li><p class="first">Navigate to <strong>Local Traffic</strong> &gt; <strong>Profiles</strong> &gt; <strong>Services</strong> &gt;
 <strong>DNS</strong>. <strong>NOTE:</strong> if you are mousing over the services, DNS may not
@@ -154,22 +153,24 @@ menu on services to select <strong>DNS</strong>.</p>
 </li>
 <li><p class="first">Create a new DNS services profile with the following values, leaving
 unspecified values at their default values:</p>
-<ol class="loweralpha" start="3">
+<ul>
 <li><p class="first">Name: dns-block-mx</p>
 </li>
-<li><p class="first">DNS Traffic</p>
-<ol class="lowerroman">
+<li><dl class="first docutils">
+<dt>DNS Traffic</dt>
+<dd><ul class="first last">
 <li><p class="first">DNS Security: Enabled</p>
 </li>
 <li><div class="first line-block">
-<div class="line">DNS Security Profile Name: dns-block-mx-query. Click
-finished</div>
+<div class="line">DNS Security Profile Name: dns-block-mx-query. Click finished</div>
 <div class="line"><a class="reference internal" href="../_images/image73.png"><img alt="image75" src="../_images/image73.png" style="width: 2.60017in; height: 6.93378in;" /></a></div>
 </div>
 </li>
-</ol>
+</ul>
+</dd>
+</dl>
 </li>
-</ol>
+</ul>
 </li>
 <li><p class="first">Navigate to <strong>Local Traffic</strong> &gt; <strong>Virtual Servers</strong> &gt; <strong>Virtual
 Server List</strong>.</p>
@@ -203,7 +204,7 @@ request log types.</div>
 <li><div class="first line-block">
 <div class="line">Return to the Attack Server SSH session and re-issue the MX query
 command:</div>
-<div class="line">dig &#64;10.20.0.10 MX example.com</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dig</span> <span class="pre">&#64;10.20.0.10</span> <span class="pre">MX</span> <span class="pre">example.com</span></code></div>
 </div>
 </li>
 <li><p class="first">The query hangs as the BIG-IP is blocking the MX lookup.</p>

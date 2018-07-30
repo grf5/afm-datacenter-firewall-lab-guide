@@ -8,12 +8,9 @@ BIG-IP UI during attack mitigation.
    **Logging Profiles** and create a new profile with the following
    values, leaving unspecified attributes at their default value:
 
-   a. Profile Name: dns-dos-profile-logging
-
-   b. DoS Protection: Enabled
-
-   c. | DNS DoS Protection Publisher: local-db-publisher and click
-        finish
+   - Profile Name: dns-dos-profile-logging
+   - DoS Protection: Enabled
+   -  | DNS DoS Protection Publisher: local-db-publisher and click **Finish.**
       | |image58|
 
 .. |image58| image:: ../media/image56.png

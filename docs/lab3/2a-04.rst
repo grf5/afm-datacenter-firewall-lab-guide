@@ -22,15 +22,12 @@ limit the attack’s effect on our server.
 7. Modify the **DNS A Query** vector configuration to match the
    following values, leaving unspecified attributes with their default
    value:
-
-   a. State: Mitigate
-
-   b. Threshold Mode: Fully Manual
-
-   c. Detection Threshold EPS: (Set this at 80% of your safe QPS value)
-
-   d. | Mitigation Threshold EPS: (Set this to your safe QPS value)
-      | |image60|
+   
+   - State: Mitigate
+   - Threshold Mode: Fully Manual
+   - Detection Threshold EPS: (Set this at 80% of your safe QPS value)
+   - | Mitigation Threshold EPS: (Set this to your safe QPS value)
+     | |image60|
 
 8. Make sure that you click **Update** to save your changes.
 

@@ -1,4 +1,4 @@
-WORKFLOW 3: Device Import
+Workflow 3: Device Import
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 BIG-IQ is capable of centrally managing multiple products, for this lab
