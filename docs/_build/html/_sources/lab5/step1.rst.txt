@@ -239,17 +239,12 @@ The history within the tool makes Root Cause Analysis (RCA) reports very
 easy, this allows the security team to show a denied flow and subsequent
 permitted flow.
 
-|image125|
-
 .. |image117| image:: ../media/image113.png
    :width: 6.49097in
    :height: 0.85486in
 .. |image118| image:: ../media/image114.png
    :width: 6.49097in
    :height: 3.13611in
-.. |image125| image:: ../media/image1.jpeg
-   :width: 3.27778in
-   :height: 1.14444in
 .. |image113| image:: ../media/image109.png
    :width: 4.65486in
    :height: 3.92708in

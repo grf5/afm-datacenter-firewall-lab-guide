@@ -51,7 +51,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="10. Conclusion" href="../conclusion.html" />
+    <link rel="next" title="9.2. About Representational State Transfer" href="step2.html" />
     <link rel="prev" title="9. Lab 6 - iControl REST API" href="intro.html" />
   </head><body>
   <div id="clouddocs-header"></div>
@@ -76,12 +76,6 @@
         <span class="nav-sidebartoc">
             <ul>
 <li><a class="reference internal" href="#">9.1. Lab Overview</a></li>
-<li><a class="reference internal" href="#about-representational-state-transfer">9.2. About Representational State Transfer</a></li>
-<li><a class="reference internal" href="#about-uri-format">9.3. About URI format</a></li>
-<li><a class="reference internal" href="#about-reserved-ascii-characters">9.4. About reserved ASCII characters</a></li>
-<li><a class="reference internal" href="#about-rest-resource-identifiers">9.5. About REST resource identifiers</a></li>
-<li><a class="reference internal" href="#about-postman-rest-client">9.6. About Postman – REST Client</a></li>
-<li><a class="reference internal" href="#simulating-and-defeating-a-christmas-tree-packet-attack">9.7. Simulating and defeating a Christmas Tree Packet Attack</a></li>
 </ul>
 
          </span>
@@ -90,24 +84,15 @@
         <span class="nav-sidebartoc">
             <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../intro1.html">1. Advanced Firewall Manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro1.html">1. Advanced Firewall Manager - The Data Center Firewall</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro2.html">2. Connecting to the Training Lab</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../intro3.html">3. Ravello Environment pre-check</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro3.html">3. Ravello Environment Pre-Check</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab1/intro.html">4. Lab 1 – Advanced Firewall Manager (AFM)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab2/intro.html">5. Lab 2 - AFM Packet Tester, Flow Inspector, Stale Rule Lab</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab3/intro.html">6. Lab 3 - AFM DDoS Lab</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab4/intro.html">7. Lab 4 - Device Management Workflows</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab5/intro.html">8. Lab 5 - Network Security (AFM) Management Workflows</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="intro.html">9. Lab 6 - iControl REST API</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">9.1. Lab Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#about-representational-state-transfer">9.2. About Representational State Transfer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#about-uri-format">9.3. About URI format</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#about-reserved-ascii-characters">9.4. About reserved ASCII characters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#about-rest-resource-identifiers">9.5. About REST resource identifiers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#about-postman-rest-client">9.6. About Postman – REST Client</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#simulating-and-defeating-a-christmas-tree-packet-attack">9.7. Simulating and defeating a Christmas Tree Packet Attack</a></li>
-</ul>
-</li>
+<li class="toctree-l1 current"><a class="reference internal" href="intro.html">9. Lab 6 - iControl REST API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../conclusion.html">10. Conclusion</a></li>
 </ul>
 
@@ -139,323 +124,6 @@ explore the SecOps world and configure devices through the REST API.
 Before we proceed let’s learn a little about what REST is and how to
 interact with the F5 API, also known as iControl.</p>
 </div>
-<div class="section" id="about-representational-state-transfer">
-<h1>9.2. About Representational State Transfer<a class="headerlink" href="#about-representational-state-transfer" title="Permalink to this headline">¶</a></h1>
-<p>Representational State Transfer (REST) describes an architectural style
-of web services where clients and servers exchange representations of
-resources. The REST model defines a resource as a source of information
-and defines a representation as the data that describes the state of a
-resource. REST web services use the HTTP protocol to communicate between
-a client and a server, specifically by means of the POST, GET, PUT, and
-DELETE methods to create, read, update, and delete elements or
-collections. In general terms, REST queries resources for the
-configuration objects of a BIG-IP® system, and creates, deletes, or
-modifies the representations of those configuration objects. The
-iControl® REST implementation follows the REST model by:</p>
-<ul class="simple">
-<li>Using REST as a resource-based interface, and creating API methods based on nouns.<ul>
-<li>Employing a stateless protocol and MIME data types, as well as taking advantage of the authentication mechanisms and caching built into the HTTP protocol.</li>
-</ul>
-</li>
-<li>Supporting the JSON format for document encoding.<ul>
-<li>Representing the hierarchy of resources and collections with a Uniform Resource Identifier (URI) structure.</li>
-<li>Returning HTTP response codes to indicate success or failure of an operation.</li>
-</ul>
-</li>
-<li>Including links in resource references to accommodate discovery.</li>
-</ul>
-</div>
-<div class="section" id="about-uri-format">
-<h1>9.3. About URI format<a class="headerlink" href="#about-uri-format" title="Permalink to this headline">¶</a></h1>
-<p>The iControl® REST API enables the management of a BIG-IP® device by
-using web service requests. A principle of the REST architecture
-describes the identification of a resource by means of a Uniform
-Resource Identifier (URI). You can specify a URI with a web service
-request to create, read, update, or delete some component or module of a
-BIG-IP system configuration. In the context of REST architecture, the
-system configuration is the representation of a resource. A URI
-identifies the name of a web resource; in this case, the URI also
-represents the tree structure of modules and components in TMSH.</p>
-<p>In iControl REST, the URI structure for all requests includes the string
-/mgmt/tm/ to identify the namespace for traffic management. Any
-identifiers that follow the endpoint are resource collections.</p>
-<p>Tip: Use the default administrative account, admin, for requests to
-iControl REST. Once you are familiar with the API, you can create user
-accounts for iControl REST users with various permissions.</p>
-<p><a class="reference external" href="https://management-ip/mgmt/tm/module">https://management-ip/mgmt/tm/module</a></p>
-<p>The URI in the previous example designates all of the TMSH subordinate
-modules and components in the specified module. iControl REST refers to
-this entity as an organizing collection. An organizing collection
-contains links to other resources. The management-ip component of the
-URI is the fully qualified domain name (FQDN) or IP address of a BIG-IP
-device.</p>
-<p>Important: iControl REST only supports secure access through HTTPS, so
-you must include credentials with each REST call. Use the same
-credentials you use for the BIG-IP device manager interface.</p>
-<p>For example, use the following URI to access all the components and
-subordinate modules in the LTM module:</p>
-<p><a class="reference external" href="https://management-ip/mgmt/tm/ltm">https://management-ip/mgmt/tm/ltm</a></p>
-<p>The URI in the following example designates all of the subordinate
-modules and components in the specified sub-module. iControl REST refers
-to this entity as a collection; a collection contains resources.</p>
-<p><a class="reference external" href="https://management-ip/mgmt/tm/module/sub-module">https://management-ip/mgmt/tm/module/sub-module</a></p>
-<p>The URI in the following example designates the details of the specified
-component. The Traffic Management Shell (TMSH) Reference documents the
-hierarchy of modules and components, and identifies details of each
-component. iControl REST refers to this entity as a resource. A resource
-may contain links to sub-collections.</p>
-<p><a class="reference external" href="https://management-ip/mgmt/tm/module/[sub-module]/component">https://management-ip/mgmt/tm/module/[sub-module]/component</a></p>
-</div>
-<div class="section" id="about-reserved-ascii-characters">
-<h1>9.4. About reserved ASCII characters<a class="headerlink" href="#about-reserved-ascii-characters" title="Permalink to this headline">¶</a></h1>
-<p>To accommodate the BIG-IP® configuration objects that use characters,
-which are not part of the unreserved ASCII character set, use a percent
-sign (%) and two hexadecimal digits to represent them in a URI. The
-unreserved character set consists of: [A - Z] [a - z] [0 - 9] dash (-),
-underscore (_), period (.), and tilde (~).</p>
-<p>You must encode any characters that are not part of the unreserved
-character set for inclusion in a URI scheme. For example, an IP address
-in a non-default route domain that contains a percent sign to indicate
-an address in a specific route domain, such as 192.168.25.90%3, should
-be encoded to replace the %character with %25.</p>
-</div>
-<div class="section" id="about-rest-resource-identifiers">
-<h1>9.5. About REST resource identifiers<a class="headerlink" href="#about-rest-resource-identifiers" title="Permalink to this headline">¶</a></h1>
-<p>A URI is the representation of a resource that consists of a protocol,
-an address, and a path structure to identify a resource and optional
-query parameters. Because the representation of folder and partition
-names in TMSH often includes a forward slash (/), URI encoding of folder
-and partition names must use a different character to represent a
-forward slash in iControl®</p>
-<p>To accommodate the forward slash in a resource name, iControl REST maps
-the forward slash to a tilde (~) character. When a resource name
-includes a forward slash (/) in its name, substitute a tilde (~) for the
-forward slash in the path. For example, a resource name, such as
-/Common/plist1, should be modified to the format shown here:</p>
-<p><a class="reference external" href="https://management-ip/mgmt/tm/security/firewall/port-list/~Common~plist1">https://management-ip/mgmt/tm/security/firewall/port-list/~Common~plist1</a></p>
-</div>
-<div class="section" id="about-postman-rest-client">
-<h1>9.6. About Postman – REST Client<a class="headerlink" href="#about-postman-rest-client" title="Permalink to this headline">¶</a></h1>
-<p>Postman helps you be more efficient while working with APIs. Postman is
-a scratch-your-own-itch project. The need for it arose while one of the
-developers was creating an API for his project. After looking around for
-a number of tools, nothing felt just right. The primary features added
-initially were a history of sent requests and collections. You can find
-Postman here - <a class="reference external" href="http://www.getpostman.com">www.getpostman.com</a>.</p>
-</div>
-<div class="section" id="simulating-and-defeating-a-christmas-tree-packet-attack">
-<h1>9.7. Simulating and defeating a Christmas Tree Packet Attack<a class="headerlink" href="#simulating-and-defeating-a-christmas-tree-packet-attack" title="Permalink to this headline">¶</a></h1>
-<p>Now that we understand what REST is let’s use it to defeat Joanna one
-last time. Joanna was feeling festive for her final attack. In this
-example, we’ll set the BIG-IP to detect and mitigate Joanna’s attack
-where all flags on a TCP packet are set. This is commonly referred to as
-a Christmas tree packet and is intended to increase processing on
-in-path network devices and end hosts to the target.</p>
-<p>To interact with the REST API, we’ll be using POSTMan. We’ll then use
-the hping utility to send 25,000 packets to our server, with random
-source IPs to simulate a DDoS attack where multiple hosts are attacking
-our server. We’ll set the SYN, ACK, FIN, RST, URG, PUSH, Xmas and Ymas
-TCP flags.</p>
-<ol class="arabic simple" start="13">
-<li>POSTMan is installed as an application and can be accessed from the
-desktop of the Jumpbox</li>
-<li>Once you launch POSTMan You’ll then want to import the API calls for
-the lab as well as the environment variables<ol class="loweralpha" start="6">
-<li>There is a notepad on the desktop labeled “Postman Links”</li>
-<li>Within POSTman and click on the “Import” link near the top and
-then select “Import from Link”</li>
-<li>Copy and paste the <strong>collection</strong> link from within the notepad
-and select “Import”</li>
-<li>Copy and paste the <strong>environment</strong> link from within the notepad
-and select “Import”</li>
-</ol>
-</li>
-</ol>
-<p><a class="reference internal" href="../_images/image121.png"><img alt="image126" src="../_images/image121.png" style="width: 6.5in; height: 4.08333in;" /></a></p>
-<ol class="arabic simple" start="15">
-<li>Before proceeding verify the Agility 2018 environment is selected
-from the drop down in the top right of POSTman</li>
-</ol>
-<p><a class="reference internal" href="../_images/image122.png"><img alt="image127" src="../_images/image122.png" style="width: 3.86458in; height: 2.13542in;" /></a></p>
-<ol class="arabic" start="16">
-<li><p class="first">In the bigip01.dnstest.lab (<a class="reference external" href="https://192.168.1.100">https://192.168.1.100</a>) web UI, navigate
-to Security &gt; DoS Protection &gt; Device Configuration &gt; Network
-Security.</p>
-</li>
-<li><p class="first">Expand the <strong>Bad-Header-TCP</strong> category in the vectors list.</p>
-</li>
-<li><p class="first">Click on the <strong>Bad TCP Flags (All Flags Set)</strong> vector name and take
-note of the current settings</p>
-</li>
-<li><p class="first">Within POSTman open the collection “Agility 2018 Lab 5”</p>
-<p><a class="reference internal" href="../_images/image123.png"><img alt="image128" src="../_images/image123.png" style="width: 2.50278in; height: 4.31042in;" /></a></p>
-</li>
-<li><p class="first">Run step 1 by clicking on the send button to the right</p>
-</li>
-</ol>
-<p><a class="reference internal" href="../_images/image124.png"><img alt="image129" src="../_images/image124.png" style="width: 6.49722in; height: 0.83056in;" /></a></p>
-<ol class="arabic simple" start="21">
-<li>The output from the GET request can be reviewed, this is showing you
-all the device-dos configuration options and settings. Search for
-“bad-tcp-flags-all-set” by clicking ‘ctrl +f’. Note the values as
-they are currently configured. We are now going to modify the Bad
-TCP Flags (All Flags Set) attack vector. To do so run step 2 of the
-collection by highlighting the collection and click “Send”.</li>
-<li>You can now execute step 3 in the collection and verify the changes,
-you can also verify the changes in the BIG-IP web UI.</li>
-</ol>
-<p><a class="reference internal" href="../_images/image78.png"><img alt="image130" src="../_images/image78.png" style="width: 2.43392in; height: 2.49669in;" /></a></p>
-<ol class="arabic" start="23">
-<li><p class="first">Open the BIG-IP SSH session and scroll the ltm log in real time with
-the following command: tail -f /var/log/ltm</p>
-</li>
-<li><div class="first line-block">
-<div class="line">On the attack host, launch the attack by issuing the following
-command on the BASH prompt:</div>
-<div class="line">sudo hping3 10.20.0.10 –flood –rand-source –destport 80 -c
-25000 –syn –ack –fin –rst –push –urg –xmas –ymas</div>
-</div>
-</li>
-<li><div class="first line-block">
-<div class="line">You’ll see the BIG-IP ltm log show that the attack has been
-detected:</div>
-<div class="line"><a class="reference internal" href="../_images/image79.tiff"><img alt="image131" src="../_images/image79.tiff" style="width: 4.48611in; height: 0.38889in;" /></a></div>
-</div>
-</li>
-<li><div class="first line-block">
-<div class="line">After approximately 60 seconds, press <strong>CTRL+C</strong> to stop the
-attack.</div>
-<div class="line"><a class="reference internal" href="../_images/image80.tiff"><img alt="image132" src="../_images/image80.tiff" style="width: 4.43056in; height: 0.97222in;" /></a></div>
-</div>
-</li>
-<li><p class="first">Navigate to <strong>Security</strong> &gt; <strong>DoS Protection</strong>&gt; <strong>DoS Overview (you
-may need to refresh or set the auto refresh to 10 seconds).</strong> You’ll
-notice from here you can see all the details of the active attacks.
-You can also modify an attack vector right from this screen by
-clicking on the attack vector and modifying the fly out. &lt;- did you
-mean to say “on the fly” JM</p>
-<p><a class="reference internal" href="../_images/image81.png"><img alt="image133" src="../_images/image81.png" style="width: 6.49097in; height: 1.10208in;" /></a></p>
-</li>
-<li><div class="first line-block">
-<div class="line">Return to the BIG-IP web UI. Navigate to <strong>Security</strong> &gt; <strong>Event
-Logs</strong> &gt; <strong>DoS</strong> &gt; <strong>Network</strong> &gt; <strong>Events</strong>. Observe the log
-entries showing the details surrounding the attack detection and
-mitigation.</div>
-<div class="line"><a class="reference internal" href="../_images/image82.tiff"><img alt="image134" src="../_images/image82.tiff" style="width: 5in; height: 1.70833in;" /></a></div>
-</div>
-</li>
-<li><p class="first">Navigate to <strong>Security</strong> &gt; <strong>Reporting</strong> &gt; <strong>DoS</strong> &gt; <strong>Analysis</strong>.
-Single-click on the attack ID in the filter list to the right of the
-charts and observe the various statistics around the attack.</p>
-</li>
-<li><p class="first">The same attacks can also be seen in BIG-IQ as demonstrated in the
-previous lab.</p>
-</li>
-</ol>
-<p>Congratulations, you have successfully defeated Joanna’s festive attack
-using only the REST API to configure the device! Since it’s the end of
-the week and Joanna is using the same IP address continually, lets block
-her IP address and her subnet using BIG-IQ. We’ll use the REST API to
-accomplish this as well, as BIG-IQ also has an available REST API.</p>
-<ol class="arabic simple">
-<li>Using POSTman run step 4, this will create an address-list within
-BIG-IQ, the advantage to address-lists is they allow you to group
-similar objects into a group. In this instance we’re going to create
-an address-list named API_Naughty_Address_List with a host and a
-network. Once you run the command you’ll receive output below. You
-will need to copy the value returned in the ‘ID” field as shown
-below:</li>
-</ol>
-<p><a class="reference internal" href="../_images/image125.png"><img alt="image135" src="../_images/image125.png" style="width: 6.49097in; height: 1.82708in;" /></a></p>
-<ol class="arabic simple" start="2">
-<li>Take the copied text and paste it into the environment variable for
-AFM_Adddress_ID. The variables are accessed by clicking on the “eye”
-icon next to where you selected the Agility 2018 Environment:</li>
-</ol>
-<blockquote>
-<div><a class="reference internal" href="../_images/image126.png"><img alt="image136" src="../_images/image126.png" style="width: 3.81806in; height: 3.66389in;" /></a></div></blockquote>
-<ol class="arabic simple" start="3">
-<li>Click edit and enter the value returned in step 1, when completed
-click update</li>
-</ol>
-<p><a class="reference internal" href="../_images/image127.png"><img alt="image137" src="../_images/image127.png" style="width: 5.99097in; height: 6.22708in;" /></a></p>
-<ol class="arabic simple" start="4">
-<li>We will now create a rule list name first, to accomplish this send
-the call found in step 5. You will need to also capture the “ID” in
-this step as well. This value will be updated in the AFM_Rule_ID
-field</li>
-</ol>
-<p><a class="reference internal" href="../_images/image128.png"><img alt="image138" src="../_images/image128.png" style="width: 6.49097in; height: 1.31806in;" /></a></p>
-<ol class="arabic simple" start="5">
-<li>Take the copied text and paste it into the environment variable for
-AFM_Rule_ID</li>
-</ol>
-<p><a class="reference internal" href="../_images/image129.png"><img alt="image139" src="../_images/image129.png" style="width: 5.98194in; height: 6.18194in;" /></a></p>
-<ol class="arabic simple" start="6">
-<li>At this stage we have created an address-list with objects and saved
-the ID, we have also created a rule name and saved the ID. The next
-step is to add an actual rule to the newly created rule named
-“Naughty_Rule_List”. Before you send the call-in step 6, take a
-moment to examine the body of the request. You’ll notice in the URI
-we’re referencing the variable of AFM_Rule_ID and in the body of the
-JSON request we’re linking the AFM_Address_ID to the rule. Once sent
-you’ll receive confirmation similar to the below output.</li>
-</ol>
-<p><a class="reference internal" href="../_images/image130.png"><img alt="image140" src="../_images/image130.png" style="width: 6.5in; height: 4.83333in;" /></a></p>
-<ol class="arabic simple" start="7">
-<li>Since this is an existing environment, we’re going to first need to
-obtain the policy ID before we can assign the value to this variable.
-To obtain the policy ID of the existing policy we created in lab 1
-and imported in the prior lab, run step 7.</li>
-</ol>
-<p><a class="reference internal" href="../_images/image131.png"><img alt="image141" src="../_images/image131.png" style="width: 6.49097in; height: 3.15486in;" /></a></p>
-<ol class="arabic simple" start="8">
-<li>You will notice there are two policies, Global and rd_0_policy, we’ll
-need to copy the ID for the rd_0_policy which is located directly
-under its name and paste it into the variable for AFM_Policy_ID.</li>
-</ol>
-<p><a class="reference internal" href="../_images/image132.png"><img alt="image142" src="../_images/image132.png" style="width: 6in; height: 3.33333in;" /></a></p>
-<ol class="arabic simple" start="9">
-<li>Finally run step 8 to add the new rule list to the existing policy,
-when completed you’ll receive output similar as seen below.</li>
-</ol>
-<p><a class="reference internal" href="../_images/image133.png"><img alt="image143" src="../_images/image133.png" style="width: 6.49097in; height: 1.87292in;" /></a></p>
-<ol class="arabic simple" start="10">
-<li>Before we deploy the policy. Log into the BIG-IQ web UI
-(<a class="reference external" href="https://192.168.1.50">https://192.168.1.50</a>) and navigate to Configuration Security
-Network Security Firewall Policies. Click on the link for the
-rd_0_policy, expand all the rules to verify your new API created
-rule list is first in the list and all objects are created as
-expected.</li>
-</ol>
-<p><a class="reference internal" href="../_images/image134.png"><img alt="image144" src="../_images/image134.png" style="width: 6.5in; height: 1.69097in;" /></a></p>
-<ol class="arabic simple" start="11">
-<li>The final step is to deploy the policy to the BIG-IP. Before we can
-do this, we have one last variable we’ll need to acquire, the
-machine ID of bigip02.dnslab.test. To obtain the machine ID run the
-call in step 9, once the call is run, you will look for the
-machineId key and copy the value to the environment variable
-bigip02-machined as shown below and click update.</li>
-</ol>
-<p><a class="reference internal" href="../_images/image135.png"><img alt="image145" src="../_images/image135.png" style="width: 6.5in; height: 1.27292in;" /></a></p>
-<p><a class="reference internal" href="../_images/image136.png"><img alt="image146" src="../_images/image136.png" style="width: 6in; height: 3.33333in;" /></a></p>
-<ol class="arabic simple" start="12">
-<li>Finally, you will run step 10, this will initiate a deployment on
-BIG-IQ to deploy the changes to BIG-IP. Within BIG-IQ navigate to
-Deployment Evaluate &amp; Deploy Network Security. At the bottom in the
-deployments section you’ll notice an API Policy Deploy task. Feel
-free to click on the task to investigate the changes. Once the
-policy has deployed, log into the web UI of bigip02.dnstest.lab and
-navigate to Security network Firewall Active Rules. Change the
-context to Route Domain and select 0. Expand all of the rules to
-verify the rules have been deployed as expected. Your final screen
-should look something like the screen capture below.</li>
-</ol>
-<p><a class="reference internal" href="../_images/image137.png"><img alt="image147" src="../_images/image137.png" style="width: 6.5in; height: 3.23611in;" /></a></p>
-<p>Lastly, in your web browser verify you can no longer access the web
-pages <a class="reference external" href="http://10.30.0.50">http://10.30.0.50</a> and <a class="reference external" href="http://10.40.0.50">http://10.40.0.50</a> as well as no longer being
-able to SSH to any of the devices.</p>
-</div>
 
 
 
@@ -466,7 +134,7 @@ able to SSH to any of the devices.</p>
         <a href="intro.html" title="9. Lab 6 - iControl REST API" accesskey="p" class="btn btn-primary pull-left"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Previous</a>
        
        
-          <a href="../conclusion.html" title="10. Conclusion" accesskey="n" class="btn btn-primary pull-right">Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+          <a href="step2.html" title="9.2. About Representational State Transfer" accesskey="n" class="btn btn-primary pull-right">Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
        
      </div>
      </div>

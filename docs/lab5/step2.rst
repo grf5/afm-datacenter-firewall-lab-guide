@@ -1,4 +1,4 @@
-WORKFLOW 2: Configure Network Security and DoS Event Logging 
+Workflow 2: Configure Network Security and DoS Event Logging 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Task 1 – Configure Network Security and DoS Event Logging
