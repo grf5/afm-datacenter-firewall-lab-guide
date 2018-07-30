@@ -227,16 +227,16 @@ able to SSH to any of the devices.
 .. |image130| image:: ../media/image78.png
    :width: 2.43392in
    :height: 2.49669in
-.. |image131| image:: ../media/image79.tiff
+.. |image131| image:: ../media/image79.png
    :width: 4.48611in
    :height: 0.38889in
-.. |image132| image:: ../media/image80.tiff
+.. |image132| image:: ../media/image80.png
    :width: 4.43056in
    :height: 0.97222in
 .. |image133| image:: ../media/image81.png
    :width: 6.49097in
    :height: 1.10208in
-.. |image134| image:: ../media/image82.tiff
+.. |image134| image:: ../media/image82.png
    :width: 5in
    :height: 1.70833in
 .. |image135| image:: ../media/image125.png
