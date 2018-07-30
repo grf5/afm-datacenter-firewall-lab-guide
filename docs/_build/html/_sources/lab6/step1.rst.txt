@@ -1,5 +1,5 @@
-Lab Overview
-============
+Lab 6 Overview
+==============
 
 It’s Friday, you’ve made it through week one, but its not over yet.
 After another meeting with the Bob’s they’ve decided they want to

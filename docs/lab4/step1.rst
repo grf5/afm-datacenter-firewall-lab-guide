@@ -224,8 +224,6 @@ https://support.f5.com/kb/en-us/products/big-iq-centralized-mgmt/releasenotes/pr
 
 https://support.f5.com/kb/en-us/solutions/public/14000/500/sol14592.html
 
-.. _section-7:
-
 Changes to BIG-IQ User Interface
 ================================
 

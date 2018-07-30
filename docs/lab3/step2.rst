@@ -869,7 +869,7 @@ requirements. Well done!
 .. |image60| image:: ../media/image58.png
    :width: 3.54305in
    :height: 4.68726in
-.. |image61| image:: ../media/image59.tiff
+.. |image61| image:: ../media/image59.png
    :width: 6.5in
    :height: 2.78542in
 .. |image62| image:: ../media/image60.png
@@ -890,19 +890,19 @@ requirements. Well done!
 .. |image67| image:: ../media/image65.png
    :width: 2.96026in
    :height: 1.54149in
-.. |image68| image:: ../media/image66.tiff
+.. |image68| image:: ../media/image66.png
    :width: 2.36111in
    :height: 0.68056in
-.. |image69| image:: ../media/image67.tiff
+.. |image69| image:: ../media/image67.png
    :width: 4.875in
    :height: 1.68056in
 .. |image70| image:: ../media/image68.png
    :width: 6.69121in
    :height: 3.10185in
-.. |image71| image:: ../media/image69.tiff
+.. |image71| image:: ../media/image69.png
    :width: 4.3245in
    :height: 3.69594in
-.. |image72| image:: ../media/image70.tiff
+.. |image72| image:: ../media/image70.png
    :width: 5in
    :height: 4.06944in
 .. |image73| image:: ../media/image71.png
@@ -920,7 +920,7 @@ requirements. Well done!
 .. |image77| image:: ../media/image75.png
    :width: 3.19205in
    :height: 5.75689in
-.. |image78| image:: ../media/image76.tiff
+.. |image78| image:: ../media/image76.png
    :width: 3.80132in
    :height: 1.11928in
 .. |image79| image:: ../media/image77.png
@@ -929,16 +929,16 @@ requirements. Well done!
 .. |image80| image:: ../media/image78.png
    :width: 2.43392in
    :height: 2.49669in
-.. |image81| image:: ../media/image79.tiff
+.. |image81| image:: ../media/image79.png
    :width: 4.48611in
    :height: 0.38889in
-.. |image82| image:: ../media/image80.tiff
+.. |image82| image:: ../media/image80.png
    :width: 4.43056in
    :height: 0.97222in
 .. |image83| image:: ../media/image81.png
    :width: 6.49097in
    :height: 1.10208in
-.. |image84| image:: ../media/image82.tiff
+.. |image84| image:: ../media/image82.png
    :width: 5in
    :height: 1.70833in
 .. |image85| image:: ../media/image83.png

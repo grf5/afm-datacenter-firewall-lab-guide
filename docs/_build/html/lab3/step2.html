@@ -51,7 +51,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="7. Conclusion" href="../conclusion.html" />
+    <link rel="next" title="7. Lab 4 - Device Management Workflows" href="../lab4/intro.html" />
     <link rel="prev" title="6.1. Lab Overview" href="step1.html" />
   </head><body>
   <div id="clouddocs-header"></div>
@@ -107,19 +107,16 @@
         <span class="nav-sidebartoc">
             <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../intro1.html">1. Advanced Firewall Manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro1.html">1. Advanced Firewall Manager - The Data Center Firewall</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro2.html">2. Connecting to the Training Lab</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../intro3.html">3. Ravello Environment pre-check</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro3.html">3. Ravello Environment Pre-Check</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab1/intro.html">4. Lab 1 – Advanced Firewall Manager (AFM)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab2/intro.html">5. Lab 2 - AFM Packet Tester, Flow Inspector, Stale Rule Lab</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="intro.html">6. Lab 3 - AFM DDoS Lab</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="step1.html">6.1. Lab Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="step1.html#base-big-ip-configuration">6.2. Base BIG-IP Configuration</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">6.3. Lab 1 – Advanced Firewall Manager (AFM) DNS DoS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#advanced-firewall-manager-afm-detecting-and-preventing-system-dos-and-ddos-attacks">6.4. Advanced Firewall Manager (AFM) Detecting and Preventing System DoS and DDoS Attacks</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../conclusion.html">7. Conclusion</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="intro.html">6. Lab 3 - AFM DDoS Lab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab4/intro.html">7. Lab 4 - Device Management Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab5/intro.html">8. Lab 5 - Network Security (AFM) Management Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab6/intro.html">9. Lab 6 - iControl REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conclusion.html">10. Conclusion</a></li>
 </ul>
 
         </span><!-- Use this file to add extra links to the bottom of the ToC sidebar -->
@@ -165,7 +162,7 @@ value:</p>
 </li>
 <li><div class="first line-block">
 <div class="line">Address: 10.10.0.50</div>
-<div class="line"><a class="reference internal" href="../_images/image491.png"><img alt="image51" src="../_images/image491.png" style="width: 3.94702in; height: 3.80739in;" /></a></div>
+<div class="line"><a class="reference internal" href="../_images/image49.png"><img alt="image51" src="../_images/image49.png" style="width: 3.94702in; height: 3.80739in;" /></a></div>
 </div>
 </li>
 </ol>
@@ -188,7 +185,7 @@ default value:</p>
 </li>
 <li><div class="first line-block">
 <div class="line">Click <strong>Add</strong> to add the new member to the member list.</div>
-<div class="line"><a class="reference internal" href="../_images/image501.png"><img alt="image52" src="../_images/image501.png" style="width: 4.75828in; height: 4.42937in;" /></a></div>
+<div class="line"><a class="reference internal" href="../_images/image50.png"><img alt="image52" src="../_images/image50.png" style="width: 4.75828in; height: 4.42937in;" /></a></div>
 </div>
 </li>
 </ol>
@@ -212,7 +209,7 @@ pool with the following attributes:</p>
 </li>
 <li><div class="first line-block">
 <div class="line">Click Finished</div>
-<div class="line"><a class="reference internal" href="../_images/image511.png"><img alt="image53" src="../_images/image511.png" style="width: 4.72535in; height: 3.47384in;" /></a></div>
+<div class="line"><a class="reference internal" href="../_images/image51.png"><img alt="image53" src="../_images/image51.png" style="width: 4.72535in; height: 3.47384in;" /></a></div>
 </div>
 </li>
 </ol>
@@ -230,7 +227,7 @@ o. Default Pool: lab-server-pool</p>
 </li>
 <li><div class="first line-block">
 <div class="line">Click Finished</div>
-<div class="line"><a class="reference internal" href="../_images/image521.png"><img alt="image54" src="../_images/image521.png" style="width: 3.80731in; height: 8.22517in;" /></a></div>
+<div class="line"><a class="reference internal" href="../_images/image52.png"><img alt="image54" src="../_images/image52.png" style="width: 3.80731in; height: 8.22517in;" /></a></div>
 </div>
 </li>
 <li><p class="first">We’ll now test the new DNS virtual server. SSH into the attack host
@@ -239,7 +236,7 @@ desktop.</p>
 </li>
 <li><div class="first line-block">
 <div class="line">Issue the <code class="docutils literal notranslate"><span class="pre">dig</span> <span class="pre">&#64;10.20.0.10</span> <span class="pre">www.example.com</span> <span class="pre">+short</span></code> command on the BASH CLI of the attack host.  You should see output similar to:</div>
-<div class="line"><a class="reference internal" href="../_images/image531.png"><img alt="image55" src="../_images/image531.png" style="width: 6.16667in; height: 0.44444in;" /></a></div>
+<div class="line"><a class="reference internal" href="../_images/image53.png"><img alt="image55" src="../_images/image53.png" style="width: 6.16667in; height: 0.44444in;" /></a></div>
 <div class="line">This verifies that DNS traffic is passing through the BIG-IP.</div>
 </div>
 </li>
@@ -257,7 +254,7 @@ desktop.</p>
 </li>
 <li><div class="first line-block">
 <div class="line">Click Finished</div>
-<div class="line"><a class="reference internal" href="../_images/image541.png"><img alt="image56" src="../_images/image541.png" style="width: 4.73472in; height: 6.057in;" /></a></div>
+<div class="line"><a class="reference internal" href="../_images/image54.png"><img alt="image56" src="../_images/image54.png" style="width: 4.73472in; height: 6.057in;" /></a></div>
 </div>
 </li>
 <li><p class="first">Return to the Attack Host SSH session and attempt to SSH to the
@@ -283,7 +280,7 @@ top utility.</p>
 </li>
 <li><p class="first">You will see a list of running processes sorted by CPU utilization,
 like the output below:</p>
-<p><a class="reference internal" href="../_images/image551.png"><img alt="image57" src="../_images/image551.png" style="width: 5.6in; height: 3.53333in;" /></a></p>
+<p><a class="reference internal" href="../_images/image55.png"><img alt="image57" src="../_images/image55.png" style="width: 5.6in; height: 3.53333in;" /></a></p>
 </li>
 <li><p class="first">Connect to the Attack Host SSH session by double-clicking the
 <strong>Attack Host (Ubuntu)</strong> shortcut on the jump host desktop.</p>
@@ -334,7 +331,7 @@ values, leaving unspecified attributes at their default value:</p>
 <li><div class="first line-block">
 <div class="line">DNS DoS Protection Publisher: local-db-publisher and click
 finish</div>
-<div class="line"><a class="reference internal" href="../_images/image561.png"><img alt="image58" src="../_images/image561.png" style="width: 4.045in; height: 5.58775in;" /></a></div>
+<div class="line"><a class="reference internal" href="../_images/image56.png"><img alt="image58" src="../_images/image56.png" style="width: 4.045in; height: 5.58775in;" /></a></div>
 </div>
 </li>
 </ol>
@@ -352,7 +349,7 @@ limit the attack’s effect on our server.</p>
 </li>
 <li><div class="first line-block">
 <div class="line">Click <strong>Finished</strong>.</div>
-<div class="line"><a class="reference internal" href="../_images/image571.png"><img alt="image59" src="../_images/image571.png" style="width: 4.94444in; height: 2.29167in;" /></a></div>
+<div class="line"><a class="reference internal" href="../_images/image57.png"><img alt="image59" src="../_images/image57.png" style="width: 4.94444in; height: 2.29167in;" /></a></div>
 </div>
 </li>
 <li><p class="first">The UI will return to the DoS Profiles list. Click the
@@ -375,7 +372,7 @@ value:</p>
 </li>
 <li><div class="first line-block">
 <div class="line">Mitigation Threshold EPS: (Set this to your safe QPS value)</div>
-<div class="line"><a class="reference internal" href="../_images/image581.png"><img alt="image60" src="../_images/image581.png" style="width: 3.54305in; height: 4.68726in;" /></a></div>
+<div class="line"><a class="reference internal" href="../_images/image58.png"><img alt="image60" src="../_images/image58.png" style="width: 3.54305in; height: 4.68726in;" /></a></div>
 </div>
 </li>
 </ol>
@@ -421,7 +418,7 @@ server is not overwhelmed.</p>
 <li><p class="first">After the attack, navigate to <strong>Security</strong> &gt; <strong>Event Logs</strong> &gt; <strong>DoS</strong>
 &gt; <strong>DNS Protocol</strong>. Observe the logs to see the mitigation actions
 taken by the BIG-IP. Be sure to scroll right…</p>
-<p><a class="reference internal" href="../_images/image591.tiff"><img alt="image61" src="../_images/image591.tiff" style="width: 6.5in; height: 2.78542in;" /></a></p>
+<p><a class="reference internal" href="../_images/image59.png"><img alt="image61" src="../_images/image59.png" style="width: 6.5in; height: 2.78542in;" /></a></p>
 </li>
 </ol>
 </div>
@@ -464,7 +461,7 @@ those hosts from reaching the back-end servers. To demonstrate:</p>
 </li>
 <li><div class="first line-block">
 <div class="line">Category Duration Time: 60 seconds</div>
-<div class="line"><a class="reference internal" href="../_images/image601.png"><img alt="image62" src="../_images/image601.png" style="width: 2.67129in; height: 5.81457in;" /></a></div>
+<div class="line"><a class="reference internal" href="../_images/image60.png"><img alt="image62" src="../_images/image60.png" style="width: 2.67129in; height: 5.81457in;" /></a></div>
 </div>
 </li>
 </ol>
@@ -484,7 +481,7 @@ their default values:</p>
 <li>Blacklist Matching Policy<ol class="lowerroman" start="2">
 <li>Create a new blacklist matching policy:<ol class="arabic">
 <li>Blacklist Category: denial_of_service</li>
-<li><a class="reference internal" href="../_images/image611.png"><img alt="image63" src="../_images/image611.png" style="width: 6.22083in; height: 3.675in;" /></a>Click <strong>Add</strong> to add the policy then click
+<li><a class="reference internal" href="../_images/image61.png"><img alt="image63" src="../_images/image61.png" style="width: 6.22083in; height: 3.675in;" /></a>Click <strong>Add</strong> to add the policy then click
 finished</li>
 </ol>
 </li>
@@ -502,7 +499,7 @@ Server List</strong>.</p>
 <li><div class="first line-block">
 <div class="line">Enable <strong>IP Intelligence</strong> and choose the
 <strong>dns-bad-actor-blocking</strong> policy.</div>
-<div class="line"><a class="reference internal" href="../_images/image621.png"><img alt="image64" src="../_images/image621.png" style="width: 3.81074in; height: 5.31788in;" /></a></div>
+<div class="line"><a class="reference internal" href="../_images/image62.png"><img alt="image64" src="../_images/image62.png" style="width: 3.81074in; height: 5.31788in;" /></a></div>
 </div>
 </li>
 <li><p class="first">Make sure you click <strong>Update</strong> to save your changes.</p>
@@ -515,7 +512,7 @@ Server List</strong>.</p>
 <div class="line">Under the <strong>Network Firewall</strong> tab (next to Protocol Security),
 set the IP Intelligence Publisher to <strong>local-db-publisher</strong> and
 check <strong>Log Shun Events</strong>.</div>
-<div class="line"><a class="reference internal" href="../_images/image631.png"><img alt="image65" src="../_images/image631.png" style="width: 4.17881in; height: 2.18072in;" /></a></div>
+<div class="line"><a class="reference internal" href="../_images/image63.png"><img alt="image65" src="../_images/image63.png" style="width: 4.17881in; height: 2.18072in;" /></a></div>
 </div>
 </li>
 <li><p class="first">Click <strong>Update</strong> to save your changes.</p>
@@ -524,13 +521,13 @@ check <strong>Log Shun Events</strong>.</div>
 </li>
 <li><div class="first line-block">
 <div class="line">Check <strong>Enabled</strong> next to <strong>Network Firewall</strong>.</div>
-<div class="line"><a class="reference internal" href="../_images/image641.png"><img alt="image66" src="../_images/image641.png" style="width: 3.40297in; height: 3.22001in;" /></a></div>
+<div class="line"><a class="reference internal" href="../_images/image64.png"><img alt="image66" src="../_images/image64.png" style="width: 3.40297in; height: 3.22001in;" /></a></div>
 </div>
 </li>
 <li><div class="first line-block">
 <div class="line">Under the <strong>Network Firewall</strong> tab, change the <strong>IP Intelligence
 Publisher</strong> to <strong>local-db-publisher</strong> and click <strong>Update</strong>.</div>
-<div class="line"><a class="reference internal" href="../_images/image651.png"><img alt="image67" src="../_images/image651.png" style="width: 2.96026in; height: 1.54149in;" /></a></div>
+<div class="line"><a class="reference internal" href="../_images/image65.png"><img alt="image67" src="../_images/image65.png" style="width: 2.96026in; height: 1.54149in;" /></a></div>
 </div>
 </li>
 <li><p class="first">Bring into view the Victim Server SSH session running the top
@@ -548,7 +545,7 @@ the following syntax:</div>
 slowly drop. The attack host will show that queries are timing out
 as shown below. This is due to the BIG-IP blacklisting the bad
 actor.</div>
-<div class="line"><a class="reference internal" href="../_images/image661.tiff"><img alt="image68" src="../_images/image661.tiff" style="width: 2.36111in; height: 0.68056in;" /></a></div>
+<div class="line"><a class="reference internal" href="../_images/image66.png"><img alt="image68" src="../_images/image66.png" style="width: 2.36111in; height: 0.68056in;" /></a></div>
 </div>
 </li>
 <li><p class="first">Navigate to <strong>Security</strong> &gt; <strong>Event Logs</strong> &gt; <strong>Network</strong> &gt; <strong>IP
@@ -558,7 +555,7 @@ Intelligence</strong>. Observe the bad actor blocking mitigation logs.</p>
 <div class="line">Navigate to <strong>Security</strong> &gt; <strong>Event Logs</strong> &gt; <strong>Network</strong> &gt;
 <strong>Shun</strong>. This screen shows the bad actor being added to (and
 later deleted from) the shun category.</div>
-<div class="line"><a class="reference internal" href="../_images/image671.tiff"><img alt="image69" src="../_images/image671.tiff" style="width: 4.875in; height: 1.68056in;" /></a></div>
+<div class="line"><a class="reference internal" href="../_images/image67.png"><img alt="image69" src="../_images/image67.png" style="width: 4.875in; height: 1.68056in;" /></a></div>
 </div>
 </li>
 <li><p class="first">While the attack is running, navigate to <strong>Security</strong> &gt; <strong>DoS
@@ -569,13 +566,13 @@ vector right from this screen by clicking on the attack vector and
 modifying the fly out.</p>
 </li>
 </ol>
-<p><a class="reference internal" href="../_images/image681.png"><img alt="image70" src="../_images/image681.png" style="width: 6.69121in; height: 3.10185in;" /></a></p>
+<p><a class="reference internal" href="../_images/image68.png"><img alt="image70" src="../_images/image68.png" style="width: 6.69121in; height: 3.10185in;" /></a></p>
 <ol class="arabic" start="26">
 <li><div class="first line-block">
 <div class="line">Navigate to <strong>Security</strong> &gt; <strong>Reporting</strong> &gt; <strong>Protocol</strong> &gt; <strong>DNS</strong>.
 Change the <strong>View By</strong> drop-down to view various statistics around
 the DNS traffic and attacks.</div>
-<div class="line"><a class="reference internal" href="../_images/image691.tiff"><img alt="image71" src="../_images/image691.tiff" style="width: 4.3245in; height: 3.69594in;" /></a></div>
+<div class="line"><a class="reference internal" href="../_images/image69.png"><img alt="image71" src="../_images/image69.png" style="width: 4.3245in; height: 3.69594in;" /></a></div>
 </div>
 </li>
 <li><p class="first">Navigate to <strong>Security</strong> &gt; <strong>Reporting</strong> &gt; <strong>Network</strong> &gt; <strong>IP
@@ -587,14 +584,14 @@ handling of the attack traffic.</p>
 <div class="line">Navigate to <strong>Security</strong> &gt; <strong>Reporting</strong> &gt; <strong>DoS</strong> &gt; <strong>Dashboard</strong>
 to view an overview of the DoS attacks and timeline. You can
 select filters in the filter pane to highlight specific attacks.</div>
-<div class="line"><a class="reference internal" href="../_images/image701.tiff"><img alt="image72" src="../_images/image701.tiff" style="width: 5in; height: 4.06944in;" /></a></div>
+<div class="line"><a class="reference internal" href="../_images/image70.png"><img alt="image72" src="../_images/image70.png" style="width: 5in; height: 4.06944in;" /></a></div>
 </div>
 </li>
 <li><p class="first">Finally, navigate to <strong>Security</strong> &gt; <strong>Reporting</strong> &gt; <strong>DoS</strong> &gt;
 <strong>Analysis</strong>. View detailed statistics around each attack.</p>
 </li>
 </ol>
-<p><a class="reference internal" href="../_images/image711.png"><img alt="image73" src="../_images/image711.png" style="width: 6.49097in; height: 2.17569in;" /></a></p>
+<p><a class="reference internal" href="../_images/image71.png"><img alt="image73" src="../_images/image71.png" style="width: 6.49097in; height: 2.17569in;" /></a></p>
 </div>
 <div class="section" id="remote-triggered-black-holing">
 <h3>6.3.1.8. Remote Triggered Black Holing<a class="headerlink" href="#remote-triggered-black-holing" title="Permalink to this headline">¶</a></h3>
@@ -636,7 +633,7 @@ value:</p>
 <li><div class="first line-block">
 <div class="line">Query Type Filter: move mx from Available to Active and click
 finished</div>
-<div class="line"><a class="reference internal" href="../_images/image721.png"><img alt="image74" src="../_images/image721.png" style="width: 3.89968in; height: 3.43639in;" /></a></div>
+<div class="line"><a class="reference internal" href="../_images/image72.png"><img alt="image74" src="../_images/image72.png" style="width: 3.89968in; height: 3.43639in;" /></a></div>
 </div>
 </li>
 </ol>
@@ -658,7 +655,7 @@ unspecified values at their default values:</p>
 <li><div class="first line-block">
 <div class="line">DNS Security Profile Name: dns-block-mx-query. Click
 finished</div>
-<div class="line"><a class="reference internal" href="../_images/image731.png"><img alt="image75" src="../_images/image731.png" style="width: 2.60017in; height: 6.93378in;" /></a></div>
+<div class="line"><a class="reference internal" href="../_images/image73.png"><img alt="image75" src="../_images/image73.png" style="width: 2.60017in; height: 6.93378in;" /></a></div>
 </div>
 </li>
 </ol>
@@ -674,7 +671,7 @@ Server List</strong>.</p>
 </li>
 <li><div class="first line-block">
 <div class="line">Set the <strong>DNS Profile</strong> to <strong>dns-block-mx</strong>.</div>
-<div class="line"><a class="reference internal" href="../_images/image741.png"><img alt="image76" src="../_images/image741.png" style="width: 3.02244in; height: 2.63576in;" /></a></div>
+<div class="line"><a class="reference internal" href="../_images/image74.png"><img alt="image76" src="../_images/image74.png" style="width: 3.02244in; height: 2.63576in;" /></a></div>
 </div>
 </li>
 <li><p class="first">Click <strong>Update</strong> to save your settings.</p>
@@ -689,7 +686,7 @@ Server List</strong>.</p>
 <div class="line">In the <strong>Protocol Security</strong> tab, set the <strong>DNS Security
 Publisher</strong> to <strong>local-db-publisher</strong> and check all five of the
 request log types.</div>
-<div class="line"><a class="reference internal" href="../_images/image751.png"><img alt="image77" src="../_images/image751.png" style="width: 3.19205in; height: 5.75689in;" /></a></div>
+<div class="line"><a class="reference internal" href="../_images/image75.png"><img alt="image77" src="../_images/image75.png" style="width: 3.19205in; height: 5.75689in;" /></a></div>
 </div>
 </li>
 <li><p class="first">Make sure that you click <strong>Update</strong> to save your settings.</p>
@@ -705,7 +702,7 @@ command:</div>
 <li><div class="first line-block">
 <div class="line">Navigate to <strong>Security</strong> &gt; <strong>Event Logs</strong> &gt; <strong>Protocol</strong> &gt;
 <strong>DNS</strong>. Observe the MX query drops.</div>
-<div class="line"><a class="reference internal" href="../_images/image761.tiff"><img alt="image78" src="../_images/image761.tiff" style="width: 3.80132in; height: 1.11928in;" /></a></div>
+<div class="line"><a class="reference internal" href="../_images/image76.png"><img alt="image78" src="../_images/image76.png" style="width: 3.80132in; height: 1.11928in;" /></a></div>
 </div>
 </li>
 </ol>
@@ -726,7 +723,7 @@ reporting.</p>
 </li>
 <li><div class="first line-block">
 <div class="line">Click the <strong>Commit Changes to System</strong> button.</div>
-<div class="line"><a class="reference internal" href="../_images/image771.png"><img alt="image79" src="../_images/image771.png" style="width: 2.98013in; height: 1.62914in;" /></a></div>
+<div class="line"><a class="reference internal" href="../_images/image77.png"><img alt="image79" src="../_images/image77.png" style="width: 2.98013in; height: 1.62914in;" /></a></div>
 </div>
 </li>
 </ol>
@@ -759,7 +756,7 @@ and Ymas TCP flags.</p>
 </li>
 <li><div class="first line-block">
 <div class="line">Mitigation Threshold EPS: Specify 100</div>
-<div class="line"><a class="reference internal" href="../_images/image782.png"><img alt="image80" src="../_images/image782.png" style="width: 2.43392in; height: 2.49669in;" /></a></div>
+<div class="line"><a class="reference internal" href="../_images/image781.png"><img alt="image80" src="../_images/image781.png" style="width: 2.43392in; height: 2.49669in;" /></a></div>
 </div>
 </li>
 </ol>
@@ -779,13 +776,13 @@ command on the BASH prompt:</div>
 <li><div class="first line-block">
 <div class="line">You’ll see the BIG-IP ltm log show that the attack has been
 detected:</div>
-<div class="line"><a class="reference internal" href="../_images/image792.tiff"><img alt="image81" src="../_images/image792.tiff" style="width: 4.48611in; height: 0.38889in;" /></a></div>
+<div class="line"><a class="reference internal" href="../_images/image79.png"><img alt="image81" src="../_images/image79.png" style="width: 4.48611in; height: 0.38889in;" /></a></div>
 </div>
 </li>
 <li><div class="first line-block">
 <div class="line">After approximately 60 seconds, press <strong>CTRL+C</strong> to stop the
 attack.</div>
-<div class="line"><a class="reference internal" href="../_images/image802.tiff"><img alt="image82" src="../_images/image802.tiff" style="width: 4.43056in; height: 0.97222in;" /></a></div>
+<div class="line"><a class="reference internal" href="../_images/image80.png"><img alt="image82" src="../_images/image80.png" style="width: 4.43056in; height: 0.97222in;" /></a></div>
 </div>
 </li>
 <li><p class="first">Navigate to <strong>Security</strong> &gt; <strong>DoS Protection</strong>&gt; <strong>DoS Overview (you
@@ -794,14 +791,14 @@ notice from here you can see all the details of the active attacks.
 You can also modify an attack vector right from this screen by
 clicking on the attack vector and modifying the details in the fly
 out panel.</p>
-<p><a class="reference internal" href="../_images/image812.png"><img alt="image83" src="../_images/image812.png" style="width: 6.49097in; height: 1.10208in;" /></a></p>
+<p><a class="reference internal" href="../_images/image811.png"><img alt="image83" src="../_images/image811.png" style="width: 6.49097in; height: 1.10208in;" /></a></p>
 </li>
 <li><div class="first line-block">
 <div class="line">Return to the BIG-IP web UI. Navigate to <strong>Security</strong> &gt; <strong>Event
 Logs</strong> &gt; <strong>DoS</strong> &gt; <strong>Network</strong> &gt; <strong>Events</strong>. Observe the log
 entries showing the details surrounding the attack detection and
 mitigation.</div>
-<div class="line"><a class="reference internal" href="../_images/image822.tiff"><img alt="image84" src="../_images/image822.tiff" style="width: 5in; height: 1.70833in;" /></a></div>
+<div class="line"><a class="reference internal" href="../_images/image82.png"><img alt="image84" src="../_images/image82.png" style="width: 5in; height: 1.70833in;" /></a></div>
 </div>
 </li>
 <li><p class="first">Navigate to <strong>Security</strong> &gt; <strong>Reporting</strong> &gt; <strong>DoS</strong> &gt; <strong>Analysis</strong>.
@@ -834,7 +831,7 @@ multiple source hosts.</p>
 </li>
 <li><div class="first line-block">
 <div class="line">Mitigation Threshold EPS: 400</div>
-<div class="line"><a class="reference internal" href="../_images/image831.png"><img alt="image85" src="../_images/image831.png" style="width: 2.45542in; height: 3.49669in;" /></a></div>
+<div class="line"><a class="reference internal" href="../_images/image83.png"><img alt="image85" src="../_images/image83.png" style="width: 2.45542in; height: 3.49669in;" /></a></div>
 </div>
 </li>
 </ol>
@@ -904,7 +901,7 @@ ports.</p>
 </li>
 <li><div class="first line-block">
 <div class="line">Packet Type: Move All IPv4 to Selected</div>
-<div class="line"><a class="reference internal" href="../_images/image841.png"><img alt="image86" src="../_images/image841.png" style="width: 2.7954in; height: 6.25166in;" /></a></div>
+<div class="line"><a class="reference internal" href="../_images/image84.png"><img alt="image86" src="../_images/image84.png" style="width: 2.7954in; height: 6.25166in;" /></a></div>
 </div>
 </li>
 </ol>
@@ -917,7 +914,7 @@ Intelligence</strong> &gt; <strong>Policies</strong>.</p>
 <li><div class="first line-block">
 <div class="line">In the <strong>Global Policy</strong> section, change the <strong>IP Intelligence
 Policy</strong> to <strong>ip-intelligence</strong>.</div>
-<div class="line"><a class="reference internal" href="../_images/image851.png"><img alt="image87" src="../_images/image851.png" style="width: 2.56954in; height: 0.91286in;" /></a></div>
+<div class="line"><a class="reference internal" href="../_images/image85.png"><img alt="image87" src="../_images/image85.png" style="width: 2.56954in; height: 0.91286in;" /></a></div>
 </div>
 </li>
 <li><p class="first">Click <strong>Update</strong>.</p>
@@ -935,7 +932,7 @@ unspecified attributes with their default values:</p>
 </li>
 <li><div class="first line-block">
 <div class="line">Click <strong>Add</strong> to add the new Blacklist Matching Policy.</div>
-<div class="line"><a class="reference internal" href="../_images/image861.png"><img alt="image88" src="../_images/image861.png" style="width: 6.49097in; height: 3.32431in;" /></a></div>
+<div class="line"><a class="reference internal" href="../_images/image86.png"><img alt="image88" src="../_images/image86.png" style="width: 6.49097in; height: 3.32431in;" /></a></div>
 </div>
 </li>
 <li><p class="first">Click <strong>Update</strong> to save changes to the ip-intelligence policy.</p>
@@ -1024,7 +1021,7 @@ packets.</p>
 </li>
 <li><div class="first line-block">
 <div class="line">Packet Type: Move Any ICMP (IPv4) to Selected</div>
-<div class="line"><a class="reference internal" href="../_images/image871.png"><img alt="image89" src="../_images/image871.png" style="width: 2.41144in; height: 5.43046in;" /></a></div>
+<div class="line"><a class="reference internal" href="../_images/image87.png"><img alt="image89" src="../_images/image87.png" style="width: 2.41144in; height: 5.43046in;" /></a></div>
 </div>
 </li>
 </ol>
@@ -1092,7 +1089,7 @@ requirements. Well done!</p>
         <a href="step1.html" title="6.1. Lab Overview" accesskey="p" class="btn btn-primary pull-left"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Previous</a>
        
        
-          <a href="../conclusion.html" title="7. Conclusion" accesskey="n" class="btn btn-primary pull-right">Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+          <a href="../lab4/intro.html" title="7. Lab 4 - Device Management Workflows" accesskey="n" class="btn btn-primary pull-right">Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
        
      </div>
      </div>
